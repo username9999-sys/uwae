@@ -1,0 +1,112 @@
+{
+  "project_name": "botasaurus",
+  "version": "4.0.97",
+  "direct_dependencies": [
+    {
+      "name": "psutil",
+      "type": "system_monitoring",
+      "description": "Process and system utilities monitoring",
+      "used_for": "Process monitoring, system information gathering"
+    },
+    {
+      "name": "javascript_fixes",
+      "type": "javascript_utility",
+      "description": "JavaScript compatibility fixes",
+      "used_for": "Ensuring proper JavaScript execution in browser contexts"
+    },
+    {
+      "name": "requests",
+      "type": "http_client",
+      "description": "HTTP library for making web requests",
+      "used_for": "HTTP-based web acquisition"
+    },
+    {
+      "name": "joblib",
+      "type": "parallel_processing",
+      "description": "Lightweight pipelining in Python",
+      "version": ">=1.3.2",
+      "used_for": "Parallel execution, caching, and job scheduling"
+    },
+    {
+      "name": "beautifulsoup4",
+      "type": "html_parser",
+      "description": "HTML parsing library",
+      "version": ">=4.11.2",
+      "used_for": "HTML content parsing and extraction"
+    },
+    {
+      "name": "lxml",
+      "type": "xml_html_parser",
+      "description": "XML and HTML processing library",
+      "version": ">=5.2.2",
+      "used_for": "Fast HTML/XML parsing, used with BeautifulSoup"
+    },
+    {
+      "name": "openpyxl",
+      "type": "excel_handler",
+      "description": "Excel file reading/writing library",
+      "used_for": "Excel output format support"
+    },
+    {
+      "name": "close_chrome",
+      "type": "browser_extension",
+      "description": "Chrome extension for Botasaurus",
+      "used_for": "Browser-based acquisition with Chrome extension capabilities"
+    },
+    {
+      "name": "botasaurus-humancursor",
+      "type": "browser_utility",
+      "description": "Human cursor movement simulation",
+      "used_for": "Making browser automation appear more human-like"
+    },
+    {
+      "name": "botasaurus-api",
+      "type": "web_framework",
+      "description": "Botasaurus API server components",
+      "used_for": "Web interface for Botasaurus"
+    },
+    {
+      "name": "botasaurus-driver",
+      "type": "browser_driver",
+      "description": "Custom browser driver implementation",
+      "used_for": "Enhanced browser automation capabilities"
+    },
+    {
+      "name": "bota",
+      "type": "utility_library",
+      "description": "Utility functions library",
+      "used_for": "Common helper functions across Botasaurus components"
+    },
+    {
+      "name": "botasaurus-proxy-authentication",
+      "type": "network_utility",
+      "description": "Proxy authentication handling",
+      "used_for": "Authenticated proxy support"
+    },
+    {
+      "name": "botasaurus-requests",
+      "type": "http_client_enhanced",
+      "description": "Enhanced requests library with browser-like characteristics",
+      "used_for": "HTTP requests that mimic browser behavior"
+    }
+  ],
+  "cpython_specific_dependencies": [
+    {
+      "name": "PyDispatcher",
+      "type": "event_dispatching",
+      "description": "Multicast safe notification mechanism",
+      "version": ">=2.0.5",
+      "used_for": "Event-driven communication between components"
+    }
+  ],
+  "dependency_sources": {
+    "setup_py": "Primary source for direct dependencies",
+    "requirements_files": "No separate requirements.txt found; dependencies managed in setup.py",
+    "environment_markers": "No environment-specific dependencies observed"
+  },
+  "notes": [
+    "Dependencies include both PyPI packages and local Botasaurus sub-packages",
+    "Several dependencies appear to be internal Botasaurus modules published as separate packages",
+    "The dependency structure suggests a microservices-like architecture within the Botasaurus ecosystem"
+  ]
+}

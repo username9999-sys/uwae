@@ -1,0 +1,163 @@
+{
+  "project_name": "botasaurus",
+  "version": "4.0.97",
+  "repository_url": "https://github.com/omkarcloud/botasaurus",
+  "commit_sha": "6c9260de12d71b9dc0c3b3a019d2698a9af38433",
+  "audit_timestamp": "2026-10-20T12:45:00+07:00",
+  "audit_environment": {
+    "python_version": "3.14.6 (Termux) / 3.14.4 (PRoot)",
+    "platform": "linux (PRoot-Distro on Termux Android, no root)",
+    "architecture": "aarch64"
+  },
+  "source_statistics": {
+    "total_tracked_files": 618,
+    "total_tracked_python_files": 113,
+    "top_level_tracked_entries": 34,
+    "python_files_per_component": {
+      "botasaurus_server": 38,
+      "botasaurus": 38,
+      "botasaurus_humancursor": 8,
+      "bota": 7,
+      "close_chrome": 4,
+      "botasaurus_api": 4,
+      "sqlite-cache-storage": 3,
+      "pg-cache-storage": 3,
+      "js": 3,
+      "botasaurus-controls": 2,
+      "setup.py": 1,
+      "increment_version.py": 1,
+      "bot_detection_tests.py": 1
+    }
+  },
+  "components": [
+    {
+      "name": "botasaurus",
+      "type": "core_framework",
+      "description": "Main Botasaurus framework providing decorators and core functionality",
+      "path": "./botasaurus",
+      "python_files": 38,
+      "status": "inventoried_2026-10-20"
+    },
+    {
+      "name": "botasaurus_server",
+      "type": "integration_server",
+      "description": "Server components for Botasaurus integrations",
+      "path": "./botasaurus_server",
+      "python_files": 38,
+      "status": "inventoried_2026-10-20"
+    },
+    {
+      "name": "bota",
+      "type": "utility_library",
+      "description": "Utility functions and helpers used across Botasaurus",
+      "path": "./bota",
+      "python_files": 7,
+      "status": "inventoried_2026-10-20"
+    },
+    {
+      "name": "botasaurus_api",
+      "type": "web_framework",
+      "description": "API server components for Botasaurus",
+      "path": "./botasaurus_api",
+      "python_files": 4,
+      "status": "inventoried_2026-10-20"
+    },
+    {
+      "name": "botasaurus_humancursor",
+      "type": "browser_utility",
+      "description": "Human-like cursor movement simulation for browser automation",
+      "path": "./botasaurus_humancursor",
+      "python_files": 8,
+      "status": "inventoried_2026-10-20"
+    },
+    {
+      "name": "botasaurus-controls",
+      "type": "ui_components",
+      "description": "Web UI components for Botasaurus control interface",
+      "path": "./botasaurus-controls",
+      "python_files": 2,
+      "status": "inventoried_2026-10-20"
+    },
+    {
+      "name": "close_chrome",
+      "type": "browser_utility",
+      "description": "Chrome process management utilities",
+      "path": "./close_chrome",
+      "python_files": 4,
+      "status": "inventoried_2026-10-20"
+    },
+    {
+      "name": "sqlite-cache-storage",
+      "type": "storage_backend",
+      "description": "SQLite-based cache storage implementation",
+      "path": "./sqlite-cache-storage",
+      "python_files": 3,
+      "status": "inventoried_2026-10-20"
+    },
+    {
+      "name": "pg-cache-storage",
+      "type": "storage_backend",
+      "description": "PostgreSQL-based cache storage implementation",
+      "path": "./pg-cache-storage",
+      "python_files": 3,
+      "status": "inventoried_2026-10-20"
+    },
+    {
+      "name": "js",
+      "type": "assets",
+      "description": "JavaScript assets",
+      "path": "./js",
+      "python_files": 3,
+      "status": "inventoried_2026-10-20"
+    },
+    {
+      "name": "vm-scripts",
+      "type": "deployment_scripts",
+      "description": "Virtual machine deployment and setup scripts",
+      "path": "./vm-scripts",
+      "python_files": 0,
+      "status": "inventoried_2026-10-20"
+    }
+  ],
+  "runtime_dependencies": {
+    "source": "setup.py (install_requires)",
+    "packages": [
+      "psutil",
+      "javascript_fixes",
+      "requests",
+      "joblib>=1.3.2",
+      "beautifulsoup4>=4.11.2",
+      "lxml>=5.2.2",
+      "openpyxl",
+      "close_chrome",
+      "botasaurus-humancursor",
+      "botasaurus-api",
+      "botasaurus-driver",
+      "bota",
+      "botasaurus-proxy-authentication",
+      "botasaurus-requests"
+    ],
+    "cpython_dependencies": [
+      "PyDispatcher>=2.0.5"
+    ]
+  },
+  "installed_venv_evidence": {
+    "path": "/root/botasaurus-venv",
+    "dist_info_packages": 357,
+    "site_packages_top_level_dirs": 47,
+    "botasaurus_stack": {
+      "botasaurus": "4.0.97",
+      "botasaurus_api": "4.0.10",
+      "botasaurus_driver": "4.0.101",
+      "botasaurus_humancursor": "4.0.83",
+      "botasaurus_proxy_authentication": "1.0.16",
+      "botasaurus_requests": "4.0.38",
+      "close_chrome": "4.0.40",
+      "bota": "4.0.162"
+    },
+    "note": "Menjawab Lampiran L.1 INSTRUCTION.md: klaim 'lebih dari 120 modul' = 357 paket venv (B/C), bukan 113 file .py milik repo Botasaurus (A)."
+  },
+  "dependency_inventory": "see dependency-inventory.json",
+  "capability_evidence": "see capability-evidence.csv",
+  "limitations_identified": "see botasaurus-limitations.md"
+}
