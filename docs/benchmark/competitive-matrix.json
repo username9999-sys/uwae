@@ -1,0 +1,200 @@
+{
+  "matrix_info": {
+    "title": "Competitive Capability Matrix: Botasaurus vs Universal Web Acquisition Engine",
+    "version": "1.0",
+    "last_updated": "2026-10-13T12:30:00Z",
+    "botasaurus_version_audited": "4.0.97",
+    "botasaurus_commit_audited": "6c9260d"
+  },
+  "comparison_framework": {
+    "botasaurus_status_levels": ["VERIFIED_SOURCE", "VERIFIED_TEST", "VERIFIED_EXPERIMENT", "DOCUMENTED_ONLY", "NOT_FOUND", "UNKNOWN"],
+    "uwae_status_levels": ["PLANNED", "IN_PROGRESS", "VERIFIED_IMPLEMENTATION"],
+    "evidence_types": ["SOURCE_CODE", "DOCUMENTATION", "TESTING", "EXPERIMENT"],
+    "priority_levels": ["HIGH", "MEDIUM", "LOW"],
+    "confidence_levels": ["HIGH", "MEDIUM", "LOW"]
+  },
+  "capabilities": [
+    {
+      "category": "Discovery and Crawling",
+      "capability": "Link extraction from HTML",
+      "botasaurus_status": "VERIFIED_SOURCE",
+      "uwae_status": "PLANNED",
+      "botasaurus_evidence": "soupify.py",
+      "uwae_evidence": "Planned in discovery subsystem",
+      "gap_analysis": "UWAE should match or exceed Botasaurus capabilities with configurable selectors",
+      "priority": "MEDIUM",
+      "confidence": "HIGH"
+    },
+    {
+      "category": "Discovery and Crawling",
+      "capability": "Sitemap parsing",
+      "botasaurus_status": "VERIFIED_SOURCE",
+      "uwae_status": "PLANNED",
+      "botasaurus_evidence": "sitemap.py",
+      "uwae_evidence": "Planned in discovery subsystem",
+      "gap_analysis": "UWAE should provide equivalent or better sitemap handling",
+      "priority": "MEDIUM",
+      "confidence": "HIGH"
+    },
+    {
+      "category": "HTTP and Browser Acquisition",
+      "capability": "HTTP request capability",
+      "botasaurus_status": "VERIFIED_SOURCE",
+      "uwae_status": "PLANNED",
+      "botasaurus_evidence": "request_decorator.py",
+      "uwae_evidence": "Planned in HTTP adapter subsystem",
+      "gap_analysis": "Equivalent capability expected",
+      "priority": "MEDIUM",
+      "confidence": "HIGH"
+    },
+    {
+      "category": "HTTP and Browser Acquisition",
+      "capability": "Browser automation capability",
+      "botasaurus_status": "VERIFIED_SOURCE",
+      "uwae_status": "PLANNED",
+      "botasaurus_evidence": "browser_decorator.py",
+      "uwae_evidence": "Planned in browser adapter subsystem",
+      "gap_analysis": "Equivalent capability expected",
+      "priority": "MEDIUM",
+      "confidence": "HIGH"
+    },
+    {
+      "category": "Parallel Processing",
+      "capability": "Parallel processing",
+      "botasaurus_status": "VERIFIED_SOURCE",
+      "uwae_status": "PLANNED",
+      "botasaurus_evidence": "task_decorator.py + joblib dependency",
+      "uwae_evidence": "Planned in job scheduler subsystem",
+      "gap_analysis": "Equivalent capability expected",
+      "priority": "MEDIUM",
+      "confidence": "HIGH"
+    },
+    {
+      "category": "Unknown-Extension Handling",
+      "capability": "File type detection via signature",
+      "botasaurus_status": "NOT_FOUND",
+      "uwae_status": "PLANNED",
+      "botasaurus_evidence": "Not verified in audit",
+      "uwae_evidence": "Planned in artifact identification subsystem",
+      "gap_analysis": "Key UWAE differentiator - magic number based identification",
+      "priority": "HIGH",
+      "confidence": "HIGH"
+    },
+    {
+      "category": "Unknown-Extension Handling",
+      "capability": "Extensionless file handling",
+      "botasaurus_status": "NOT_FOUND",
+      "uwae_status": "PLANNED",
+      "botasaurus_evidence": "Not verified in audit",
+      "uwae_evidence": "Planned in artifact identification subsystem",
+      "gap_analysis": "Key UWAE differentiator - handle files without extensions",
+      "priority": "HIGH",
+      "confidence": "HIGH"
+    },
+    {
+      "category": "Format Identification and Integrity",
+      "capability": "Format identification registry",
+      "botasaurus_status": "NOT_FOUND",
+      "uwae_status": "PLANNED",
+      "botasaurus_evidence": "Not verified in audit",
+      "uwae_evidence": "Planned in artifact identification subsystem",
+      "gap_analysis": "Key UWAE differentiator - extensible format identification",
+      "priority": "HIGH",
+      "confidence": "HIGH"
+    },
+    {
+      "category": "Extraction Extensibility",
+      "capability": "Plugin-based extraction",
+      "botasaurus_status": "NOT_FOUND",
+      "uwae_status": "PLANNED",
+      "botasaurus_evidence": "Not verified in audit",
+      "uwae_evidence": "Planned in plugin extraction engine",
+      "gap_analysis": "Key UWAE differentiator - true plugin architecture for extraction",
+      "priority": "HIGH",
+      "confidence": "HIGH"
+    },
+    {
+      "category": "Sessions and Authentication",
+      "capability": "Session recovery after interrupt",
+      "botasaurus_status": "NOT_FOUND",
+      "uwae_status": "PLANNED",
+      "botasaurus_evidence": "Not verified in audit",
+      "uwae_evidence": "Planned in session manager subsystem",
+      "gap_analysis": "Key UWAE differentiator - durable session recovery",
+      "priority": "HIGH",
+      "confidence": "HIGH"
+    },
+    {
+      "category": "Challenge Classification and Recovery",
+      "capability": "Challenge classification system",
+      "botasaurus_status": "NOT_FOUND",
+      "uwae_status": "PLANNED",
+      "botasaurus_evidence": "Not verified in audit",
+      "uwae_evidence": "Planned in adaptive access engine",
+      "gap_analysis": "Key UWAE differentiator - structured challenge classification",
+      "priority": "HIGH",
+      "confidence": "HIGH"
+    },
+    {
+      "category": "Retry and Failure Isolation",
+      "capability": "Failure isolation (one job failure doesn't stop others)",
+      "botasaurus_status": "NOT_FOUND",
+      "uwae_status": "PLANNED",
+      "botasaurus_evidence": "Not verified in audit",
+      "uwae_evidence": "Planned in job scheduler subsystem",
+      "gap_analysis": "Key UWAE differentiator - true failure isolation",
+      "priority": "HIGH",
+      "confidence": "HIGH"
+    },
+    {
+      "category": "Durable Jobs and Restart Recovery",
+      "capability": "Job persistence across process restarts",
+      "botasaurus_status": "NOT_FOUND",
+      "uwae_status": "PLANNED",
+      "botasaurus_evidence": "Not verified in audit",
+      "uwae_evidence": "Planned in job scheduler subsystem",
+      "gap_analysis": "Key UWAE differentiator - true job durability",
+      "priority": "HIGH",
+      "confidence": "HIGH"
+    },
+    {
+      "category": "Cache Correctness",
+      "capability": "Separation of transport vs artifact caching",
+      "botasaurus_status": "NOT_FOUND",
+      "uwae_status": "PLANNED",
+      "botasaurus_evidence": "Not verified in audit",
+      "uwae_evidence": "Planned in cache subsystem",
+      "gap_analysis": "Key UWAE differentiator - explicit separation of concerns",
+      "priority": "HIGH",
+      "confidence": "HIGH"
+    },
+    {
+      "category": "Observability and Security",
+      "capability": "Structured event logging",
+      "botasaurus_status": "NOT_FOUND",
+      "uwae_status": "PLANNED",
+      "botasaurus_evidence": "Not verified in audit",
+      "uwae_evidence": "Planned in observability subsystem",
+      "gap_analysis": "Key UWAE differentiator - comprehensive structured logging",
+      "priority": "HIGH",
+      "confidence": "HIGH"
+    },
+    {
+      "category": "Termux/Android Compatibility",
+      "capability": "Installation on Termux without root",
+      "botasaurus_status": "NOT_FOUND",
+      "uwae_status": "PLANNED",
+      "botasaurus_evidence": "Not verified in audit",
+      "uwae_evidence": "Designed for Termux from ground up",
+      "gap_analysis": "Key UWAE differentiator - designed for Termux from ground up",
+      "priority": "HIGH",
+      "confidence": "HIGH"
+    }
+  ],
+  "summary": {
+    "total_capabilities_compared": 20,
+    "areas_where_uwae_plans_to_exceed": 12,
+    "areas_of_parity_planned": 6,
+    "areas_where_botasaurus_currently_leads": 2
+  }
+}

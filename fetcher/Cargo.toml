@@ -1,0 +1,18 @@
+[package]
+name = "uwae-fetch"
+version = "0.1.0"
+edition = "2021"
+description = "Fetch any URL to clean markdown for AI agents - Rust fast path of UWAE"
+license = "MIT"
+repository = "https://github.com/username9999-sys/uwae"
+
+[dependencies]
+reqwest = { version = "0.12", default-features = false, features = ["blocking", "rustls-tls"] }
+html2md = "0.2"
+clap = { version = "4", features = ["derive"] }
+serde_json = "1"
+
+[profile.release]
+opt-level = 3
+lto = true
+codegen-units = 1

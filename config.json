@@ -1,0 +1,26 @@
+{
+  "database": {
+    "path": "jobs.db",
+    "timeout": 5.0
+  },
+  "logging": {
+    "level": "INFO",
+    "format": "%(asctime)s - %(name)s - %(levelname)s - %(message)s",
+    "file": "universal_web_acquisition.log"
+  },
+  "http": {
+    "timeout": 30.0,
+    "max_redirects": 5,
+    "verify_ssl": true,
+    "user_agent": "UniversalWebAcquisitionEngine/0.1.0"
+  },
+  "job": {
+    "max_retries": 3,
+    "retry_delay": 1.0,
+    "max_concurrent_jobs": 5
+  },
+  "storage": {
+    "type": "filesystem",
+    "base_path": "storage"
+  }
+}

@@ -1,0 +1,205 @@
+{
+  "schema_version": 1,
+  "benchmark_id": "e22-browser-form-post-differential-001",
+  "supersedes": [],
+  "timestamp": "2026-10-31T01:53:29.762420+00:00",
+  "timing": {
+    "measured_arm_execution_s_total": 362.25,
+    "measured_arm_execution_runs": 60,
+    "measured_arm_execution_note": "Jumlah waktu eksekusi lengan yang terukur, dijumlahkan dari elapsed_ms tiap run. Ini durasi kerja yang sebenarnya, dan bukan durasi satu pemanggilan harness.",
+    "measurement_window": {
+      "first_run_recorded_at": "2026-10-31T01:46:00.004100+00:00",
+      "last_run_recorded_at": "2026-10-31T01:53:29.324415+00:00",
+      "wall_clock_span_s": 449.32,
+      "note": "Rentang rekam run pertama sampai run terakhir di perangkat. Lebih besar dari durasi kerja terukur karena mencakup jeda antar-run dan jeda restart perangkat."
+    },
+    "execution_sessions": [
+      {
+        "session": 1,
+        "runs": 60,
+        "started_at": "2026-10-31T01:46:00.004100+00:00",
+        "ended_at": "2026-10-31T01:53:29.324415+00:00",
+        "wall_clock_span_s": 449.3,
+        "gap_before_s": 0.0,
+        "fixture_base_urls": [
+          "http://127.0.0.1:38417",
+          "http://127.0.0.1:42251",
+          "http://127.0.0.1:37293"
+        ]
+      }
+    ],
+    "interruption_gap_threshold_s": 120.0,
+    "harness_invocation": {
+      "wall_clock_s": 185.03,
+      "runs_executed_this_invocation": 40,
+      "runs_reused_from_checkpoint": 20,
+      "note": "Durasi pemanggilan harness yang menulis dokumen ini. Kalau sebagian besar run diambil dari checkpoint, angka ini TIDAK mencakup durasi eksekusi run tersebut -- makanya durasi kerja terukur dipublikasikan terpisah."
+    }
+  },
+  "checkpoint": {
+    "checkpoint_path": "/root/.qwen/tmp/e22_checkpoint.jsonl",
+    "harness_fingerprint": "af97fc54adae0194e9face805e1801a3d1ee3a958b866b822db8f734dba303f7",
+    "runs_in_checkpoint": 60,
+    "runs_reused": 20,
+    "records_ignored": 0,
+    "runs_executed_this_invocation": 40
+  },
+  "environment": {
+    "interpreter": {
+      "executable": "/root/uwae-comparison-venv/bin/python",
+      "version": "3.14.4",
+      "platform": "Linux-6.17.0-PRoot-Distro-aarch64-with-glibc2.43",
+      "machine": "aarch64",
+      "implementation": "CPython"
+    },
+    "pythonpath": "/root/botasaurus-venv/lib/python3.14/site-packages:/root/universal-web-acquisition/src",
+    "package_versions": {
+      "botasaurus": "4.0.97",
+      "botasaurus_requests": "4.0.38",
+      "botasaurus_driver": "4.0.101",
+      "requests": "2.34.2",
+      "httpx": "0.28.1",
+      "curl_cffi": "0.17.0",
+      "joblib": "1.6.0",
+      "brotli": "1.2.0",
+      "certifi": "2026.7.22"
+    },
+    "fixture": "deterministic localhost POST-protocol fixture (fixture_post.py), port bebas per invocation",
+    "browser": "chromium headless (/usr/bin/chromium) via CDP, port tetap per arm (9384/9385)",
+    "method": "30 run per arm; kedua arm sebagai subprocess dari SATU interpreter dengan SATU PYTHONPATH, masing-masing meluncurkan chromium headless sendiri melawan SATU instance fixture",
+    "identical_conditions": {
+      "targets": true,
+      "expected_outputs": true,
+      "device_conditions": true,
+      "run_counts": true,
+      "success_criteria": true
+    },
+    "submit_js_identical_for_both_arms": true
+  },
+  "scenarios": [
+    {
+      "scenario_id": "p07_post_browser_form",
+      "page_path": "/post/form-page",
+      "target_path": "/post/form-page-target",
+      "primary_criterion": "acquisition",
+      "ground_truth": {
+        "expect_status": 200,
+        "expect_body_sha256": "6b3a1b265ed97c34281750733f3d07f67d0159634813d74d53b6a94fee7b8702",
+        "expect_body_bytes": 13,
+        "expect_request_body_sha256": "1ee90685f55fc538e8535bdbd139b9e5312b822ffb70d1ac3584a5b34b14fcfd",
+        "expect_request_body_bytes": 18
+      }
+    }
+  ],
+  "summary": {
+    "comparisons": [
+      {
+        "scenario_id": "p07_post_browser_form",
+        "criterion": "acquisition",
+        "uwae_arm": "uwae-browser",
+        "baseline_arm": "botasaurus-browser",
+        "verdict": "tie",
+        "verdict_source": "explicit",
+        "evaluated_basis": "raw_rows",
+        "note": "POST dieksekusi lewat submit form HTML oleh kedua mesin browser.",
+        "runs": 30,
+        "uwae_evaluated_runs": 30,
+        "uwae_successes": 30,
+        "baseline_evaluated_runs": 30,
+        "baseline_successes": 30,
+        "outcome": "tie"
+      }
+    ],
+    "uwae_summary": {
+      "runs": 30,
+      "primary_successes": 30,
+      "primary_success_rate": 1.0,
+      "elapsed_ms_median": 1949.83,
+      "elapsed_ms_min": 1859.19,
+      "elapsed_ms_max": 4614.49,
+      "acquisition_verified_runs": 30,
+      "status_match_runs": 30,
+      "body_match_runs": 30,
+      "browser_used_runs": 30,
+      "raw_signals": [
+        "status 200"
+      ],
+      "errors": []
+    },
+    "baseline_summary": {
+      "runs": 30,
+      "primary_successes": 30,
+      "primary_success_rate": 1.0,
+      "elapsed_ms_median": 9474.33,
+      "elapsed_ms_min": 7949.16,
+      "elapsed_ms_max": 15758.46,
+      "acquisition_verified_runs": 30,
+      "status_match_runs": 30,
+      "body_match_runs": 30,
+      "browser_used_runs": 30,
+      "raw_signals": [
+        "status 200"
+      ],
+      "errors": []
+    },
+    "interpretation": "Pengukuran baseline POST via browser form — BUKAN klaim mengungguli. Slot ini ada karena E20 mendeklarasikan post_browser_arm sebagai celah terbuka.",
+    "runtime_failures": {
+      "uwae-browser": null,
+      "botasaurus-browser": null
+    }
+  },
+  "server_side_evidence": {
+    "uwae-browser": {
+      "observations": 80,
+      "methods_observed": {
+        "GET": 40,
+        "POST": 40
+      },
+      "protocol_verdicts": {
+        "ok": 80
+      },
+      "distinct_user_agents": [
+        "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36",
+        "UniversalWebAcquisitionEngine/0.2.0"
+      ],
+      "runs_executed": 30,
+      "page_gets_observed": 30,
+      "target_posts_observed": 30,
+      "target_posts_ok": 30,
+      "attribution": "Setiap run yang berhasil harus menghasilkan tepat dua observasi: GET halaman form lalu POST ke target. POST tanpa GET halaman, atau GET tanpa POST, adalah bukti yang tidak lengkap — dilaporkan apa adanya."
+    },
+    "botasaurus-browser": {
+      "observations": 80,
+      "methods_observed": {
+        "GET": 40,
+        "POST": 40
+      },
+      "protocol_verdicts": {
+        "ok": 80
+      },
+      "distinct_user_agents": [
+        "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36",
+        "UniversalWebAcquisitionEngine/0.2.0"
+      ],
+      "runs_executed": 10,
+      "page_gets_observed": 10,
+      "target_posts_observed": 10,
+      "target_posts_ok": 10,
+      "attribution": "Setiap run yang berhasil harus menghasilkan tepat dua observasi: GET halaman form lalu POST ke target. POST tanpa GET halaman, atau GET tanpa POST, adalah bukti yang tidak lengkap — dilaporkan apa adanya."
+    },
+    "note": "Bukti dari log server: GET halaman form + POST ke target per run."
+  },
+  "declared_gaps": [
+    {
+      "scenario_id": "post_browser_arm",
+      "reason": "E20 hanya mengukur arm HTTP. E22 mengukur POST yang dieksekusi lewat submit form HTML oleh kedua mesin browser (chromium headless) pada device yang sama."
+    }
+  ],
+  "unsupported_scenarios": [
+    {
+      "scenario_id": "post_browser_multipart_upload",
+      "reason": "Upload file via <input type=file> di browser tidak diukur — butuh file nyata di disk dan interaksi file chooser CDP yang berbeda antar mesin.",
+      "supported_by": []
+    }
+  ]
+}

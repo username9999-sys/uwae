@@ -1,0 +1,1777 @@
+{
+  "schema_version": 1,
+  "benchmark_id": "e17-corpus-verdict-matrix-001",
+  "generated_at": "2026-10-31T01:58:19.687322+00:00",
+  "purpose": "Menggabungkan vonis seluruh benchmark lintas-implementasi UWAE vs Botasaurus jadi satu matriks korpus: menang, seri, kalah, dan belum teruji dipublikasikan terpisah (TEXT.md:1427, Tahap G; gerbang TEXT.md §9 #7).",
+  "method": {
+    "verdict_rule": "Vonis dihitung pada DUA batas: tingkat sukses atas run yang dievaluasi dan tingkat sukses atas seluruh attempt. Kalau kedua batas memberi urutan sama, vonisnya pasti (uwae / baseline / tie). Kalau berbeda, bukti tidak cukup memilih -> not_comparable. Kalau salah satu sisi tidak punya run yang bisa dinilai -> no_evaluable_runs. Run yang tidak bisa dinilai dikeluarkan dari penyebut kapabilitas dan dipublikasikan terpisah sebagai untested_runs.",
+    "source_slots": [
+      {
+        "slot": "E14",
+        "source": "engine-results-e14.json"
+      },
+      {
+        "slot": "E15",
+        "source": "engine-results-e15.json"
+      },
+      {
+        "slot": "E16",
+        "source": "engine-results-e16.json"
+      },
+      {
+        "slot": "E18",
+        "source": "engine-results-e18.json"
+      },
+      {
+        "slot": "E19",
+        "source": "engine-results-e19.json"
+      },
+      {
+        "slot": "E20",
+        "source": "engine-results-e20.json"
+      },
+      {
+        "slot": "E21",
+        "source": "engine-results-e21.json"
+      },
+      {
+        "slot": "E22",
+        "source": "engine-results-e22.json"
+      }
+    ],
+    "counts_are": "Jumlah INSTANSI perbandingan, bukan jumlah skenario unik. Skenario yang sama bisa diukur di beberapa slot dengan lengan dan kriteria berbeda, jadi jumlah slot tidak boleh dibaca sebagai jumlah skenario.",
+    "no_new_runs": "Modul ini tidak menjalankan benchmark. Ia hanya merangkum evidence yang sudah dipublikasikan."
+  },
+  "slots": [
+    {
+      "slot": "E14",
+      "source": "engine-results-e14.json",
+      "benchmark_id": "e14-cross-implementation-differential-001",
+      "dimension": "http-transport",
+      "schema": "e14_like",
+      "comparisons": [
+        {
+          "scenario_id": "b01_small_get",
+          "criterion": "acquisition",
+          "uwae_arm": "uwae-engine",
+          "baseline_arm": "botasaurus-request",
+          "uwae": {
+            "runs": 5,
+            "evaluated_runs": 5,
+            "primary_success_runs": 5,
+            "untested_runs": 0
+          },
+          "baseline": {
+            "runs": 5,
+            "evaluated_runs": 5,
+            "primary_success_runs": 5,
+            "untested_runs": 0
+          },
+          "verdict": "tie",
+          "verdict_source": "derived",
+          "evaluated_basis": "published_runs_only",
+          "note": "Slot ini tidak memisahkan run yang belum bisa dinilai, jadi evaluated_runs = runs. Bandingkan dengan slot berikutnya yang menyimpan row kasar."
+        },
+        {
+          "scenario_id": "b01_large_get",
+          "criterion": "acquisition",
+          "uwae_arm": "uwae-engine",
+          "baseline_arm": "botasaurus-request",
+          "uwae": {
+            "runs": 5,
+            "evaluated_runs": 5,
+            "primary_success_runs": 5,
+            "untested_runs": 0
+          },
+          "baseline": {
+            "runs": 5,
+            "evaluated_runs": 5,
+            "primary_success_runs": 5,
+            "untested_runs": 0
+          },
+          "verdict": "tie",
+          "verdict_source": "derived",
+          "evaluated_basis": "published_runs_only",
+          "note": "Slot ini tidak memisahkan run yang belum bisa dinilai, jadi evaluated_runs = runs. Bandingkan dengan slot berikutnya yang menyimpan row kasar."
+        },
+        {
+          "scenario_id": "b04_redirect",
+          "criterion": "acquisition",
+          "uwae_arm": "uwae-engine",
+          "baseline_arm": "botasaurus-request",
+          "uwae": {
+            "runs": 5,
+            "evaluated_runs": 5,
+            "primary_success_runs": 5,
+            "untested_runs": 0
+          },
+          "baseline": {
+            "runs": 5,
+            "evaluated_runs": 5,
+            "primary_success_runs": 5,
+            "untested_runs": 0
+          },
+          "verdict": "tie",
+          "verdict_source": "derived",
+          "evaluated_basis": "published_runs_only",
+          "note": "Slot ini tidak memisahkan run yang belum bisa dinilai, jadi evaluated_runs = runs. Bandingkan dengan slot berikutnya yang menyimpan row kasar."
+        },
+        {
+          "scenario_id": "b06_gzip",
+          "criterion": "acquisition",
+          "uwae_arm": "uwae-engine",
+          "baseline_arm": "botasaurus-request",
+          "uwae": {
+            "runs": 5,
+            "evaluated_runs": 5,
+            "primary_success_runs": 5,
+            "untested_runs": 0
+          },
+          "baseline": {
+            "runs": 5,
+            "evaluated_runs": 5,
+            "primary_success_runs": 5,
+            "untested_runs": 0
+          },
+          "verdict": "tie",
+          "verdict_source": "derived",
+          "evaluated_basis": "published_runs_only",
+          "note": "Slot ini tidak memisahkan run yang belum bisa dinilai, jadi evaluated_runs = runs. Bandingkan dengan slot berikutnya yang menyimpan row kasar."
+        },
+        {
+          "scenario_id": "b06_brotli",
+          "criterion": "acquisition",
+          "uwae_arm": "uwae-engine",
+          "baseline_arm": "botasaurus-request",
+          "uwae": {
+            "runs": 5,
+            "evaluated_runs": 5,
+            "primary_success_runs": 5,
+            "untested_runs": 0
+          },
+          "baseline": {
+            "runs": 5,
+            "evaluated_runs": 5,
+            "primary_success_runs": 5,
+            "untested_runs": 0
+          },
+          "verdict": "tie",
+          "verdict_source": "derived",
+          "evaluated_basis": "published_runs_only",
+          "note": "Slot ini tidak memisahkan run yang belum bisa dinilai, jadi evaluated_runs = runs. Bandingkan dengan slot berikutnya yang menyimpan row kasar."
+        },
+        {
+          "scenario_id": "b07_js_render",
+          "criterion": "diagnosis",
+          "uwae_arm": "uwae-engine",
+          "baseline_arm": "botasaurus-request",
+          "uwae": {
+            "runs": 5,
+            "evaluated_runs": 5,
+            "primary_success_runs": 5,
+            "untested_runs": 0
+          },
+          "baseline": {
+            "runs": 5,
+            "evaluated_runs": 5,
+            "primary_success_runs": 0,
+            "untested_runs": 0
+          },
+          "verdict": "uwae",
+          "verdict_source": "derived",
+          "evaluated_basis": "published_runs_only",
+          "note": "Slot ini tidak memisahkan run yang belum bisa dinilai, jadi evaluated_runs = runs. Bandingkan dengan slot berikutnya yang menyimpan row kasar."
+        },
+        {
+          "scenario_id": "e02_not_found",
+          "criterion": "diagnosis",
+          "uwae_arm": "uwae-engine",
+          "baseline_arm": "botasaurus-request",
+          "uwae": {
+            "runs": 5,
+            "evaluated_runs": 5,
+            "primary_success_runs": 5,
+            "untested_runs": 0
+          },
+          "baseline": {
+            "runs": 5,
+            "evaluated_runs": 5,
+            "primary_success_runs": 0,
+            "untested_runs": 0
+          },
+          "verdict": "uwae",
+          "verdict_source": "derived",
+          "evaluated_basis": "published_runs_only",
+          "note": "Slot ini tidak memisahkan run yang belum bisa dinilai, jadi evaluated_runs = runs. Bandingkan dengan slot berikutnya yang menyimpan row kasar."
+        },
+        {
+          "scenario_id": "a04_login",
+          "criterion": "diagnosis",
+          "uwae_arm": "uwae-engine",
+          "baseline_arm": "botasaurus-request",
+          "uwae": {
+            "runs": 5,
+            "evaluated_runs": 5,
+            "primary_success_runs": 5,
+            "untested_runs": 0
+          },
+          "baseline": {
+            "runs": 5,
+            "evaluated_runs": 5,
+            "primary_success_runs": 0,
+            "untested_runs": 0
+          },
+          "verdict": "uwae",
+          "verdict_source": "derived",
+          "evaluated_basis": "published_runs_only",
+          "note": "Slot ini tidak memisahkan run yang belum bisa dinilai, jadi evaluated_runs = runs. Bandingkan dengan slot berikutnya yang menyimpan row kasar."
+        },
+        {
+          "scenario_id": "a06_rate_limited",
+          "criterion": "diagnosis",
+          "uwae_arm": "uwae-engine",
+          "baseline_arm": "botasaurus-request",
+          "uwae": {
+            "runs": 5,
+            "evaluated_runs": 5,
+            "primary_success_runs": 5,
+            "untested_runs": 0
+          },
+          "baseline": {
+            "runs": 5,
+            "evaluated_runs": 5,
+            "primary_success_runs": 0,
+            "untested_runs": 0
+          },
+          "verdict": "uwae",
+          "verdict_source": "derived",
+          "evaluated_basis": "published_runs_only",
+          "note": "Slot ini tidak memisahkan run yang belum bisa dinilai, jadi evaluated_runs = runs. Bandingkan dengan slot berikutnya yang menyimpan row kasar."
+        },
+        {
+          "scenario_id": "a07_challenge",
+          "criterion": "diagnosis",
+          "uwae_arm": "uwae-engine",
+          "baseline_arm": "botasaurus-request",
+          "uwae": {
+            "runs": 5,
+            "evaluated_runs": 5,
+            "primary_success_runs": 5,
+            "untested_runs": 0
+          },
+          "baseline": {
+            "runs": 5,
+            "evaluated_runs": 5,
+            "primary_success_runs": 0,
+            "untested_runs": 0
+          },
+          "verdict": "uwae",
+          "verdict_source": "derived",
+          "evaluated_basis": "published_runs_only",
+          "note": "Slot ini tidak memisahkan run yang belum bisa dinilai, jadi evaluated_runs = runs. Bandingkan dengan slot berikutnya yang menyimpan row kasar."
+        },
+        {
+          "scenario_id": "a07_denied",
+          "criterion": "diagnosis",
+          "uwae_arm": "uwae-engine",
+          "baseline_arm": "botasaurus-request",
+          "uwae": {
+            "runs": 5,
+            "evaluated_runs": 5,
+            "primary_success_runs": 5,
+            "untested_runs": 0
+          },
+          "baseline": {
+            "runs": 5,
+            "evaluated_runs": 5,
+            "primary_success_runs": 0,
+            "untested_runs": 0
+          },
+          "verdict": "uwae",
+          "verdict_source": "derived",
+          "evaluated_basis": "published_runs_only",
+          "note": "Slot ini tidak memisahkan run yang belum bisa dinilai, jadi evaluated_runs = runs. Bandingkan dengan slot berikutnya yang menyimpan row kasar."
+        },
+        {
+          "scenario_id": "a11_invalid_html",
+          "criterion": "diagnosis",
+          "uwae_arm": "uwae-engine",
+          "baseline_arm": "botasaurus-request",
+          "uwae": {
+            "runs": 5,
+            "evaluated_runs": 5,
+            "primary_success_runs": 5,
+            "untested_runs": 0
+          },
+          "baseline": {
+            "runs": 5,
+            "evaluated_runs": 5,
+            "primary_success_runs": 0,
+            "untested_runs": 0
+          },
+          "verdict": "uwae",
+          "verdict_source": "derived",
+          "evaluated_basis": "published_runs_only",
+          "note": "Slot ini tidak memisahkan run yang belum bisa dinilai, jadi evaluated_runs = runs. Bandingkan dengan slot berikutnya yang menyimpan row kasar."
+        },
+        {
+          "scenario_id": "a09_large_download",
+          "criterion": "acquisition",
+          "uwae_arm": "uwae-engine",
+          "baseline_arm": "botasaurus-request",
+          "uwae": {
+            "runs": 5,
+            "evaluated_runs": 5,
+            "primary_success_runs": 5,
+            "untested_runs": 0
+          },
+          "baseline": {
+            "runs": 5,
+            "evaluated_runs": 5,
+            "primary_success_runs": 5,
+            "untested_runs": 0
+          },
+          "verdict": "tie",
+          "verdict_source": "derived",
+          "evaluated_basis": "published_runs_only",
+          "note": "Slot ini tidak memisahkan run yang belum bisa dinilai, jadi evaluated_runs = runs. Bandingkan dengan slot berikutnya yang menyimpan row kasar."
+        }
+      ],
+      "totals": {
+        "uwae_wins": 7,
+        "ties": 6,
+        "baseline_wins": 0,
+        "not_comparable": 0,
+        "no_evaluable_runs": 0,
+        "untested_runs_total": 0
+      },
+      "declared_gaps": [
+        {
+          "scenario_id": "a05_protected",
+          "reason": "memerlukan alur sesi terautentikasi (cookie login -> akses); benchmark ini mengukur target satu-permintaan. Perbandingan alur sesi belum diukur.",
+          "supported_by": []
+        },
+        {
+          "scenario_id": "js_rendering_browser_arm",
+          "reason": "Kedua arm di benchmark ini adalah arm HTTP. Rendering JavaScript butuh arm browser; Botasaurus memakai driver CDP (bukan chromedriver) dan UWAE memakai raw CDP (ADR-014) — keduanya belum diukur pada device ini, jadi tidak diklaim sebagai perbedaan engine.",
+          "supported_by": []
+        }
+      ],
+      "supersedes": [],
+      "status": "superseded",
+      "superseded_by": "E18"
+    },
+    {
+      "slot": "E15",
+      "source": "engine-results-e15.json",
+      "benchmark_id": "e15-session-flow-differential-001",
+      "dimension": "session-flow",
+      "schema": "e15_like",
+      "comparisons": [
+        {
+          "scenario_id": "session_valid",
+          "criterion": "content_acquired",
+          "uwae_arm": "uwae-engine",
+          "baseline_arm": "botasaurus-auto",
+          "uwae": {
+            "runs": 5,
+            "evaluated_runs": 5,
+            "primary_success_runs": 5,
+            "untested_runs": 0
+          },
+          "baseline": {
+            "runs": 5,
+            "evaluated_runs": 5,
+            "primary_success_runs": 5,
+            "untested_runs": 0
+          },
+          "verdict": "tie",
+          "verdict_source": "derived",
+          "evaluated_basis": "raw_rows",
+          "note": "Kriteria primer E15: resource terproteksi benar-benar terambil dengan body yang cocok (status 200 + sha256 body). Run dengan error tanpa body maupun status dihitung belum teruji, bukan gagal."
+        },
+        {
+          "scenario_id": "session_valid",
+          "criterion": "content_acquired",
+          "uwae_arm": "uwae-engine",
+          "baseline_arm": "botasaurus-explicit",
+          "uwae": {
+            "runs": 5,
+            "evaluated_runs": 5,
+            "primary_success_runs": 5,
+            "untested_runs": 0
+          },
+          "baseline": {
+            "runs": 5,
+            "evaluated_runs": 5,
+            "primary_success_runs": 5,
+            "untested_runs": 0
+          },
+          "verdict": "tie",
+          "verdict_source": "derived",
+          "evaluated_basis": "raw_rows",
+          "note": "Kriteria primer E15: resource terproteksi benar-benar terambil dengan body yang cocok (status 200 + sha256 body). Run dengan error tanpa body maupun status dihitung belum teruji, bukan gagal."
+        },
+        {
+          "scenario_id": "session_valid",
+          "criterion": "content_acquired",
+          "uwae_arm": "uwae-engine",
+          "baseline_arm": "botasaurus-decorator-request",
+          "uwae": {
+            "runs": 5,
+            "evaluated_runs": 5,
+            "primary_success_runs": 5,
+            "untested_runs": 0
+          },
+          "baseline": {
+            "runs": 5,
+            "evaluated_runs": 5,
+            "primary_success_runs": 5,
+            "untested_runs": 0
+          },
+          "verdict": "tie",
+          "verdict_source": "derived",
+          "evaluated_basis": "raw_rows",
+          "note": "Kriteria primer E15: resource terproteksi benar-benar terambil dengan body yang cocok (status 200 + sha256 body). Run dengan error tanpa body maupun status dihitung belum teruji, bukan gagal."
+        },
+        {
+          "scenario_id": "session_required",
+          "criterion": "content_acquired",
+          "uwae_arm": "uwae-engine",
+          "baseline_arm": "botasaurus-auto",
+          "uwae": {
+            "runs": 5,
+            "evaluated_runs": 5,
+            "primary_success_runs": 5,
+            "untested_runs": 0
+          },
+          "baseline": {
+            "runs": 5,
+            "evaluated_runs": 5,
+            "primary_success_runs": 0,
+            "untested_runs": 0
+          },
+          "verdict": "uwae",
+          "verdict_source": "derived",
+          "evaluated_basis": "raw_rows",
+          "note": "Kriteria primer E15: resource terproteksi benar-benar terambil dengan body yang cocok (status 200 + sha256 body). Run dengan error tanpa body maupun status dihitung belum teruji, bukan gagal."
+        },
+        {
+          "scenario_id": "session_required",
+          "criterion": "content_acquired",
+          "uwae_arm": "uwae-engine",
+          "baseline_arm": "botasaurus-explicit",
+          "uwae": {
+            "runs": 5,
+            "evaluated_runs": 5,
+            "primary_success_runs": 5,
+            "untested_runs": 0
+          },
+          "baseline": {
+            "runs": 5,
+            "evaluated_runs": 5,
+            "primary_success_runs": 5,
+            "untested_runs": 0
+          },
+          "verdict": "tie",
+          "verdict_source": "derived",
+          "evaluated_basis": "raw_rows",
+          "note": "Kriteria primer E15: resource terproteksi benar-benar terambil dengan body yang cocok (status 200 + sha256 body). Run dengan error tanpa body maupun status dihitung belum teruji, bukan gagal."
+        },
+        {
+          "scenario_id": "session_required",
+          "criterion": "content_acquired",
+          "uwae_arm": "uwae-engine",
+          "baseline_arm": "botasaurus-decorator-request",
+          "uwae": {
+            "runs": 5,
+            "evaluated_runs": 5,
+            "primary_success_runs": 5,
+            "untested_runs": 0
+          },
+          "baseline": {
+            "runs": 5,
+            "evaluated_runs": 5,
+            "primary_success_runs": 0,
+            "untested_runs": 0
+          },
+          "verdict": "uwae",
+          "verdict_source": "derived",
+          "evaluated_basis": "raw_rows",
+          "note": "Kriteria primer E15: resource terproteksi benar-benar terambil dengan body yang cocok (status 200 + sha256 body). Run dengan error tanpa body maupun status dihitung belum teruji, bukan gagal."
+        },
+        {
+          "scenario_id": "session_expired",
+          "criterion": "content_acquired",
+          "uwae_arm": "uwae-engine",
+          "baseline_arm": "botasaurus-auto",
+          "uwae": {
+            "runs": 5,
+            "evaluated_runs": 5,
+            "primary_success_runs": 5,
+            "untested_runs": 0
+          },
+          "baseline": {
+            "runs": 5,
+            "evaluated_runs": 5,
+            "primary_success_runs": 0,
+            "untested_runs": 0
+          },
+          "verdict": "uwae",
+          "verdict_source": "derived",
+          "evaluated_basis": "raw_rows",
+          "note": "Kriteria primer E15: resource terproteksi benar-benar terambil dengan body yang cocok (status 200 + sha256 body). Run dengan error tanpa body maupun status dihitung belum teruji, bukan gagal."
+        },
+        {
+          "scenario_id": "session_expired",
+          "criterion": "content_acquired",
+          "uwae_arm": "uwae-engine",
+          "baseline_arm": "botasaurus-explicit",
+          "uwae": {
+            "runs": 5,
+            "evaluated_runs": 5,
+            "primary_success_runs": 5,
+            "untested_runs": 0
+          },
+          "baseline": {
+            "runs": 5,
+            "evaluated_runs": 5,
+            "primary_success_runs": 5,
+            "untested_runs": 0
+          },
+          "verdict": "tie",
+          "verdict_source": "derived",
+          "evaluated_basis": "raw_rows",
+          "note": "Kriteria primer E15: resource terproteksi benar-benar terambil dengan body yang cocok (status 200 + sha256 body). Run dengan error tanpa body maupun status dihitung belum teruji, bukan gagal."
+        },
+        {
+          "scenario_id": "session_expired",
+          "criterion": "content_acquired",
+          "uwae_arm": "uwae-engine",
+          "baseline_arm": "botasaurus-decorator-request",
+          "uwae": {
+            "runs": 5,
+            "evaluated_runs": 5,
+            "primary_success_runs": 5,
+            "untested_runs": 0
+          },
+          "baseline": {
+            "runs": 5,
+            "evaluated_runs": 5,
+            "primary_success_runs": 0,
+            "untested_runs": 0
+          },
+          "verdict": "uwae",
+          "verdict_source": "derived",
+          "evaluated_basis": "raw_rows",
+          "note": "Kriteria primer E15: resource terproteksi benar-benar terambil dengan body yang cocok (status 200 + sha256 body). Run dengan error tanpa body maupun status dihitung belum teruji, bukan gagal."
+        }
+      ],
+      "totals": {
+        "uwae_wins": 4,
+        "ties": 5,
+        "baseline_wins": 0,
+        "not_comparable": 0,
+        "no_evaluable_runs": 0,
+        "untested_runs_total": 0
+      },
+      "declared_gaps": [],
+      "supersedes": [],
+      "status": "superseded",
+      "superseded_by": "E19"
+    },
+    {
+      "slot": "E16",
+      "source": "engine-results-e16.json",
+      "benchmark_id": "e16-browser-arm-differential-001",
+      "dimension": "browser-arm",
+      "schema": "e16_like",
+      "comparisons": [
+        {
+          "scenario_id": "b01_small_get",
+          "criterion": "body_acquired",
+          "uwae_arm": "uwae-adaptive",
+          "baseline_arm": "botasaurus-http",
+          "uwae": {
+            "runs": 30,
+            "evaluated_runs": 30,
+            "primary_success_runs": 30,
+            "untested_runs": 0
+          },
+          "baseline": {
+            "runs": 30,
+            "evaluated_runs": 30,
+            "primary_success_runs": 30,
+            "untested_runs": 0
+          },
+          "verdict": "tie",
+          "verdict_source": "explicit",
+          "evaluated_basis": "raw_rows",
+          "note": "Vonis diambil apa adanya dari evidence slot ini."
+        },
+        {
+          "scenario_id": "b01_small_get",
+          "criterion": "body_acquired",
+          "uwae_arm": "uwae-adaptive",
+          "baseline_arm": "botasaurus-browser",
+          "uwae": {
+            "runs": 30,
+            "evaluated_runs": 30,
+            "primary_success_runs": 30,
+            "untested_runs": 0
+          },
+          "baseline": {
+            "runs": 30,
+            "evaluated_runs": 30,
+            "primary_success_runs": 30,
+            "untested_runs": 0
+          },
+          "verdict": "tie",
+          "verdict_source": "explicit",
+          "evaluated_basis": "raw_rows",
+          "note": "Vonis diambil apa adanya dari evidence slot ini."
+        },
+        {
+          "scenario_id": "b01_small_get",
+          "criterion": "body_acquired",
+          "uwae_arm": "uwae-browser-only",
+          "baseline_arm": "botasaurus-browser",
+          "uwae": {
+            "runs": 30,
+            "evaluated_runs": 30,
+            "primary_success_runs": 30,
+            "untested_runs": 0
+          },
+          "baseline": {
+            "runs": 30,
+            "evaluated_runs": 30,
+            "primary_success_runs": 30,
+            "untested_runs": 0
+          },
+          "verdict": "tie",
+          "verdict_source": "explicit",
+          "evaluated_basis": "raw_rows",
+          "note": "Vonis diambil apa adanya dari evidence slot ini."
+        },
+        {
+          "scenario_id": "b07_js_render",
+          "criterion": "body_acquired",
+          "uwae_arm": "uwae-adaptive",
+          "baseline_arm": "botasaurus-http",
+          "uwae": {
+            "runs": 30,
+            "evaluated_runs": 30,
+            "primary_success_runs": 30,
+            "untested_runs": 0
+          },
+          "baseline": {
+            "runs": 30,
+            "evaluated_runs": 30,
+            "primary_success_runs": 0,
+            "untested_runs": 0
+          },
+          "verdict": "uwae",
+          "verdict_source": "explicit",
+          "evaluated_basis": "raw_rows",
+          "note": "Vonis diambil apa adanya dari evidence slot ini."
+        },
+        {
+          "scenario_id": "b07_js_render",
+          "criterion": "body_acquired",
+          "uwae_arm": "uwae-adaptive",
+          "baseline_arm": "botasaurus-browser",
+          "uwae": {
+            "runs": 30,
+            "evaluated_runs": 30,
+            "primary_success_runs": 30,
+            "untested_runs": 0
+          },
+          "baseline": {
+            "runs": 30,
+            "evaluated_runs": 30,
+            "primary_success_runs": 30,
+            "untested_runs": 0
+          },
+          "verdict": "tie",
+          "verdict_source": "explicit",
+          "evaluated_basis": "raw_rows",
+          "note": "Vonis diambil apa adanya dari evidence slot ini."
+        },
+        {
+          "scenario_id": "b07_js_render",
+          "criterion": "body_acquired",
+          "uwae_arm": "uwae-browser-only",
+          "baseline_arm": "botasaurus-browser",
+          "uwae": {
+            "runs": 30,
+            "evaluated_runs": 30,
+            "primary_success_runs": 30,
+            "untested_runs": 0
+          },
+          "baseline": {
+            "runs": 30,
+            "evaluated_runs": 30,
+            "primary_success_runs": 30,
+            "untested_runs": 0
+          },
+          "verdict": "tie",
+          "verdict_source": "explicit",
+          "evaluated_basis": "raw_rows",
+          "note": "Vonis diambil apa adanya dari evidence slot ini."
+        },
+        {
+          "scenario_id": "a11_invalid_html",
+          "criterion": "signal_preserved",
+          "uwae_arm": "uwae-adaptive",
+          "baseline_arm": "botasaurus-http",
+          "uwae": {
+            "runs": 30,
+            "evaluated_runs": 30,
+            "primary_success_runs": 30,
+            "untested_runs": 0
+          },
+          "baseline": {
+            "runs": 30,
+            "evaluated_runs": 30,
+            "primary_success_runs": 30,
+            "untested_runs": 0
+          },
+          "verdict": "tie",
+          "verdict_source": "explicit",
+          "evaluated_basis": "raw_rows",
+          "note": "Vonis diambil apa adanya dari evidence slot ini."
+        },
+        {
+          "scenario_id": "a11_invalid_html",
+          "criterion": "signal_preserved",
+          "uwae_arm": "uwae-adaptive",
+          "baseline_arm": "botasaurus-browser",
+          "uwae": {
+            "runs": 30,
+            "evaluated_runs": 30,
+            "primary_success_runs": 30,
+            "untested_runs": 0
+          },
+          "baseline": {
+            "runs": 30,
+            "evaluated_runs": 30,
+            "primary_success_runs": 0,
+            "untested_runs": 0
+          },
+          "verdict": "uwae",
+          "verdict_source": "explicit",
+          "evaluated_basis": "raw_rows",
+          "note": "Vonis diambil apa adanya dari evidence slot ini."
+        },
+        {
+          "scenario_id": "a11_invalid_html",
+          "criterion": "signal_preserved",
+          "uwae_arm": "uwae-browser-only",
+          "baseline_arm": "botasaurus-browser",
+          "uwae": {
+            "runs": 30,
+            "evaluated_runs": 30,
+            "primary_success_runs": 0,
+            "untested_runs": 0
+          },
+          "baseline": {
+            "runs": 30,
+            "evaluated_runs": 30,
+            "primary_success_runs": 0,
+            "untested_runs": 0
+          },
+          "verdict": "tie",
+          "verdict_source": "explicit",
+          "evaluated_basis": "raw_rows",
+          "note": "Vonis diambil apa adanya dari evidence slot ini."
+        },
+        {
+          "scenario_id": "a07_challenge",
+          "criterion": "signal_preserved",
+          "uwae_arm": "uwae-adaptive",
+          "baseline_arm": "botasaurus-http",
+          "uwae": {
+            "runs": 30,
+            "evaluated_runs": 30,
+            "primary_success_runs": 30,
+            "untested_runs": 0
+          },
+          "baseline": {
+            "runs": 30,
+            "evaluated_runs": 30,
+            "primary_success_runs": 30,
+            "untested_runs": 0
+          },
+          "verdict": "tie",
+          "verdict_source": "explicit",
+          "evaluated_basis": "raw_rows",
+          "note": "Vonis diambil apa adanya dari evidence slot ini."
+        },
+        {
+          "scenario_id": "a07_challenge",
+          "criterion": "signal_preserved",
+          "uwae_arm": "uwae-adaptive",
+          "baseline_arm": "botasaurus-browser",
+          "uwae": {
+            "runs": 30,
+            "evaluated_runs": 30,
+            "primary_success_runs": 30,
+            "untested_runs": 0
+          },
+          "baseline": {
+            "runs": 30,
+            "evaluated_runs": 30,
+            "primary_success_runs": 30,
+            "untested_runs": 0
+          },
+          "verdict": "tie",
+          "verdict_source": "explicit",
+          "evaluated_basis": "raw_rows",
+          "note": "Vonis diambil apa adanya dari evidence slot ini."
+        },
+        {
+          "scenario_id": "a07_challenge",
+          "criterion": "signal_preserved",
+          "uwae_arm": "uwae-browser-only",
+          "baseline_arm": "botasaurus-browser",
+          "uwae": {
+            "runs": 30,
+            "evaluated_runs": 30,
+            "primary_success_runs": 30,
+            "untested_runs": 0
+          },
+          "baseline": {
+            "runs": 30,
+            "evaluated_runs": 30,
+            "primary_success_runs": 30,
+            "untested_runs": 0
+          },
+          "verdict": "tie",
+          "verdict_source": "explicit",
+          "evaluated_basis": "raw_rows",
+          "note": "Vonis diambil apa adanya dari evidence slot ini."
+        }
+      ],
+      "totals": {
+        "uwae_wins": 2,
+        "ties": 10,
+        "baseline_wins": 0,
+        "not_comparable": 0,
+        "no_evaluable_runs": 0,
+        "untested_runs_total": 0
+      },
+      "declared_gaps": [],
+      "supersedes": [],
+      "status": "active"
+    },
+    {
+      "slot": "E18",
+      "source": "engine-results-e18.json",
+      "benchmark_id": "e18-cross-implementation-differential-n30-001",
+      "dimension": "http-transport",
+      "schema": "e14_like",
+      "comparisons": [
+        {
+          "scenario_id": "b01_small_get",
+          "criterion": "acquisition",
+          "uwae_arm": "uwae-engine",
+          "baseline_arm": "botasaurus-request",
+          "uwae": {
+            "runs": 30,
+            "evaluated_runs": 30,
+            "primary_success_runs": 30,
+            "untested_runs": 0
+          },
+          "baseline": {
+            "runs": 30,
+            "evaluated_runs": 30,
+            "primary_success_runs": 30,
+            "untested_runs": 0
+          },
+          "verdict": "tie",
+          "verdict_source": "derived",
+          "evaluated_basis": "published_runs_only",
+          "note": "Slot ini tidak memisahkan run yang belum bisa dinilai, jadi evaluated_runs = runs. Bandingkan dengan slot berikutnya yang menyimpan row kasar."
+        },
+        {
+          "scenario_id": "b01_large_get",
+          "criterion": "acquisition",
+          "uwae_arm": "uwae-engine",
+          "baseline_arm": "botasaurus-request",
+          "uwae": {
+            "runs": 30,
+            "evaluated_runs": 30,
+            "primary_success_runs": 30,
+            "untested_runs": 0
+          },
+          "baseline": {
+            "runs": 30,
+            "evaluated_runs": 30,
+            "primary_success_runs": 30,
+            "untested_runs": 0
+          },
+          "verdict": "tie",
+          "verdict_source": "derived",
+          "evaluated_basis": "published_runs_only",
+          "note": "Slot ini tidak memisahkan run yang belum bisa dinilai, jadi evaluated_runs = runs. Bandingkan dengan slot berikutnya yang menyimpan row kasar."
+        },
+        {
+          "scenario_id": "b04_redirect",
+          "criterion": "acquisition",
+          "uwae_arm": "uwae-engine",
+          "baseline_arm": "botasaurus-request",
+          "uwae": {
+            "runs": 30,
+            "evaluated_runs": 30,
+            "primary_success_runs": 30,
+            "untested_runs": 0
+          },
+          "baseline": {
+            "runs": 30,
+            "evaluated_runs": 30,
+            "primary_success_runs": 30,
+            "untested_runs": 0
+          },
+          "verdict": "tie",
+          "verdict_source": "derived",
+          "evaluated_basis": "published_runs_only",
+          "note": "Slot ini tidak memisahkan run yang belum bisa dinilai, jadi evaluated_runs = runs. Bandingkan dengan slot berikutnya yang menyimpan row kasar."
+        },
+        {
+          "scenario_id": "b06_gzip",
+          "criterion": "acquisition",
+          "uwae_arm": "uwae-engine",
+          "baseline_arm": "botasaurus-request",
+          "uwae": {
+            "runs": 30,
+            "evaluated_runs": 30,
+            "primary_success_runs": 30,
+            "untested_runs": 0
+          },
+          "baseline": {
+            "runs": 30,
+            "evaluated_runs": 30,
+            "primary_success_runs": 30,
+            "untested_runs": 0
+          },
+          "verdict": "tie",
+          "verdict_source": "derived",
+          "evaluated_basis": "published_runs_only",
+          "note": "Slot ini tidak memisahkan run yang belum bisa dinilai, jadi evaluated_runs = runs. Bandingkan dengan slot berikutnya yang menyimpan row kasar."
+        },
+        {
+          "scenario_id": "b06_brotli",
+          "criterion": "acquisition",
+          "uwae_arm": "uwae-engine",
+          "baseline_arm": "botasaurus-request",
+          "uwae": {
+            "runs": 30,
+            "evaluated_runs": 30,
+            "primary_success_runs": 30,
+            "untested_runs": 0
+          },
+          "baseline": {
+            "runs": 30,
+            "evaluated_runs": 30,
+            "primary_success_runs": 30,
+            "untested_runs": 0
+          },
+          "verdict": "tie",
+          "verdict_source": "derived",
+          "evaluated_basis": "published_runs_only",
+          "note": "Slot ini tidak memisahkan run yang belum bisa dinilai, jadi evaluated_runs = runs. Bandingkan dengan slot berikutnya yang menyimpan row kasar."
+        },
+        {
+          "scenario_id": "b07_js_render",
+          "criterion": "diagnosis",
+          "uwae_arm": "uwae-engine",
+          "baseline_arm": "botasaurus-request",
+          "uwae": {
+            "runs": 30,
+            "evaluated_runs": 30,
+            "primary_success_runs": 30,
+            "untested_runs": 0
+          },
+          "baseline": {
+            "runs": 30,
+            "evaluated_runs": 30,
+            "primary_success_runs": 0,
+            "untested_runs": 0
+          },
+          "verdict": "uwae",
+          "verdict_source": "derived",
+          "evaluated_basis": "published_runs_only",
+          "note": "Slot ini tidak memisahkan run yang belum bisa dinilai, jadi evaluated_runs = runs. Bandingkan dengan slot berikutnya yang menyimpan row kasar."
+        },
+        {
+          "scenario_id": "e02_not_found",
+          "criterion": "diagnosis",
+          "uwae_arm": "uwae-engine",
+          "baseline_arm": "botasaurus-request",
+          "uwae": {
+            "runs": 30,
+            "evaluated_runs": 30,
+            "primary_success_runs": 30,
+            "untested_runs": 0
+          },
+          "baseline": {
+            "runs": 30,
+            "evaluated_runs": 30,
+            "primary_success_runs": 0,
+            "untested_runs": 0
+          },
+          "verdict": "uwae",
+          "verdict_source": "derived",
+          "evaluated_basis": "published_runs_only",
+          "note": "Slot ini tidak memisahkan run yang belum bisa dinilai, jadi evaluated_runs = runs. Bandingkan dengan slot berikutnya yang menyimpan row kasar."
+        },
+        {
+          "scenario_id": "a04_login",
+          "criterion": "diagnosis",
+          "uwae_arm": "uwae-engine",
+          "baseline_arm": "botasaurus-request",
+          "uwae": {
+            "runs": 30,
+            "evaluated_runs": 30,
+            "primary_success_runs": 30,
+            "untested_runs": 0
+          },
+          "baseline": {
+            "runs": 30,
+            "evaluated_runs": 30,
+            "primary_success_runs": 0,
+            "untested_runs": 0
+          },
+          "verdict": "uwae",
+          "verdict_source": "derived",
+          "evaluated_basis": "published_runs_only",
+          "note": "Slot ini tidak memisahkan run yang belum bisa dinilai, jadi evaluated_runs = runs. Bandingkan dengan slot berikutnya yang menyimpan row kasar."
+        },
+        {
+          "scenario_id": "a06_rate_limited",
+          "criterion": "diagnosis",
+          "uwae_arm": "uwae-engine",
+          "baseline_arm": "botasaurus-request",
+          "uwae": {
+            "runs": 30,
+            "evaluated_runs": 30,
+            "primary_success_runs": 30,
+            "untested_runs": 0
+          },
+          "baseline": {
+            "runs": 30,
+            "evaluated_runs": 30,
+            "primary_success_runs": 0,
+            "untested_runs": 0
+          },
+          "verdict": "uwae",
+          "verdict_source": "derived",
+          "evaluated_basis": "published_runs_only",
+          "note": "Slot ini tidak memisahkan run yang belum bisa dinilai, jadi evaluated_runs = runs. Bandingkan dengan slot berikutnya yang menyimpan row kasar."
+        },
+        {
+          "scenario_id": "a07_challenge",
+          "criterion": "diagnosis",
+          "uwae_arm": "uwae-engine",
+          "baseline_arm": "botasaurus-request",
+          "uwae": {
+            "runs": 30,
+            "evaluated_runs": 30,
+            "primary_success_runs": 30,
+            "untested_runs": 0
+          },
+          "baseline": {
+            "runs": 30,
+            "evaluated_runs": 30,
+            "primary_success_runs": 0,
+            "untested_runs": 0
+          },
+          "verdict": "uwae",
+          "verdict_source": "derived",
+          "evaluated_basis": "published_runs_only",
+          "note": "Slot ini tidak memisahkan run yang belum bisa dinilai, jadi evaluated_runs = runs. Bandingkan dengan slot berikutnya yang menyimpan row kasar."
+        },
+        {
+          "scenario_id": "a07_denied",
+          "criterion": "diagnosis",
+          "uwae_arm": "uwae-engine",
+          "baseline_arm": "botasaurus-request",
+          "uwae": {
+            "runs": 30,
+            "evaluated_runs": 30,
+            "primary_success_runs": 30,
+            "untested_runs": 0
+          },
+          "baseline": {
+            "runs": 30,
+            "evaluated_runs": 30,
+            "primary_success_runs": 0,
+            "untested_runs": 0
+          },
+          "verdict": "uwae",
+          "verdict_source": "derived",
+          "evaluated_basis": "published_runs_only",
+          "note": "Slot ini tidak memisahkan run yang belum bisa dinilai, jadi evaluated_runs = runs. Bandingkan dengan slot berikutnya yang menyimpan row kasar."
+        },
+        {
+          "scenario_id": "a11_invalid_html",
+          "criterion": "diagnosis",
+          "uwae_arm": "uwae-engine",
+          "baseline_arm": "botasaurus-request",
+          "uwae": {
+            "runs": 30,
+            "evaluated_runs": 30,
+            "primary_success_runs": 30,
+            "untested_runs": 0
+          },
+          "baseline": {
+            "runs": 30,
+            "evaluated_runs": 30,
+            "primary_success_runs": 0,
+            "untested_runs": 0
+          },
+          "verdict": "uwae",
+          "verdict_source": "derived",
+          "evaluated_basis": "published_runs_only",
+          "note": "Slot ini tidak memisahkan run yang belum bisa dinilai, jadi evaluated_runs = runs. Bandingkan dengan slot berikutnya yang menyimpan row kasar."
+        },
+        {
+          "scenario_id": "a09_large_download",
+          "criterion": "acquisition",
+          "uwae_arm": "uwae-engine",
+          "baseline_arm": "botasaurus-request",
+          "uwae": {
+            "runs": 30,
+            "evaluated_runs": 30,
+            "primary_success_runs": 30,
+            "untested_runs": 0
+          },
+          "baseline": {
+            "runs": 30,
+            "evaluated_runs": 30,
+            "primary_success_runs": 30,
+            "untested_runs": 0
+          },
+          "verdict": "tie",
+          "verdict_source": "derived",
+          "evaluated_basis": "published_runs_only",
+          "note": "Slot ini tidak memisahkan run yang belum bisa dinilai, jadi evaluated_runs = runs. Bandingkan dengan slot berikutnya yang menyimpan row kasar."
+        }
+      ],
+      "totals": {
+        "uwae_wins": 7,
+        "ties": 6,
+        "baseline_wins": 0,
+        "not_comparable": 0,
+        "no_evaluable_runs": 0,
+        "untested_runs_total": 0
+      },
+      "declared_gaps": [
+        {
+          "scenario_id": "a05_protected",
+          "reason": "memerlukan alur sesi terautentikasi (cookie login -> akses); benchmark ini mengukur target satu-permintaan. Perbandingan alur sesi belum diukur.",
+          "supported_by": []
+        },
+        {
+          "scenario_id": "js_rendering_browser_arm",
+          "reason": "Kedua arm di benchmark ini adalah arm HTTP. Rendering JavaScript butuh arm browser; Botasaurus memakai driver CDP (bukan chromedriver) dan UWAE memakai raw CDP (ADR-014) — keduanya belum diukur pada device ini, jadi tidak diklaim sebagai perbedaan engine.",
+          "supported_by": []
+        }
+      ],
+      "supersedes": [
+        "E14"
+      ],
+      "status": "active"
+    },
+    {
+      "slot": "E19",
+      "source": "engine-results-e19.json",
+      "benchmark_id": "e19-session-flow-differential-n30-001",
+      "dimension": "session-flow",
+      "schema": "e15_like",
+      "comparisons": [
+        {
+          "scenario_id": "session_valid",
+          "criterion": "content_acquired",
+          "uwae_arm": "uwae-engine",
+          "baseline_arm": "botasaurus-auto",
+          "uwae": {
+            "runs": 30,
+            "evaluated_runs": 30,
+            "primary_success_runs": 30,
+            "untested_runs": 0
+          },
+          "baseline": {
+            "runs": 30,
+            "evaluated_runs": 30,
+            "primary_success_runs": 30,
+            "untested_runs": 0
+          },
+          "verdict": "tie",
+          "verdict_source": "derived",
+          "evaluated_basis": "raw_rows",
+          "note": "Kriteria primer E15: resource terproteksi benar-benar terambil dengan body yang cocok (status 200 + sha256 body). Run dengan error tanpa body maupun status dihitung belum teruji, bukan gagal."
+        },
+        {
+          "scenario_id": "session_valid",
+          "criterion": "content_acquired",
+          "uwae_arm": "uwae-engine",
+          "baseline_arm": "botasaurus-explicit",
+          "uwae": {
+            "runs": 30,
+            "evaluated_runs": 30,
+            "primary_success_runs": 30,
+            "untested_runs": 0
+          },
+          "baseline": {
+            "runs": 30,
+            "evaluated_runs": 30,
+            "primary_success_runs": 30,
+            "untested_runs": 0
+          },
+          "verdict": "tie",
+          "verdict_source": "derived",
+          "evaluated_basis": "raw_rows",
+          "note": "Kriteria primer E15: resource terproteksi benar-benar terambil dengan body yang cocok (status 200 + sha256 body). Run dengan error tanpa body maupun status dihitung belum teruji, bukan gagal."
+        },
+        {
+          "scenario_id": "session_valid",
+          "criterion": "content_acquired",
+          "uwae_arm": "uwae-engine",
+          "baseline_arm": "botasaurus-decorator-request",
+          "uwae": {
+            "runs": 30,
+            "evaluated_runs": 30,
+            "primary_success_runs": 30,
+            "untested_runs": 0
+          },
+          "baseline": {
+            "runs": 30,
+            "evaluated_runs": 30,
+            "primary_success_runs": 30,
+            "untested_runs": 0
+          },
+          "verdict": "tie",
+          "verdict_source": "derived",
+          "evaluated_basis": "raw_rows",
+          "note": "Kriteria primer E15: resource terproteksi benar-benar terambil dengan body yang cocok (status 200 + sha256 body). Run dengan error tanpa body maupun status dihitung belum teruji, bukan gagal."
+        },
+        {
+          "scenario_id": "session_required",
+          "criterion": "content_acquired",
+          "uwae_arm": "uwae-engine",
+          "baseline_arm": "botasaurus-auto",
+          "uwae": {
+            "runs": 30,
+            "evaluated_runs": 30,
+            "primary_success_runs": 30,
+            "untested_runs": 0
+          },
+          "baseline": {
+            "runs": 30,
+            "evaluated_runs": 30,
+            "primary_success_runs": 0,
+            "untested_runs": 0
+          },
+          "verdict": "uwae",
+          "verdict_source": "derived",
+          "evaluated_basis": "raw_rows",
+          "note": "Kriteria primer E15: resource terproteksi benar-benar terambil dengan body yang cocok (status 200 + sha256 body). Run dengan error tanpa body maupun status dihitung belum teruji, bukan gagal."
+        },
+        {
+          "scenario_id": "session_required",
+          "criterion": "content_acquired",
+          "uwae_arm": "uwae-engine",
+          "baseline_arm": "botasaurus-explicit",
+          "uwae": {
+            "runs": 30,
+            "evaluated_runs": 30,
+            "primary_success_runs": 30,
+            "untested_runs": 0
+          },
+          "baseline": {
+            "runs": 30,
+            "evaluated_runs": 30,
+            "primary_success_runs": 30,
+            "untested_runs": 0
+          },
+          "verdict": "tie",
+          "verdict_source": "derived",
+          "evaluated_basis": "raw_rows",
+          "note": "Kriteria primer E15: resource terproteksi benar-benar terambil dengan body yang cocok (status 200 + sha256 body). Run dengan error tanpa body maupun status dihitung belum teruji, bukan gagal."
+        },
+        {
+          "scenario_id": "session_required",
+          "criterion": "content_acquired",
+          "uwae_arm": "uwae-engine",
+          "baseline_arm": "botasaurus-decorator-request",
+          "uwae": {
+            "runs": 30,
+            "evaluated_runs": 30,
+            "primary_success_runs": 30,
+            "untested_runs": 0
+          },
+          "baseline": {
+            "runs": 30,
+            "evaluated_runs": 30,
+            "primary_success_runs": 0,
+            "untested_runs": 0
+          },
+          "verdict": "uwae",
+          "verdict_source": "derived",
+          "evaluated_basis": "raw_rows",
+          "note": "Kriteria primer E15: resource terproteksi benar-benar terambil dengan body yang cocok (status 200 + sha256 body). Run dengan error tanpa body maupun status dihitung belum teruji, bukan gagal."
+        },
+        {
+          "scenario_id": "session_expired",
+          "criterion": "content_acquired",
+          "uwae_arm": "uwae-engine",
+          "baseline_arm": "botasaurus-auto",
+          "uwae": {
+            "runs": 30,
+            "evaluated_runs": 30,
+            "primary_success_runs": 30,
+            "untested_runs": 0
+          },
+          "baseline": {
+            "runs": 30,
+            "evaluated_runs": 30,
+            "primary_success_runs": 0,
+            "untested_runs": 0
+          },
+          "verdict": "uwae",
+          "verdict_source": "derived",
+          "evaluated_basis": "raw_rows",
+          "note": "Kriteria primer E15: resource terproteksi benar-benar terambil dengan body yang cocok (status 200 + sha256 body). Run dengan error tanpa body maupun status dihitung belum teruji, bukan gagal."
+        },
+        {
+          "scenario_id": "session_expired",
+          "criterion": "content_acquired",
+          "uwae_arm": "uwae-engine",
+          "baseline_arm": "botasaurus-explicit",
+          "uwae": {
+            "runs": 30,
+            "evaluated_runs": 30,
+            "primary_success_runs": 30,
+            "untested_runs": 0
+          },
+          "baseline": {
+            "runs": 30,
+            "evaluated_runs": 30,
+            "primary_success_runs": 30,
+            "untested_runs": 0
+          },
+          "verdict": "tie",
+          "verdict_source": "derived",
+          "evaluated_basis": "raw_rows",
+          "note": "Kriteria primer E15: resource terproteksi benar-benar terambil dengan body yang cocok (status 200 + sha256 body). Run dengan error tanpa body maupun status dihitung belum teruji, bukan gagal."
+        },
+        {
+          "scenario_id": "session_expired",
+          "criterion": "content_acquired",
+          "uwae_arm": "uwae-engine",
+          "baseline_arm": "botasaurus-decorator-request",
+          "uwae": {
+            "runs": 30,
+            "evaluated_runs": 30,
+            "primary_success_runs": 30,
+            "untested_runs": 0
+          },
+          "baseline": {
+            "runs": 30,
+            "evaluated_runs": 30,
+            "primary_success_runs": 0,
+            "untested_runs": 0
+          },
+          "verdict": "uwae",
+          "verdict_source": "derived",
+          "evaluated_basis": "raw_rows",
+          "note": "Kriteria primer E15: resource terproteksi benar-benar terambil dengan body yang cocok (status 200 + sha256 body). Run dengan error tanpa body maupun status dihitung belum teruji, bukan gagal."
+        }
+      ],
+      "totals": {
+        "uwae_wins": 4,
+        "ties": 5,
+        "baseline_wins": 0,
+        "not_comparable": 0,
+        "no_evaluable_runs": 0,
+        "untested_runs_total": 0
+      },
+      "declared_gaps": [],
+      "supersedes": [
+        "E15"
+      ],
+      "status": "active"
+    },
+    {
+      "slot": "E20",
+      "source": "engine-results-e20.json",
+      "benchmark_id": "e20-http-post-differential-001",
+      "dimension": "http-post",
+      "schema": "e14_like",
+      "comparisons": [
+        {
+          "scenario_id": "p01_post_form",
+          "criterion": "acquisition",
+          "uwae_arm": "uwae-engine",
+          "baseline_arm": "botasaurus-request",
+          "uwae": {
+            "runs": 30,
+            "evaluated_runs": 30,
+            "primary_success_runs": 30,
+            "untested_runs": 0
+          },
+          "baseline": {
+            "runs": 30,
+            "evaluated_runs": 30,
+            "primary_success_runs": 30,
+            "untested_runs": 0
+          },
+          "verdict": "tie",
+          "verdict_source": "derived",
+          "evaluated_basis": "published_runs_only",
+          "note": "Slot ini tidak memisahkan run yang belum bisa dinilai, jadi evaluated_runs = runs. Bandingkan dengan slot berikutnya yang menyimpan row kasar."
+        },
+        {
+          "scenario_id": "p02_post_json",
+          "criterion": "acquisition",
+          "uwae_arm": "uwae-engine",
+          "baseline_arm": "botasaurus-request",
+          "uwae": {
+            "runs": 30,
+            "evaluated_runs": 30,
+            "primary_success_runs": 30,
+            "untested_runs": 0
+          },
+          "baseline": {
+            "runs": 30,
+            "evaluated_runs": 30,
+            "primary_success_runs": 30,
+            "untested_runs": 0
+          },
+          "verdict": "tie",
+          "verdict_source": "derived",
+          "evaluated_basis": "published_runs_only",
+          "note": "Slot ini tidak memisahkan run yang belum bisa dinilai, jadi evaluated_runs = runs. Bandingkan dengan slot berikutnya yang menyimpan row kasar."
+        },
+        {
+          "scenario_id": "p03_post_empty",
+          "criterion": "acquisition",
+          "uwae_arm": "uwae-engine",
+          "baseline_arm": "botasaurus-request",
+          "uwae": {
+            "runs": 30,
+            "evaluated_runs": 30,
+            "primary_success_runs": 30,
+            "untested_runs": 0
+          },
+          "baseline": {
+            "runs": 30,
+            "evaluated_runs": 30,
+            "primary_success_runs": 30,
+            "untested_runs": 0
+          },
+          "verdict": "tie",
+          "verdict_source": "derived",
+          "evaluated_basis": "published_runs_only",
+          "note": "Slot ini tidak memisahkan run yang belum bisa dinilai, jadi evaluated_runs = runs. Bandingkan dengan slot berikutnya yang menyimpan row kasar."
+        },
+        {
+          "scenario_id": "p04_post_large_body",
+          "criterion": "acquisition",
+          "uwae_arm": "uwae-engine",
+          "baseline_arm": "botasaurus-request",
+          "uwae": {
+            "runs": 30,
+            "evaluated_runs": 30,
+            "primary_success_runs": 30,
+            "untested_runs": 0
+          },
+          "baseline": {
+            "runs": 30,
+            "evaluated_runs": 30,
+            "primary_success_runs": 30,
+            "untested_runs": 0
+          },
+          "verdict": "tie",
+          "verdict_source": "derived",
+          "evaluated_basis": "published_runs_only",
+          "note": "Slot ini tidak memisahkan run yang belum bisa dinilai, jadi evaluated_runs = runs. Bandingkan dengan slot berikutnya yang menyimpan row kasar."
+        }
+      ],
+      "totals": {
+        "uwae_wins": 0,
+        "ties": 4,
+        "baseline_wins": 0,
+        "not_comparable": 0,
+        "no_evaluable_runs": 0,
+        "untested_runs_total": 0
+      },
+      "declared_gaps": [
+        {
+          "scenario_id": "post_multipart_form_data",
+          "reason": "POST multipart/form-data (upload berkas) tidak diukur. Fixture protokol POST E20 hanya mencakup application/x-www-form-urlencoded, application/json, body kosong, dan application/octet-stream.",
+          "supported_by": []
+        },
+        {
+          "scenario_id": "post_redirect_307_preserves_method",
+          "reason": "Redirect 307/308 yang wajib mempertahankan method dan body tidak diukur. Fixture protokol POST E20 tidak punya route redirect, jadi perilaku library terhadap redirect POST tidak boleh diasumsikan.",
+          "supported_by": []
+        },
+        {
+          "scenario_id": "post_browser_arm",
+          "reason": "POST pada arm browser tidak diukur. Slot ini adalah arm HTTP murni untuk kedua implementasi; arm browser punya mekanisme input yang berbeda dan tidak boleh disamakan dengan POST HTTP.",
+          "supported_by": []
+        }
+      ],
+      "supersedes": [],
+      "status": "active"
+    },
+    {
+      "slot": "E21",
+      "source": "engine-results-e21.json",
+      "benchmark_id": "e21-http-post-ext-differential-001",
+      "dimension": "http-post",
+      "schema": "e14_like",
+      "comparisons": [
+        {
+          "scenario_id": "p05_post_multipart",
+          "criterion": "acquisition",
+          "uwae_arm": "uwae-engine",
+          "baseline_arm": "botasaurus-request",
+          "uwae": {
+            "runs": 30,
+            "evaluated_runs": 30,
+            "primary_success_runs": 30,
+            "untested_runs": 0
+          },
+          "baseline": {
+            "runs": 30,
+            "evaluated_runs": 30,
+            "primary_success_runs": 30,
+            "untested_runs": 0
+          },
+          "verdict": "tie",
+          "verdict_source": "derived",
+          "evaluated_basis": "published_runs_only",
+          "note": "Slot ini tidak memisahkan run yang belum bisa dinilai, jadi evaluated_runs = runs. Bandingkan dengan slot berikutnya yang menyimpan row kasar."
+        },
+        {
+          "scenario_id": "p06_post_redirect307",
+          "criterion": "acquisition",
+          "uwae_arm": "uwae-engine",
+          "baseline_arm": "botasaurus-request",
+          "uwae": {
+            "runs": 30,
+            "evaluated_runs": 30,
+            "primary_success_runs": 30,
+            "untested_runs": 0
+          },
+          "baseline": {
+            "runs": 30,
+            "evaluated_runs": 30,
+            "primary_success_runs": 30,
+            "untested_runs": 0
+          },
+          "verdict": "tie",
+          "verdict_source": "derived",
+          "evaluated_basis": "published_runs_only",
+          "note": "Slot ini tidak memisahkan run yang belum bisa dinilai, jadi evaluated_runs = runs. Bandingkan dengan slot berikutnya yang menyimpan row kasar."
+        }
+      ],
+      "totals": {
+        "uwae_wins": 0,
+        "ties": 2,
+        "baseline_wins": 0,
+        "not_comparable": 0,
+        "no_evaluable_runs": 0,
+        "untested_runs_total": 0
+      },
+      "declared_gaps": [
+        {
+          "scenario_id": "post_browser_arm",
+          "reason": "POST pada arm browser tidak diukur di slot E21 (arm HTTP saja). Ditangani slot E22.",
+          "supported_by": [
+            "E22"
+          ]
+        }
+      ],
+      "supersedes": [],
+      "status": "active"
+    },
+    {
+      "slot": "E22",
+      "source": "engine-results-e22.json",
+      "benchmark_id": "e22-browser-form-post-differential-001",
+      "dimension": "http-post",
+      "schema": "e16_like",
+      "comparisons": [
+        {
+          "scenario_id": "p07_post_browser_form",
+          "criterion": "acquisition",
+          "uwae_arm": "uwae-browser",
+          "baseline_arm": "botasaurus-browser",
+          "uwae": {
+            "runs": 30,
+            "evaluated_runs": 30,
+            "primary_success_runs": 30,
+            "untested_runs": 0
+          },
+          "baseline": {
+            "runs": 30,
+            "evaluated_runs": 30,
+            "primary_success_runs": 30,
+            "untested_runs": 0
+          },
+          "verdict": "tie",
+          "verdict_source": "explicit",
+          "evaluated_basis": "raw_rows",
+          "note": "Vonis diambil apa adanya dari evidence slot ini."
+        }
+      ],
+      "totals": {
+        "uwae_wins": 0,
+        "ties": 1,
+        "baseline_wins": 0,
+        "not_comparable": 0,
+        "no_evaluable_runs": 0,
+        "untested_runs_total": 0
+      },
+      "declared_gaps": [
+        {
+          "scenario_id": "post_browser_multipart_upload",
+          "reason": "Upload file via <input type=file> di browser tidak diukur — butuh file nyata di disk dan interaksi file chooser CDP yang berbeda antar mesin.",
+          "supported_by": []
+        }
+      ],
+      "supersedes": [],
+      "status": "active"
+    }
+  ],
+  "dimensions": {
+    "browser-arm": {
+      "uwae_wins": 2,
+      "ties": 10,
+      "baseline_wins": 0,
+      "not_comparable": 0,
+      "no_evaluable_runs": 0,
+      "untested_runs_total": 0
+    },
+    "http-transport": {
+      "uwae_wins": 7,
+      "ties": 6,
+      "baseline_wins": 0,
+      "not_comparable": 0,
+      "no_evaluable_runs": 0,
+      "untested_runs_total": 0
+    },
+    "session-flow": {
+      "uwae_wins": 4,
+      "ties": 5,
+      "baseline_wins": 0,
+      "not_comparable": 0,
+      "no_evaluable_runs": 0,
+      "untested_runs_total": 0
+    },
+    "http-post": {
+      "uwae_wins": 0,
+      "ties": 7,
+      "baseline_wins": 0,
+      "not_comparable": 0,
+      "no_evaluable_runs": 0,
+      "untested_runs_total": 0
+    }
+  },
+  "supersessions": [
+    {
+      "slot": "E14",
+      "source": "engine-results-e14.json",
+      "superseded_by": "E18",
+      "reason": "Slot ini digantikan oleh E18 yang mengukur skenario dan dimensi yang sama dengan n lebih besar.  evidences lamanya tetap utuh dan tetap dipublikasikan."
+    },
+    {
+      "slot": "E15",
+      "source": "engine-results-e15.json",
+      "superseded_by": "E19",
+      "reason": "Slot ini digantikan oleh E19 yang mengukur skenario dan dimensi yang sama dengan n lebih besar.  evidences lamanya tetap utuh dan tetap dipublikasikan."
+    }
+  ],
+  "declared_gaps": [
+    {
+      "scenario_id": "a05_protected",
+      "declared_in": "E18",
+      "declared_in_source": "engine-results-e18.json",
+      "reason": "memerlukan alur sesi terautentikasi (cookie login -> akses); benchmark ini mengukur target satu-permintaan. Perbandingan alur sesi belum diukur.",
+      "status": "closed",
+      "closed_by": "E19",
+      "closure_evidence": "docs/benchmark/engine-results-e19.json",
+      "closure_note": "Slot http-transport menyatakan alur sesi terautentikasi belum diukur. Slot session-flow mengukurnya pada fixture yang mendukung: cookie login -> akses terproteksi, dengan pencabutan sesi di sisi server. Setelah backfill §6.3, slot session-flow yang dihitung adalah E19 (n=30), bukan E15 (n=5) yang digantikannya."
+    },
+    {
+      "scenario_id": "js_rendering_browser_arm",
+      "declared_in": "E18",
+      "declared_in_source": "engine-results-e18.json",
+      "reason": "Kedua arm di benchmark ini adalah arm HTTP. Rendering JavaScript butuh arm browser; Botasaurus memakai driver CDP (bukan chromedriver) dan UWAE memakai raw CDP (ADR-014) — keduanya belum diukur pada device ini, jadi tidak diklaim sebagai perbedaan engine.",
+      "status": "closed",
+      "closed_by": "E16",
+      "closure_evidence": "docs/benchmark/engine-results-e16.json",
+      "closure_note": "Slot http-transport menyatakan kedua arm-nya arm HTTP sehingga rendering JavaScript tak terukur. E16 menjalankan kedua implementasi browser di device yang sama dan mengukur gerbang JS lewat skenario b07_js_render."
+    },
+    {
+      "scenario_id": "post_multipart_form_data",
+      "declared_in": "E20",
+      "declared_in_source": "engine-results-e20.json",
+      "reason": "POST multipart/form-data (upload berkas) tidak diukur. Fixture protokol POST E20 hanya mencakup application/x-www-form-urlencoded, application/json, body kosong, dan application/octet-stream.",
+      "status": "closed",
+      "closed_by": "E21",
+      "closure_evidence": "docs/benchmark/engine-results-e21.json",
+      "closure_note": "E20 hanya mengukur urlencoded/JSON/empty/octet-stream. E21 mengukur multipart/form-data byte-for-byte terhadap konstanta MULTIPART_BODY (boundary ikut diuji) pada n=30 per arm."
+    },
+    {
+      "scenario_id": "post_redirect_307_preserves_method",
+      "declared_in": "E20",
+      "declared_in_source": "engine-results-e20.json",
+      "reason": "Redirect 307/308 yang wajib mempertahankan method dan body tidak diukur. Fixture protokol POST E20 tidak punya route redirect, jadi perilaku library terhadap redirect POST tidak boleh diasumsikan.",
+      "status": "closed",
+      "closed_by": "E21",
+      "closure_evidence": "docs/benchmark/engine-results-e21.json",
+      "closure_note": "E20 tidak punya route redirect. E21 mengukur apakah method dan body POST dipertahankan setelah redirect 307 — ground truth respons akhir 200, dan observasi server membuktikan dua hop (307 lalu 200 ok)."
+    },
+    {
+      "scenario_id": "post_browser_arm",
+      "declared_in": "E20",
+      "declared_in_source": "engine-results-e20.json",
+      "reason": "POST pada arm browser tidak diukur. Slot ini adalah arm HTTP murni untuk kedua implementasi; arm browser punya mekanisme input yang berbeda dan tidak boleh disamakan dengan POST HTTP.",
+      "status": "closed",
+      "closed_by": "E22",
+      "closure_evidence": "docs/benchmark/engine-results-e22.json",
+      "closure_note": "E20 hanya arm HTTP. E22 mengukur POST yang dieksekusi lewat submit form HTML oleh kedua mesin browser (chromium headless) pada device yang sama, n=30 per arm, dengan JS submit identik untuk kedua arm."
+    },
+    {
+      "scenario_id": "post_browser_multipart_upload",
+      "declared_in": "E22",
+      "declared_in_source": "engine-results-e22.json",
+      "reason": "Upload file via <input type=file> di browser tidak diukur — butuh file nyata di disk dan interaksi file chooser CDP yang berbeda antar mesin.",
+      "status": "open",
+      "closed_by": null,
+      "closure_evidence": null,
+      "closure_note": null
+    }
+  ],
+  "summary": {
+    "corpus_totals": {
+      "uwae_wins": 13,
+      "ties": 28,
+      "baseline_wins": 0,
+      "not_comparable": 0,
+      "no_evaluable_runs": 0,
+      "untested_runs_total": 0
+    },
+    "active_slots": 6,
+    "superseded_slots": 2,
+    "declared_gaps_total": 6,
+    "declared_gaps_closed": 5,
+    "declared_gaps_open": 1,
+    "interpretation": "Korpus ini mengukur DUA HAL yang tidak boleh dicampur: kemampuan (vonis per perbandingan) dan cakupan (celah yang dideklarasikan lalu ditutup). Tidak ada klaim bahwa UWAE mengungguli Botasaurus secara keseluruhan."
+  }
+}

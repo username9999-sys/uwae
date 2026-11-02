@@ -1,0 +1,1963 @@
+{
+  "schema_version": 1,
+  "benchmark_id": "e18-cross-implementation-differential-n30-001",
+  "supersedes": [
+    "E14"
+  ],
+  "timestamp": "2026-10-29T03:48:55.132999+00:00",
+  "timing": {
+    "measured_arm_execution_s_total": 715.56,
+    "measured_arm_execution_runs": 786,
+    "measured_arm_execution_note": "Jumlah waktu eksekusi lengan yang terukur, dijumlahkan dari elapsed_ms tiap run. Ini durasi kerja yang sebenarnya, dan bukan durasi satu pemanggilan harness.",
+    "measurement_window": {
+      "first_run_recorded_at": "2026-10-28T12:27:55.766092+00:00",
+      "last_run_recorded_at": "2026-10-28T12:40:42.916041+00:00",
+      "wall_clock_span_s": 767.15,
+      "note": "Rentang rekam run pertama sampai run terakhir di perangkat. Lebih besar dari durasi kerja terukur karena mencakup jeda antar-run dan jeda restart perangkat."
+    },
+    "execution_sessions": [
+      {
+        "session": 1,
+        "runs": 780,
+        "started_at": "2026-10-28T12:27:55.766092+00:00",
+        "ended_at": "2026-10-28T12:34:50.660926+00:00",
+        "wall_clock_span_s": 414.9,
+        "gap_before_s": 0.0,
+        "fixture_base_urls": [
+          "http://127.0.0.1:8765"
+        ]
+      },
+      {
+        "session": 2,
+        "runs": 2,
+        "started_at": "2026-10-28T12:36:21.324215+00:00",
+        "ended_at": "2026-10-28T12:36:47.619338+00:00",
+        "wall_clock_span_s": 26.3,
+        "gap_before_s": 90.7,
+        "fixture_base_urls": [
+          "http://127.0.0.1:8765"
+        ]
+      },
+      {
+        "session": 3,
+        "runs": 2,
+        "started_at": "2026-10-28T12:38:17.702128+00:00",
+        "ended_at": "2026-10-28T12:38:42.232266+00:00",
+        "wall_clock_span_s": 24.5,
+        "gap_before_s": 90.1,
+        "fixture_base_urls": [
+          "http://127.0.0.1:8765"
+        ]
+      },
+      {
+        "session": 4,
+        "runs": 2,
+        "started_at": "2026-10-28T12:40:12.309474+00:00",
+        "ended_at": "2026-10-28T12:40:42.916041+00:00",
+        "wall_clock_span_s": 30.6,
+        "gap_before_s": 90.1,
+        "fixture_base_urls": [
+          "http://127.0.0.1:8765"
+        ]
+      }
+    ],
+    "interruption_gap_threshold_s": 60.0,
+    "harness_invocation": {
+      "wall_clock_s": 17.44,
+      "runs_executed_this_invocation": 0,
+      "runs_reused_from_checkpoint": 786,
+      "note": "Durasi pemanggilan harness yang menulis dokumen ini. Kalau sebagian besar run diambil dari checkpoint, angka ini TIDAK mencakup durasi eksekusi run tersebut -- makanya durasi kerja terukur dipublikasikan terpisah."
+    }
+  },
+  "checkpoint": {
+    "checkpoint_path": "/root/.qwen/tmp/e14_checkpoint.jsonl",
+    "harness_fingerprint": "06cba7751015caac17cb05fa09e60ddcd1803de53c009a1b2c23d8caa8aadeaf",
+    "runs_in_checkpoint": 786,
+    "runs_reused": 786,
+    "records_ignored": 0,
+    "runs_executed_this_invocation": 0
+  },
+  "environment": {
+    "interpreter": {
+      "executable": "/root/uwae-comparison-venv/bin/python",
+      "version": "3.14.4",
+      "platform": "Linux-6.17.0-PRoot-Distro-aarch64-with-glibc2.43",
+      "machine": "aarch64",
+      "implementation": "CPython"
+    },
+    "pythonpath": "/root/botasaurus-venv/lib/python3.14/site-packages:/root/universal-web-acquisition/src",
+    "package_versions": {
+      "botasaurus": "4.0.97",
+      "botasaurus_requests": "4.0.38",
+      "botasaurus_driver": "4.0.101",
+      "requests": "2.34.2",
+      "httpx": "0.28.1",
+      "curl_cffi": "0.17.0",
+      "joblib": "1.6.0",
+      "brotli": "1.2.0",
+      "certifi": "2026.7.22"
+    },
+    "fixture": "deterministic localhost fixture server (fixture_server.py)",
+    "method": "30 run per (arm, skenario), koneksi baru setiap run; kedua arm sebagai subprocess dari SATU interpreter dengan SATU PYTHONPATH melawan SATU instance fixture server",
+    "identical_conditions": {
+      "targets": true,
+      "expected_outputs": true,
+      "device_conditions": true,
+      "run_counts": true,
+      "success_criteria": true
+    },
+    "memory_note": "peak_memory_bytes = peak alokasi Python (tracemalloc); buffer C tidak dihitung (batasan yang sama dipakai benchmark transport E5)",
+    "percentile_note": "p95 nearest-rank pada n=30 memakai statistik urutan ke-29 dari 30 run (bukan maksimum) — ambang minimal 30 pengulangan TEXT.md §6.3 sudah terpenuhi, tetapi persentil hanya bermakna kalau dibaca bersama median dan seluruh waktu mentah di elapsed_ms_runs"
+  },
+  "engines": [
+    {
+      "engine_id": "uwae-engine",
+      "engine_name": "UWAE engine (JobWorker + ACP)",
+      "engine_version": "uwae-0.3.0",
+      "is_baseline": false,
+      "description": "JobWorker + transport registry (curl_cffi primary) + classifier + planner + artifact storage; RetryPolicy default (tidak disetel ulang)"
+    },
+    {
+      "engine_id": "botasaurus-request",
+      "engine_name": "Botasaurus @request (public API)",
+      "engine_version": "botasaurus 4.0.97 / botasaurus_requests 4.0.38",
+      "source_commit": "6c9260de12d71b9dc0c3b3a019d2698a9af38433",
+      "is_baseline": true,
+      "description": "Dekorator @request publik: output=None, create_error_logs=False, raise_exception=False, close_on_crash=True, cache=False, max_retry=None (semua default Botasaurus kecuali tiga yang eksplisit disebut)"
+    }
+  ],
+  "scenarios": [
+    {
+      "scenario_id": "b01_small_get",
+      "path": "/html",
+      "primary_criterion": "acquisition",
+      "ground_truth": {
+        "expect_status": 200,
+        "expect_body_sha256": "684dc652a4ef827883e27c2a823bffaee9a7f834bb1f25b08a815a8752784748",
+        "expect_body_bytes": 177,
+        "expected_diagnosis": null
+      },
+      "results": {
+        "uwae-engine": {
+          "runs": 30,
+          "primary_successes": 30,
+          "primary_success_rate": 1.0,
+          "elapsed_ms_median": 250.47,
+          "elapsed_ms_p95": 1024.6,
+          "elapsed_ms_min": 194.44,
+          "elapsed_ms_max": 1334.88,
+          "elapsed_ms_runs": [
+            1024.6,
+            349.83,
+            519.68,
+            481.06,
+            646.19,
+            432.63,
+            800.53,
+            1334.88,
+            703.56,
+            236.28,
+            271.75,
+            253.18,
+            225.68,
+            219.65,
+            260.28,
+            219.4,
+            205.79,
+            210.91,
+            249.61,
+            251.33,
+            218.48,
+            225.94,
+            194.44,
+            222.15,
+            200.17,
+            243.3,
+            249.22,
+            222.8,
+            388.55,
+            292.94
+          ],
+          "peak_memory_bytes": 3182476,
+          "attempts_total": 30,
+          "attempts_max": 1,
+          "acquisition_verified_runs": 30,
+          "diagnosis_verified_runs": 0,
+          "diagnosis_applicable_runs": 0,
+          "spurious_problem_runs": 0,
+          "healthy_runs": 30,
+          "observed_diagnoses": [
+            "access_granted"
+          ],
+          "raw_signals": [
+            "access_granted"
+          ],
+          "errors": []
+        },
+        "botasaurus-request": {
+          "runs": 30,
+          "primary_successes": 30,
+          "primary_success_rate": 1.0,
+          "elapsed_ms_median": 40.94,
+          "elapsed_ms_p95": 58.78,
+          "elapsed_ms_min": 25.97,
+          "elapsed_ms_max": 174.66,
+          "elapsed_ms_runs": [
+            174.66,
+            38.65,
+            34.08,
+            42.1,
+            50.41,
+            37.43,
+            32.6,
+            58.78,
+            42.39,
+            32.84,
+            28.99,
+            32.96,
+            47.53,
+            29.14,
+            40.6,
+            25.97,
+            40.2,
+            35.29,
+            34.98,
+            42.49,
+            29.33,
+            41.28,
+            28.11,
+            55.19,
+            45.89,
+            50.81,
+            52.4,
+            55.2,
+            55.53,
+            56.72
+          ],
+          "peak_memory_bytes": 868929,
+          "attempts_total": 30,
+          "attempts_max": 1,
+          "acquisition_verified_runs": 30,
+          "diagnosis_verified_runs": 0,
+          "diagnosis_applicable_runs": 0,
+          "spurious_problem_runs": 0,
+          "healthy_runs": 30,
+          "observed_diagnoses": [
+            "None"
+          ],
+          "raw_signals": [
+            "status 200"
+          ],
+          "errors": []
+        }
+      }
+    },
+    {
+      "scenario_id": "b01_large_get",
+      "path": "/large",
+      "primary_criterion": "acquisition",
+      "ground_truth": {
+        "expect_status": 200,
+        "expect_body_sha256": "398f5d4d6118ad6ff6ad246d589383ec70360130042e5972e4ee68f69016853e",
+        "expect_body_bytes": 1085000,
+        "expected_diagnosis": null
+      },
+      "results": {
+        "uwae-engine": {
+          "runs": 30,
+          "primary_successes": 30,
+          "primary_success_rate": 1.0,
+          "elapsed_ms_median": 276.64,
+          "elapsed_ms_p95": 319.82,
+          "elapsed_ms_min": 231.85,
+          "elapsed_ms_max": 324.88,
+          "elapsed_ms_runs": [
+            271.63,
+            307.73,
+            276.34,
+            273.17,
+            256.34,
+            271.52,
+            244.82,
+            269.33,
+            279.02,
+            319.82,
+            248.07,
+            283.12,
+            279.48,
+            283.67,
+            297.65,
+            234.68,
+            270.6,
+            276.95,
+            292.18,
+            277.98,
+            313.96,
+            269.44,
+            324.88,
+            247.94,
+            245.96,
+            231.85,
+            263.15,
+            310.81,
+            288.91,
+            281.1
+          ],
+          "peak_memory_bytes": 7506997,
+          "attempts_total": 30,
+          "attempts_max": 1,
+          "acquisition_verified_runs": 30,
+          "diagnosis_verified_runs": 0,
+          "diagnosis_applicable_runs": 0,
+          "spurious_problem_runs": 0,
+          "healthy_runs": 30,
+          "observed_diagnoses": [
+            "access_granted"
+          ],
+          "raw_signals": [
+            "access_granted"
+          ],
+          "errors": []
+        },
+        "botasaurus-request": {
+          "runs": 30,
+          "primary_successes": 30,
+          "primary_success_rate": 1.0,
+          "elapsed_ms_median": 175.18,
+          "elapsed_ms_p95": 266.43,
+          "elapsed_ms_min": 138.89,
+          "elapsed_ms_max": 284.34,
+          "elapsed_ms_runs": [
+            266.43,
+            219.75,
+            284.34,
+            194.82,
+            163.35,
+            217.06,
+            182.03,
+            186.73,
+            184.87,
+            138.89,
+            163.82,
+            182.19,
+            167.19,
+            169.56,
+            161.48,
+            167.36,
+            159.25,
+            208.62,
+            183.96,
+            175.2,
+            151.58,
+            192.76,
+            224.4,
+            181.87,
+            154.92,
+            167.62,
+            175.16,
+            160.24,
+            161.92,
+            146.47
+          ],
+          "peak_memory_bytes": 3491953,
+          "attempts_total": 30,
+          "attempts_max": 1,
+          "acquisition_verified_runs": 30,
+          "diagnosis_verified_runs": 0,
+          "diagnosis_applicable_runs": 0,
+          "spurious_problem_runs": 0,
+          "healthy_runs": 30,
+          "observed_diagnoses": [
+            "None"
+          ],
+          "raw_signals": [
+            "status 200"
+          ],
+          "errors": []
+        }
+      }
+    },
+    {
+      "scenario_id": "b04_redirect",
+      "path": "/redirect",
+      "primary_criterion": "acquisition",
+      "ground_truth": {
+        "expect_status": 200,
+        "expect_body_sha256": "46c8058082202e23b37e5f8c9abdacec0eb3a551a6fb0116ed3993f8bf800bfc",
+        "expect_body_bytes": 17,
+        "expected_diagnosis": null
+      },
+      "results": {
+        "uwae-engine": {
+          "runs": 30,
+          "primary_successes": 30,
+          "primary_success_rate": 1.0,
+          "elapsed_ms_median": 277.22,
+          "elapsed_ms_p95": 341.84,
+          "elapsed_ms_min": 223.68,
+          "elapsed_ms_max": 349.93,
+          "elapsed_ms_runs": [
+            269.2,
+            290.74,
+            231.57,
+            262.89,
+            290.53,
+            290.95,
+            256.09,
+            266.66,
+            271.63,
+            260.75,
+            341.84,
+            328.69,
+            284.2,
+            323.73,
+            304.97,
+            281.17,
+            285.48,
+            223.68,
+            269.6,
+            276.67,
+            260.69,
+            240.56,
+            333.39,
+            265.11,
+            257.39,
+            233.51,
+            277.76,
+            349.93,
+            302.35,
+            280.12
+          ],
+          "peak_memory_bytes": 4393982,
+          "attempts_total": 30,
+          "attempts_max": 1,
+          "acquisition_verified_runs": 30,
+          "diagnosis_verified_runs": 0,
+          "diagnosis_applicable_runs": 0,
+          "spurious_problem_runs": 0,
+          "healthy_runs": 30,
+          "observed_diagnoses": [
+            "access_granted"
+          ],
+          "raw_signals": [
+            "access_granted"
+          ],
+          "errors": []
+        },
+        "botasaurus-request": {
+          "runs": 30,
+          "primary_successes": 30,
+          "primary_success_rate": 1.0,
+          "elapsed_ms_median": 95.29,
+          "elapsed_ms_p95": 144.58,
+          "elapsed_ms_min": 76.09,
+          "elapsed_ms_max": 153.8,
+          "elapsed_ms_runs": [
+            87.56,
+            94.55,
+            86.64,
+            76.09,
+            98.06,
+            99.09,
+            89.8,
+            79.51,
+            99.58,
+            153.8,
+            122.17,
+            88.88,
+            144.58,
+            139.92,
+            120.17,
+            86.87,
+            81.27,
+            96.03,
+            102.81,
+            100.51,
+            84.61,
+            85.63,
+            97.86,
+            101.26,
+            90.28,
+            84.67,
+            108.44,
+            97.53,
+            91.22,
+            83.27
+          ],
+          "peak_memory_bytes": 1671631,
+          "attempts_total": 30,
+          "attempts_max": 1,
+          "acquisition_verified_runs": 30,
+          "diagnosis_verified_runs": 0,
+          "diagnosis_applicable_runs": 0,
+          "spurious_problem_runs": 0,
+          "healthy_runs": 30,
+          "observed_diagnoses": [
+            "None"
+          ],
+          "raw_signals": [
+            "status 200"
+          ],
+          "errors": []
+        }
+      }
+    },
+    {
+      "scenario_id": "b06_gzip",
+      "path": "/gzip",
+      "primary_criterion": "acquisition",
+      "ground_truth": {
+        "expect_status": 200,
+        "expect_body_sha256": "684dc652a4ef827883e27c2a823bffaee9a7f834bb1f25b08a815a8752784748",
+        "expect_body_bytes": 177,
+        "expected_diagnosis": null
+      },
+      "results": {
+        "uwae-engine": {
+          "runs": 30,
+          "primary_successes": 30,
+          "primary_success_rate": 1.0,
+          "elapsed_ms_median": 264.44,
+          "elapsed_ms_p95": 385.24,
+          "elapsed_ms_min": 181.8,
+          "elapsed_ms_max": 416.7,
+          "elapsed_ms_runs": [
+            253.27,
+            218.92,
+            273.64,
+            241.66,
+            225.71,
+            263.58,
+            269.74,
+            416.7,
+            385.24,
+            265.3,
+            271.45,
+            257.69,
+            251.53,
+            275.74,
+            273.54,
+            261.13,
+            260.86,
+            301.7,
+            291.14,
+            287.21,
+            291.87,
+            299.34,
+            360.77,
+            294.9,
+            194.42,
+            205.73,
+            183.29,
+            194.66,
+            189.6,
+            181.8
+          ],
+          "peak_memory_bytes": 3548910,
+          "attempts_total": 30,
+          "attempts_max": 1,
+          "acquisition_verified_runs": 30,
+          "diagnosis_verified_runs": 0,
+          "diagnosis_applicable_runs": 0,
+          "spurious_problem_runs": 0,
+          "healthy_runs": 30,
+          "observed_diagnoses": [
+            "access_granted"
+          ],
+          "raw_signals": [
+            "access_granted"
+          ],
+          "errors": []
+        },
+        "botasaurus-request": {
+          "runs": 30,
+          "primary_successes": 30,
+          "primary_success_rate": 1.0,
+          "elapsed_ms_median": 39.85,
+          "elapsed_ms_p95": 50.95,
+          "elapsed_ms_min": 24.2,
+          "elapsed_ms_max": 73.3,
+          "elapsed_ms_runs": [
+            45.05,
+            33.77,
+            50.95,
+            40.96,
+            43.58,
+            42.07,
+            43.33,
+            38.99,
+            43.64,
+            73.3,
+            33.42,
+            48.8,
+            38.82,
+            34.85,
+            33.6,
+            39.17,
+            24.2,
+            40.58,
+            35.29,
+            36.85,
+            46.44,
+            37.96,
+            41.23,
+            37.11,
+            42.67,
+            34.44,
+            40.49,
+            39.21,
+            36.04,
+            48.18
+          ],
+          "peak_memory_bytes": 2066440,
+          "attempts_total": 30,
+          "attempts_max": 1,
+          "acquisition_verified_runs": 30,
+          "diagnosis_verified_runs": 0,
+          "diagnosis_applicable_runs": 0,
+          "spurious_problem_runs": 0,
+          "healthy_runs": 30,
+          "observed_diagnoses": [
+            "None"
+          ],
+          "raw_signals": [
+            "status 200"
+          ],
+          "errors": []
+        }
+      }
+    },
+    {
+      "scenario_id": "b06_brotli",
+      "path": "/brotli",
+      "primary_criterion": "acquisition",
+      "ground_truth": {
+        "expect_status": 200,
+        "expect_body_sha256": "684dc652a4ef827883e27c2a823bffaee9a7f834bb1f25b08a815a8752784748",
+        "expect_body_bytes": 177,
+        "expected_diagnosis": null
+      },
+      "results": {
+        "uwae-engine": {
+          "runs": 30,
+          "primary_successes": 30,
+          "primary_success_rate": 1.0,
+          "elapsed_ms_median": 350.54,
+          "elapsed_ms_p95": 1075.7,
+          "elapsed_ms_min": 173.65,
+          "elapsed_ms_max": 1079.91,
+          "elapsed_ms_runs": [
+            189.09,
+            216.82,
+            190.92,
+            186.01,
+            173.65,
+            195.77,
+            190.57,
+            210.36,
+            183.71,
+            193.18,
+            518.24,
+            305.66,
+            412.68,
+            289.85,
+            436.5,
+            322.36,
+            522.7,
+            310.0,
+            384.65,
+            942.11,
+            975.57,
+            843.22,
+            297.96,
+            378.72,
+            779.17,
+            1079.91,
+            722.1,
+            1075.7,
+            685.45,
+            813.8
+          ],
+          "peak_memory_bytes": 3669286,
+          "attempts_total": 30,
+          "attempts_max": 1,
+          "acquisition_verified_runs": 30,
+          "diagnosis_verified_runs": 0,
+          "diagnosis_applicable_runs": 0,
+          "spurious_problem_runs": 0,
+          "healthy_runs": 30,
+          "observed_diagnoses": [
+            "access_granted"
+          ],
+          "raw_signals": [
+            "access_granted"
+          ],
+          "errors": []
+        },
+        "botasaurus-request": {
+          "runs": 30,
+          "primary_successes": 30,
+          "primary_success_rate": 1.0,
+          "elapsed_ms_median": 45.05,
+          "elapsed_ms_p95": 76.75,
+          "elapsed_ms_min": 37.17,
+          "elapsed_ms_max": 84.97,
+          "elapsed_ms_runs": [
+            48.53,
+            49.91,
+            40.4,
+            44.22,
+            50.51,
+            41.66,
+            39.26,
+            44.0,
+            70.45,
+            46.22,
+            42.23,
+            68.64,
+            56.52,
+            51.1,
+            63.4,
+            43.48,
+            65.74,
+            39.75,
+            50.67,
+            39.35,
+            38.83,
+            41.76,
+            44.18,
+            37.17,
+            37.34,
+            50.62,
+            45.25,
+            44.85,
+            76.75,
+            84.97
+          ],
+          "peak_memory_bytes": 2461311,
+          "attempts_total": 30,
+          "attempts_max": 1,
+          "acquisition_verified_runs": 30,
+          "diagnosis_verified_runs": 0,
+          "diagnosis_applicable_runs": 0,
+          "spurious_problem_runs": 0,
+          "healthy_runs": 30,
+          "observed_diagnoses": [
+            "None"
+          ],
+          "raw_signals": [
+            "status 200"
+          ],
+          "errors": []
+        }
+      }
+    },
+    {
+      "scenario_id": "b07_js_render",
+      "path": "/js",
+      "primary_criterion": "diagnosis",
+      "ground_truth": {
+        "expect_status": 200,
+        "expect_body_sha256": "42e14aa283520210f1a6659ba82cb4dc6a1d07fe1b300fc74257ab9fd0398465",
+        "expect_body_bytes": 224,
+        "expected_diagnosis": "javascript_required"
+      },
+      "results": {
+        "uwae-engine": {
+          "runs": 30,
+          "primary_successes": 30,
+          "primary_success_rate": 1.0,
+          "elapsed_ms_median": 330.48,
+          "elapsed_ms_p95": 607.34,
+          "elapsed_ms_min": 208.09,
+          "elapsed_ms_max": 657.19,
+          "elapsed_ms_runs": [
+            657.19,
+            573.55,
+            208.09,
+            211.43,
+            215.01,
+            224.71,
+            280.76,
+            235.25,
+            398.39,
+            223.47,
+            315.86,
+            599.07,
+            539.44,
+            530.74,
+            579.15,
+            494.58,
+            603.47,
+            294.86,
+            295.78,
+            391.86,
+            255.7,
+            293.08,
+            337.25,
+            437.99,
+            281.19,
+            323.71,
+            341.21,
+            241.73,
+            508.31,
+            607.34
+          ],
+          "peak_memory_bytes": 3794817,
+          "attempts_total": 30,
+          "attempts_max": 1,
+          "acquisition_verified_runs": 30,
+          "diagnosis_verified_runs": 30,
+          "diagnosis_applicable_runs": 30,
+          "spurious_problem_runs": 0,
+          "healthy_runs": 0,
+          "observed_diagnoses": [
+            "javascript_required"
+          ],
+          "raw_signals": [
+            "javascript_required"
+          ],
+          "errors": []
+        },
+        "botasaurus-request": {
+          "runs": 30,
+          "primary_successes": 0,
+          "primary_success_rate": 0.0,
+          "elapsed_ms_median": 38.25,
+          "elapsed_ms_p95": 51.98,
+          "elapsed_ms_min": 26.28,
+          "elapsed_ms_max": 53.03,
+          "elapsed_ms_runs": [
+            43.04,
+            42.86,
+            48.76,
+            35.71,
+            37.43,
+            37.13,
+            51.98,
+            34.25,
+            37.9,
+            33.22,
+            44.12,
+            50.19,
+            53.03,
+            45.37,
+            37.59,
+            44.62,
+            35.02,
+            26.28,
+            36.81,
+            27.85,
+            43.35,
+            34.04,
+            29.66,
+            38.24,
+            46.73,
+            31.72,
+            45.97,
+            38.26,
+            48.98,
+            40.26
+          ],
+          "peak_memory_bytes": 2858661,
+          "attempts_total": 30,
+          "attempts_max": 1,
+          "acquisition_verified_runs": 30,
+          "diagnosis_verified_runs": 0,
+          "diagnosis_applicable_runs": 30,
+          "spurious_problem_runs": 0,
+          "healthy_runs": 0,
+          "observed_diagnoses": [
+            "None"
+          ],
+          "raw_signals": [
+            "status 200"
+          ],
+          "errors": []
+        }
+      }
+    },
+    {
+      "scenario_id": "e02_not_found",
+      "path": "/missing",
+      "primary_criterion": "diagnosis",
+      "ground_truth": {
+        "expect_status": 404,
+        "expect_body_sha256": "acc75af682fb66d14e776cc5a10683d0ed8eee64a2aefe110db10daf4d99917d",
+        "expect_body_bytes": 21,
+        "expected_diagnosis": "content_invalid"
+      },
+      "results": {
+        "uwae-engine": {
+          "runs": 30,
+          "primary_successes": 30,
+          "primary_success_rate": 1.0,
+          "elapsed_ms_median": 764.19,
+          "elapsed_ms_p95": 1885.58,
+          "elapsed_ms_min": 644.51,
+          "elapsed_ms_max": 2972.92,
+          "elapsed_ms_runs": [
+            2972.92,
+            1109.72,
+            1315.6,
+            1153.68,
+            1269.6,
+            1295.91,
+            1113.71,
+            1292.2,
+            1703.44,
+            1885.58,
+            660.62,
+            964.47,
+            860.03,
+            1018.37,
+            689.4,
+            679.04,
+            715.63,
+            664.11,
+            667.58,
+            673.34,
+            701.2,
+            784.53,
+            678.39,
+            682.54,
+            682.62,
+            915.59,
+            687.36,
+            728.11,
+            743.86,
+            644.51
+          ],
+          "peak_memory_bytes": 3819325,
+          "attempts_total": 150,
+          "attempts_max": 5,
+          "acquisition_verified_runs": 0,
+          "diagnosis_verified_runs": 30,
+          "diagnosis_applicable_runs": 30,
+          "spurious_problem_runs": 0,
+          "healthy_runs": 0,
+          "observed_diagnoses": [
+            "content_invalid"
+          ],
+          "raw_signals": [
+            "content_invalid"
+          ],
+          "errors": []
+        },
+        "botasaurus-request": {
+          "runs": 30,
+          "primary_successes": 0,
+          "primary_success_rate": 0.0,
+          "elapsed_ms_median": 38.95,
+          "elapsed_ms_p95": 57.61,
+          "elapsed_ms_min": 26.29,
+          "elapsed_ms_max": 81.23,
+          "elapsed_ms_runs": [
+            26.29,
+            36.42,
+            32.96,
+            39.12,
+            36.86,
+            43.8,
+            35.64,
+            32.7,
+            34.88,
+            33.84,
+            44.4,
+            29.13,
+            42.87,
+            57.61,
+            47.71,
+            40.19,
+            41.82,
+            36.03,
+            40.96,
+            36.49,
+            34.39,
+            35.17,
+            40.86,
+            43.31,
+            37.19,
+            53.72,
+            42.52,
+            39.68,
+            38.77,
+            81.23
+          ],
+          "peak_memory_bytes": 3249956,
+          "attempts_total": 30,
+          "attempts_max": 1,
+          "acquisition_verified_runs": 30,
+          "diagnosis_verified_runs": 0,
+          "diagnosis_applicable_runs": 30,
+          "spurious_problem_runs": 0,
+          "healthy_runs": 0,
+          "observed_diagnoses": [
+            "None"
+          ],
+          "raw_signals": [
+            "status 404"
+          ],
+          "errors": []
+        }
+      }
+    },
+    {
+      "scenario_id": "a04_login",
+      "path": "/login",
+      "primary_criterion": "diagnosis",
+      "ground_truth": {
+        "expect_status": 200,
+        "expect_body_sha256": "cc2a5a0673df49fba13e43c86fbbcbef9f1eceb05116d655b4bed736e814c83e",
+        "expect_body_bytes": 233,
+        "expected_diagnosis": "auth_required"
+      },
+      "results": {
+        "uwae-engine": {
+          "runs": 30,
+          "primary_successes": 30,
+          "primary_success_rate": 1.0,
+          "elapsed_ms_median": 712.95,
+          "elapsed_ms_p95": 920.13,
+          "elapsed_ms_min": 650.45,
+          "elapsed_ms_max": 958.16,
+          "elapsed_ms_runs": [
+            739.48,
+            650.45,
+            920.13,
+            668.94,
+            718.07,
+            727.2,
+            829.12,
+            706.02,
+            728.27,
+            707.83,
+            738.33,
+            697.43,
+            702.53,
+            698.78,
+            733.18,
+            689.73,
+            958.16,
+            756.97,
+            918.31,
+            804.61,
+            723.39,
+            681.59,
+            760.43,
+            694.93,
+            681.45,
+            693.4,
+            697.1,
+            694.67,
+            686.32,
+            738.87
+          ],
+          "peak_memory_bytes": 4283221,
+          "attempts_total": 150,
+          "attempts_max": 5,
+          "acquisition_verified_runs": 30,
+          "diagnosis_verified_runs": 30,
+          "diagnosis_applicable_runs": 30,
+          "spurious_problem_runs": 0,
+          "healthy_runs": 0,
+          "observed_diagnoses": [
+            "auth_required"
+          ],
+          "raw_signals": [
+            "auth_required"
+          ],
+          "errors": []
+        },
+        "botasaurus-request": {
+          "runs": 30,
+          "primary_successes": 0,
+          "primary_success_rate": 0.0,
+          "elapsed_ms_median": 38.88,
+          "elapsed_ms_p95": 67.47,
+          "elapsed_ms_min": 29.46,
+          "elapsed_ms_max": 77.09,
+          "elapsed_ms_runs": [
+            29.46,
+            51.97,
+            41.46,
+            37.89,
+            49.41,
+            53.02,
+            49.68,
+            33.4,
+            46.13,
+            36.55,
+            42.06,
+            35.61,
+            38.19,
+            67.47,
+            54.8,
+            37.59,
+            37.7,
+            62.62,
+            36.05,
+            39.56,
+            49.75,
+            34.3,
+            57.09,
+            32.82,
+            36.25,
+            77.09,
+            34.68,
+            30.67,
+            36.6,
+            43.49
+          ],
+          "peak_memory_bytes": 3644219,
+          "attempts_total": 30,
+          "attempts_max": 1,
+          "acquisition_verified_runs": 30,
+          "diagnosis_verified_runs": 0,
+          "diagnosis_applicable_runs": 30,
+          "spurious_problem_runs": 0,
+          "healthy_runs": 0,
+          "observed_diagnoses": [
+            "None"
+          ],
+          "raw_signals": [
+            "status 200"
+          ],
+          "errors": []
+        }
+      }
+    },
+    {
+      "scenario_id": "a06_rate_limited",
+      "path": "/rate-limited",
+      "primary_criterion": "diagnosis",
+      "ground_truth": {
+        "expect_status": 429,
+        "expect_body_sha256": "eabd5f61e47dda9a5c60452e627c0ec8861726ee40494e5121dc20b6aa0c7074",
+        "expect_body_bytes": 24,
+        "expected_diagnosis": "rate_limited"
+      },
+      "results": {
+        "uwae-engine": {
+          "runs": 30,
+          "primary_successes": 30,
+          "primary_success_rate": 1.0,
+          "elapsed_ms_median": 5326.95,
+          "elapsed_ms_p95": 6049.78,
+          "elapsed_ms_min": 4699.93,
+          "elapsed_ms_max": 6166.45,
+          "elapsed_ms_runs": [
+            4699.93,
+            4841.96,
+            6166.45,
+            5604.64,
+            5452.65,
+            5372.35,
+            5453.34,
+            5480.34,
+            5713.38,
+            5518.6,
+            5299.83,
+            5354.07,
+            5501.07,
+            5376.18,
+            5376.07,
+            5212.38,
+            5391.18,
+            5168.64,
+            5167.52,
+            5266.3,
+            5202.69,
+            5291.25,
+            6049.78,
+            5940.93,
+            4909.64,
+            4850.99,
+            4845.76,
+            4829.92,
+            4851.1,
+            4897.23
+          ],
+          "peak_memory_bytes": 4307775,
+          "attempts_total": 150,
+          "attempts_max": 5,
+          "acquisition_verified_runs": 0,
+          "diagnosis_verified_runs": 30,
+          "diagnosis_applicable_runs": 30,
+          "spurious_problem_runs": 0,
+          "healthy_runs": 0,
+          "observed_diagnoses": [
+            "rate_limited"
+          ],
+          "raw_signals": [
+            "rate_limited"
+          ],
+          "errors": []
+        },
+        "botasaurus-request": {
+          "runs": 30,
+          "primary_successes": 0,
+          "primary_success_rate": 0.0,
+          "elapsed_ms_median": 40.72,
+          "elapsed_ms_p95": 63.04,
+          "elapsed_ms_min": 25.7,
+          "elapsed_ms_max": 76.19,
+          "elapsed_ms_runs": [
+            63.04,
+            76.19,
+            35.01,
+            54.64,
+            35.04,
+            41.9,
+            40.69,
+            60.69,
+            40.68,
+            46.63,
+            45.19,
+            48.64,
+            49.66,
+            37.26,
+            34.67,
+            30.31,
+            40.65,
+            33.11,
+            37.62,
+            43.11,
+            44.43,
+            35.08,
+            38.71,
+            38.7,
+            40.76,
+            52.13,
+            31.44,
+            55.82,
+            46.88,
+            25.7
+          ],
+          "peak_memory_bytes": 4035738,
+          "attempts_total": 30,
+          "attempts_max": 1,
+          "acquisition_verified_runs": 30,
+          "diagnosis_verified_runs": 0,
+          "diagnosis_applicable_runs": 30,
+          "spurious_problem_runs": 0,
+          "healthy_runs": 0,
+          "observed_diagnoses": [
+            "None"
+          ],
+          "raw_signals": [
+            "status 429"
+          ],
+          "errors": []
+        }
+      }
+    },
+    {
+      "scenario_id": "a07_challenge",
+      "path": "/challenge",
+      "primary_criterion": "diagnosis",
+      "ground_truth": {
+        "expect_status": 403,
+        "expect_body_sha256": "cebcc4a60c4e81193412844f4bcd45f6f3b550c3bda7510215a88cf9ee18b079",
+        "expect_body_bytes": 127,
+        "expected_diagnosis": "challenge_present"
+      },
+      "results": {
+        "uwae-engine": {
+          "runs": 30,
+          "primary_successes": 30,
+          "primary_success_rate": 1.0,
+          "elapsed_ms_median": 234.17,
+          "elapsed_ms_p95": 316.95,
+          "elapsed_ms_min": 187.39,
+          "elapsed_ms_max": 328.96,
+          "elapsed_ms_runs": [
+            232.2,
+            328.96,
+            200.96,
+            231.04,
+            238.39,
+            253.42,
+            202.01,
+            212.52,
+            188.5,
+            244.25,
+            225.25,
+            187.39,
+            254.91,
+            207.73,
+            239.48,
+            277.07,
+            316.95,
+            225.44,
+            211.34,
+            285.61,
+            302.7,
+            309.16,
+            236.14,
+            203.48,
+            248.64,
+            230.84,
+            281.86,
+            254.7,
+            216.7,
+            228.98
+          ],
+          "peak_memory_bytes": 4351936,
+          "attempts_total": 30,
+          "attempts_max": 1,
+          "acquisition_verified_runs": 0,
+          "diagnosis_verified_runs": 30,
+          "diagnosis_applicable_runs": 30,
+          "spurious_problem_runs": 0,
+          "healthy_runs": 0,
+          "observed_diagnoses": [
+            "challenge_present"
+          ],
+          "raw_signals": [
+            "challenge_present"
+          ],
+          "errors": []
+        },
+        "botasaurus-request": {
+          "runs": 30,
+          "primary_successes": 0,
+          "primary_success_rate": 0.0,
+          "elapsed_ms_median": 37.11,
+          "elapsed_ms_p95": 54.25,
+          "elapsed_ms_min": 26.72,
+          "elapsed_ms_max": 88.86,
+          "elapsed_ms_runs": [
+            39.94,
+            30.55,
+            53.87,
+            50.03,
+            32.94,
+            36.49,
+            44.32,
+            37.58,
+            44.71,
+            44.77,
+            32.4,
+            29.94,
+            32.37,
+            44.58,
+            29.72,
+            36.51,
+            54.25,
+            37.55,
+            88.86,
+            42.23,
+            50.69,
+            35.08,
+            26.72,
+            39.8,
+            33.15,
+            37.84,
+            36.31,
+            33.23,
+            30.3,
+            36.67
+          ],
+          "peak_memory_bytes": 4272567,
+          "attempts_total": 30,
+          "attempts_max": 1,
+          "acquisition_verified_runs": 30,
+          "diagnosis_verified_runs": 0,
+          "diagnosis_applicable_runs": 30,
+          "spurious_problem_runs": 0,
+          "healthy_runs": 0,
+          "observed_diagnoses": [
+            "None"
+          ],
+          "raw_signals": [
+            "status 403"
+          ],
+          "errors": []
+        }
+      }
+    },
+    {
+      "scenario_id": "a07_denied",
+      "path": "/denied",
+      "primary_criterion": "diagnosis",
+      "ground_truth": {
+        "expect_status": 403,
+        "expect_body_sha256": "98c37e2b08b320eec9e9f4a540f59ecfedbe0f2e0c03d8c6e840cfdad425940a",
+        "expect_body_bytes": 23,
+        "expected_diagnosis": "access_denied"
+      },
+      "results": {
+        "uwae-engine": {
+          "runs": 30,
+          "primary_successes": 30,
+          "primary_success_rate": 1.0,
+          "elapsed_ms_median": 233.25,
+          "elapsed_ms_p95": 438.68,
+          "elapsed_ms_min": 155.07,
+          "elapsed_ms_max": 535.45,
+          "elapsed_ms_runs": [
+            194.31,
+            280.38,
+            197.7,
+            268.83,
+            277.51,
+            293.14,
+            248.34,
+            181.46,
+            174.09,
+            190.59,
+            167.32,
+            346.62,
+            324.25,
+            235.13,
+            231.38,
+            215.48,
+            231.07,
+            221.88,
+            178.6,
+            219.28,
+            243.6,
+            248.28,
+            173.24,
+            245.08,
+            179.87,
+            298.93,
+            535.45,
+            438.68,
+            155.07,
+            279.71
+          ],
+          "peak_memory_bytes": 4380751,
+          "attempts_total": 30,
+          "attempts_max": 1,
+          "acquisition_verified_runs": 0,
+          "diagnosis_verified_runs": 30,
+          "diagnosis_applicable_runs": 30,
+          "spurious_problem_runs": 0,
+          "healthy_runs": 0,
+          "observed_diagnoses": [
+            "access_denied"
+          ],
+          "raw_signals": [
+            "access_denied"
+          ],
+          "errors": []
+        },
+        "botasaurus-request": {
+          "runs": 30,
+          "primary_successes": 0,
+          "primary_success_rate": 0.0,
+          "elapsed_ms_median": 40.47,
+          "elapsed_ms_p95": 58.21,
+          "elapsed_ms_min": 30.75,
+          "elapsed_ms_max": 64.79,
+          "elapsed_ms_runs": [
+            34.74,
+            34.49,
+            58.21,
+            36.83,
+            37.77,
+            40.91,
+            41.77,
+            35.19,
+            35.67,
+            35.15,
+            51.08,
+            43.02,
+            32.98,
+            64.79,
+            30.75,
+            45.79,
+            38.11,
+            41.53,
+            41.7,
+            48.23,
+            33.54,
+            36.32,
+            42.64,
+            39.6,
+            42.37,
+            52.4,
+            40.03,
+            35.7,
+            45.05,
+            46.92
+          ],
+          "peak_memory_bytes": 1487250,
+          "attempts_total": 30,
+          "attempts_max": 1,
+          "acquisition_verified_runs": 30,
+          "diagnosis_verified_runs": 0,
+          "diagnosis_applicable_runs": 30,
+          "spurious_problem_runs": 0,
+          "healthy_runs": 0,
+          "observed_diagnoses": [
+            "None"
+          ],
+          "raw_signals": [
+            "status 403"
+          ],
+          "errors": []
+        }
+      }
+    },
+    {
+      "scenario_id": "a11_invalid_html",
+      "path": "/invalid-html",
+      "primary_criterion": "diagnosis",
+      "ground_truth": {
+        "expect_status": 200,
+        "expect_body_sha256": "24db550ed32ca6a9add383f9b69dd756fd0d264ac0cd905822427d22a9f3316e",
+        "expect_body_bytes": 37,
+        "expected_diagnosis": "content_invalid"
+      },
+      "results": {
+        "uwae-engine": {
+          "runs": 30,
+          "primary_successes": 30,
+          "primary_success_rate": 1.0,
+          "elapsed_ms_median": 931.05,
+          "elapsed_ms_p95": 1282.25,
+          "elapsed_ms_min": 718.01,
+          "elapsed_ms_max": 1300.0,
+          "elapsed_ms_runs": [
+            801.24,
+            950.31,
+            903.11,
+            871.21,
+            789.66,
+            879.68,
+            933.62,
+            1282.25,
+            1107.33,
+            822.25,
+            718.01,
+            736.32,
+            723.63,
+            868.68,
+            1043.65,
+            868.05,
+            1024.18,
+            1156.49,
+            1300.0,
+            1004.64,
+            924.79,
+            901.67,
+            903.88,
+            1013.15,
+            965.01,
+            1178.38,
+            1030.33,
+            1015.39,
+            1011.08,
+            928.47
+          ],
+          "peak_memory_bytes": 4612676,
+          "attempts_total": 150,
+          "attempts_max": 5,
+          "acquisition_verified_runs": 30,
+          "diagnosis_verified_runs": 30,
+          "diagnosis_applicable_runs": 30,
+          "spurious_problem_runs": 0,
+          "healthy_runs": 0,
+          "observed_diagnoses": [
+            "content_invalid"
+          ],
+          "raw_signals": [
+            "content_invalid"
+          ],
+          "errors": []
+        },
+        "botasaurus-request": {
+          "runs": 30,
+          "primary_successes": 0,
+          "primary_success_rate": 0.0,
+          "elapsed_ms_median": 50.39,
+          "elapsed_ms_p95": 96.09,
+          "elapsed_ms_min": 23.25,
+          "elapsed_ms_max": 113.94,
+          "elapsed_ms_runs": [
+            49.63,
+            56.79,
+            42.69,
+            32.58,
+            53.68,
+            34.95,
+            23.25,
+            44.87,
+            96.09,
+            38.86,
+            113.94,
+            65.86,
+            45.29,
+            41.12,
+            49.22,
+            41.31,
+            47.18,
+            42.18,
+            54.39,
+            63.35,
+            47.82,
+            69.16,
+            62.05,
+            51.16,
+            54.63,
+            76.74,
+            73.32,
+            54.81,
+            33.02,
+            67.1
+          ],
+          "peak_memory_bytes": 1866106,
+          "attempts_total": 30,
+          "attempts_max": 1,
+          "acquisition_verified_runs": 30,
+          "diagnosis_verified_runs": 0,
+          "diagnosis_applicable_runs": 30,
+          "spurious_problem_runs": 0,
+          "healthy_runs": 0,
+          "observed_diagnoses": [
+            "None"
+          ],
+          "raw_signals": [
+            "status 200"
+          ],
+          "errors": []
+        }
+      }
+    },
+    {
+      "scenario_id": "a09_large_download",
+      "path": "/large-download",
+      "primary_criterion": "acquisition",
+      "ground_truth": {
+        "expect_status": 200,
+        "expect_body_sha256": "33bc8aab40703678c3ebe94d2dd8f2afff285dd901f9234e841e4679f8204fd5",
+        "expect_body_bytes": 524288,
+        "expected_diagnosis": null
+      },
+      "results": {
+        "uwae-engine": {
+          "runs": 30,
+          "primary_successes": 30,
+          "primary_success_rate": 1.0,
+          "elapsed_ms_median": 692.85,
+          "elapsed_ms_p95": 930.49,
+          "elapsed_ms_min": 541.64,
+          "elapsed_ms_max": 998.67,
+          "elapsed_ms_runs": [
+            627.35,
+            685.36,
+            728.27,
+            623.95,
+            703.92,
+            630.24,
+            678.95,
+            760.31,
+            712.57,
+            563.0,
+            902.35,
+            814.77,
+            560.67,
+            727.67,
+            592.96,
+            541.64,
+            649.99,
+            689.08,
+            675.15,
+            663.85,
+            666.8,
+            685.6,
+            795.73,
+            998.67,
+            930.49,
+            696.61,
+            772.81,
+            745.03,
+            739.37,
+            839.45
+          ],
+          "peak_memory_bytes": 13290601,
+          "attempts_total": 30,
+          "attempts_max": 1,
+          "acquisition_verified_runs": 30,
+          "diagnosis_verified_runs": 0,
+          "diagnosis_applicable_runs": 0,
+          "spurious_problem_runs": 0,
+          "healthy_runs": 30,
+          "observed_diagnoses": [
+            "access_granted"
+          ],
+          "raw_signals": [
+            "access_granted"
+          ],
+          "errors": []
+        },
+        "botasaurus-request": {
+          "runs": 30,
+          "primary_successes": 30,
+          "primary_success_rate": 1.0,
+          "elapsed_ms_median": 147.53,
+          "elapsed_ms_p95": 286.89,
+          "elapsed_ms_min": 97.14,
+          "elapsed_ms_max": 295.83,
+          "elapsed_ms_runs": [
+            190.51,
+            209.58,
+            244.44,
+            162.29,
+            209.17,
+            286.89,
+            295.83,
+            158.15,
+            187.25,
+            170.14,
+            113.71,
+            146.18,
+            122.52,
+            133.53,
+            148.89,
+            130.4,
+            123.98,
+            118.04,
+            120.11,
+            98.73,
+            137.22,
+            116.94,
+            115.17,
+            122.39,
+            97.14,
+            164.67,
+            176.28,
+            178.68,
+            197.36,
+            113.82
+          ],
+          "peak_memory_bytes": 4039341,
+          "attempts_total": 30,
+          "attempts_max": 1,
+          "acquisition_verified_runs": 30,
+          "diagnosis_verified_runs": 0,
+          "diagnosis_applicable_runs": 0,
+          "spurious_problem_runs": 0,
+          "healthy_runs": 30,
+          "observed_diagnoses": [
+            "None"
+          ],
+          "raw_signals": [
+            "status 200"
+          ],
+          "errors": []
+        }
+      }
+    }
+  ],
+  "dns_boundedness": {
+    "url": "https://nonexistent-uwae-e14-test.invalid",
+    "observation_window_s": 90,
+    "runs_per_arm": 3,
+    "uwae-engine": {
+      "runs": [
+        {
+          "returned": true,
+          "elapsed_s": 22.034,
+          "job_status": "failed",
+          "job_error": "budget_exhausted: ConnectionError: HTTPSConnectionPool(host='nonexistent-uwae-e14-test.invalid', port=443): Max retries exceeded with url: / (Caused by NameResolutionError(\"HTTPSConnection(host='nonexistent-uwae-e14-test.invalid', port=443): Failed to resolve 'nonexistent-uwae-e14-test.invalid' ([Errno -2] Name or service not known)\")) (attempt 7)",
+          "attempts": 7,
+          "observed_diagnosis": "network_failure",
+          "reason_code": "dns_failure",
+          "observed_retry_cycles": 0,
+          "stdout_tail": "",
+          "stderr_tail": "Job e14-dns aborted (budget_exhausted): tidak ada transport lain dan anggaran retry habis\n",
+          "elapsed_ms": 26278.34,
+          "recorded_at": "2026-10-28T12:36:47.619338+00:00",
+          "fixture_base_url": "http://127.0.0.1:8765"
+        },
+        {
+          "returned": true,
+          "elapsed_s": 18.708,
+          "job_status": "failed",
+          "job_error": "budget_exhausted: ConnectionError: HTTPSConnectionPool(host='nonexistent-uwae-e14-test.invalid', port=443): Max retries exceeded with url: / (Caused by NameResolutionError(\"HTTPSConnection(host='nonexistent-uwae-e14-test.invalid', port=443): Failed to resolve 'nonexistent-uwae-e14-test.invalid' ([Errno -2] Name or service not known)\")) (attempt 7)",
+          "attempts": 7,
+          "observed_diagnosis": "network_failure",
+          "reason_code": "dns_failure",
+          "observed_retry_cycles": 0,
+          "stdout_tail": "",
+          "stderr_tail": "Job e14-dns aborted (budget_exhausted): tidak ada transport lain dan anggaran retry habis\n",
+          "elapsed_ms": 24499.18,
+          "recorded_at": "2026-10-28T12:38:42.232266+00:00",
+          "fixture_base_url": "http://127.0.0.1:8765"
+        },
+        {
+          "returned": true,
+          "elapsed_s": 23.132,
+          "job_status": "failed",
+          "job_error": "budget_exhausted: ConnectionError: HTTPSConnectionPool(host='nonexistent-uwae-e14-test.invalid', port=443): Max retries exceeded with url: / (Caused by NameResolutionError(\"HTTPSConnection(host='nonexistent-uwae-e14-test.invalid', port=443): Failed to resolve 'nonexistent-uwae-e14-test.invalid' ([Errno -2] Name or service not known)\")) (attempt 7)",
+          "attempts": 7,
+          "observed_diagnosis": "network_failure",
+          "reason_code": "dns_failure",
+          "observed_retry_cycles": 0,
+          "stdout_tail": "",
+          "stderr_tail": "Job e14-dns aborted (budget_exhausted): tidak ada transport lain dan anggaran retry habis\n",
+          "elapsed_ms": 30597.68,
+          "recorded_at": "2026-10-28T12:40:42.916041+00:00",
+          "fixture_base_url": "http://127.0.0.1:8765"
+        }
+      ],
+      "summary": {
+        "runs": 3,
+        "reached_terminal_outcome": 3,
+        "no_terminal_outcome_within_window": 0,
+        "runs_with_classified_diagnosis": 3,
+        "observed_retry_cycles_per_run": [
+          0,
+          0,
+          0
+        ],
+        "attempts_per_run": [
+          7,
+          7,
+          7
+        ],
+        "elapsed_s_per_run": [
+          22.034,
+          18.708,
+          23.132
+        ]
+      }
+    },
+    "botasaurus-request": {
+      "runs": [
+        {
+          "engine_id": null,
+          "runtime_failure": {
+            "kind": "timeout",
+            "timeout_s": 90,
+            "elapsed_s": 90.053,
+            "observed_retry_cycles": 5,
+            "stdout_tail": "st.invalid on 8.8.8.8:53: no such host. Retrying in 20 seconds...\nRetrying now...\nNetwork error occurred: failed to do request: Get \"https://nonexistent-uwae-e14-test.invalid\": dial tcp: lookup nonexistent-uwae-e14-test.invalid on 8.8.8.8:53: no such host. Retrying in 20 seconds...\nRetrying now...\nNetwork error occurred: failed to do request: Get \"https://nonexistent-uwae-e14-test.invalid\": dial tcp: lookup nonexistent-uwae-e14-test.invalid on 8.8.8.8:53: no such host. Retrying in 20 seconds...\n",
+            "stderr_tail": ""
+          },
+          "results": [],
+          "elapsed_ms": 90055.78,
+          "recorded_at": "2026-10-28T12:36:21.324215+00:00",
+          "fixture_base_url": "http://127.0.0.1:8765"
+        },
+        {
+          "engine_id": null,
+          "runtime_failure": {
+            "kind": "timeout",
+            "timeout_s": 90,
+            "elapsed_s": 90.076,
+            "observed_retry_cycles": 5,
+            "stdout_tail": "st.invalid on 8.8.8.8:53: no such host. Retrying in 20 seconds...\nRetrying now...\nNetwork error occurred: failed to do request: Get \"https://nonexistent-uwae-e14-test.invalid\": dial tcp: lookup nonexistent-uwae-e14-test.invalid on 8.8.8.8:53: no such host. Retrying in 20 seconds...\nRetrying now...\nNetwork error occurred: failed to do request: Get \"https://nonexistent-uwae-e14-test.invalid\": dial tcp: lookup nonexistent-uwae-e14-test.invalid on 8.8.8.8:53: no such host. Retrying in 20 seconds...\n",
+            "stderr_tail": ""
+          },
+          "results": [],
+          "elapsed_ms": 90077.34,
+          "recorded_at": "2026-10-28T12:38:17.702128+00:00",
+          "fixture_base_url": "http://127.0.0.1:8765"
+        },
+        {
+          "engine_id": null,
+          "runtime_failure": {
+            "kind": "timeout",
+            "timeout_s": 90,
+            "elapsed_s": 90.069,
+            "observed_retry_cycles": 5,
+            "stdout_tail": "st.invalid on 8.8.8.8:53: no such host. Retrying in 20 seconds...\nRetrying now...\nNetwork error occurred: failed to do request: Get \"https://nonexistent-uwae-e14-test.invalid\": dial tcp: lookup nonexistent-uwae-e14-test.invalid on 8.8.8.8:53: no such host. Retrying in 20 seconds...\nRetrying now...\nNetwork error occurred: failed to do request: Get \"https://nonexistent-uwae-e14-test.invalid\": dial tcp: lookup nonexistent-uwae-e14-test.invalid on 8.8.8.8:53: no such host. Retrying in 20 seconds...\n",
+            "stderr_tail": ""
+          },
+          "results": [],
+          "elapsed_ms": 90069.13,
+          "recorded_at": "2026-10-28T12:40:12.309474+00:00",
+          "fixture_base_url": "http://127.0.0.1:8765"
+        }
+      ],
+      "summary": {
+        "runs": 3,
+        "reached_terminal_outcome": 0,
+        "no_terminal_outcome_within_window": 3,
+        "runs_with_classified_diagnosis": 0,
+        "observed_retry_cycles_per_run": [
+          5,
+          5,
+          5
+        ],
+        "attempts_per_run": [],
+        "elapsed_s_per_run": [
+          null,
+          null,
+          null
+        ]
+      }
+    },
+    "note": "Perilaku retry Botasaurus pada kegagalan DNS dipicu oleh pencocokan TEKS LITERAL pada pesan error resolver ('dial tcp: lookup' DAN 'no such host') di dalam retry_on_network_error (while True, sleep 20 detik). Teks resolver berubah antar-run di device ini (mis. 'no such host' vs 'Temporary failure in name resolution'), sehingga hasil terminal dan jumlah siklus retry dapat berbeda antar-run — semuanya dicatat apa adanya, bukan dirata-rata menjadi satu angka."
+  },
+  "unsupported_scenarios": [
+    {
+      "scenario_id": "a05_protected",
+      "reason": "memerlukan alur sesi terautentikasi (cookie login -> akses); benchmark ini mengukur target satu-permintaan. Perbandingan alur sesi belum diukur.",
+      "supported_by": []
+    },
+    {
+      "scenario_id": "js_rendering_browser_arm",
+      "reason": "Kedua arm di benchmark ini adalah arm HTTP. Rendering JavaScript butuh arm browser; Botasaurus memakai driver CDP (bukan chromedriver) dan UWAE memakai raw CDP (ADR-014) — keduanya belum diukur pada device ini, jadi tidak diklaim sebagai perbedaan engine.",
+      "supported_by": []
+    }
+  ],
+  "summary": {
+    "interpretation": "PENGUKURAN BASELINE lintas-implementasi — BUKAN klaim UWAE mengungguli Botasaurus. Klaim lama bahwa engine HTTP Botasaurus tidak dapat dieksekusi di environment ini SALAH: penyebabnya bug Python pada skrip baseline milik proyek ini (botasaurus_requests.get tanpa header -> KeyError('headers')), bukan ketidakcocokan platform. Jalur publik Botasaurus (@request) berjalan normal dan diukur di sini dengan kondisi device identik.",
+    "cause_diagnosis_metrics": {
+      "uwae-engine": {
+        "tp": 210,
+        "fn": 0,
+        "fp": 0,
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0,
+        "applicable_runs": 210,
+        "definition": "Hanya run dari skenario yang menuntut diagnosis penyebab. Precision = TP/(TP+FP); pembagi nol -> 0.0 (kelas yang tidak pernah diprediksi bukan keberhasilan). FP pada skenario sehat diukur terpisah lewat false_problem_rate."
+      },
+      "botasaurus-request": {
+        "tp": 0,
+        "fn": 210,
+        "fp": 0,
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1": 0.0,
+        "applicable_runs": 210,
+        "definition": "Hanya run dari skenario yang menuntut diagnosis penyebab. Precision = TP/(TP+FP); pembagi nol -> 0.0 (kelas yang tidak pernah diprediksi bukan keberhasilan). FP pada skenario sehat diukur terpisah lewat false_problem_rate."
+      }
+    },
+    "false_problem_metrics": {
+      "uwae-engine": {
+        "spurious_problem_runs": 0,
+        "healthy_runs": 180,
+        "rate": 0.0,
+        "definition": "Run pada skenario sehat (konten target valid) di mana engine melaporkan keadaan masalah. 0.0 pada engine tanpa API diagnosis berarti tidak ada klaim yang salah, bukan diagnosis yang benar."
+      },
+      "botasaurus-request": {
+        "spurious_problem_runs": 0,
+        "healthy_runs": 180,
+        "rate": 0.0,
+        "definition": "Run pada skenario sehat (konten target valid) di mana engine melaporkan keadaan masalah. 0.0 pada engine tanpa API diagnosis berarti tidak ada klaim yang salah, bukan diagnosis yang benar."
+      }
+    },
+    "acquisition_verified_runs": {
+      "uwae-engine": 270,
+      "botasaurus-request": 390,
+      "total_runs_per_arm": 390
+    },
+    "primary_success_runs": {
+      "uwae-engine": 390,
+      "botasaurus-request": 180,
+      "total_runs_per_arm": 390
+    },
+    "runtime_failures": {
+      "uwae-engine": null,
+      "botasaurus-request": null
+    }
+  }
+}

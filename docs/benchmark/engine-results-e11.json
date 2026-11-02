@@ -1,0 +1,70 @@
+{
+  "schema_version": 1,
+  "benchmark_id": "e11-throughput-baseline-001",
+  "timestamp": "2026-10-25T06:33:11.237591+00:00",
+  "environment": {
+    "python": "3.14.6 (Termux, bionic)",
+    "architecture": "aarch64",
+    "platform": "PRoot-Distro on Termux Android, no root",
+    "fixture": "deterministic localhost fixture server (fixture_server.py)",
+    "note": "baseline SEQUENTIAL + skenario concurrent (ConcurrentJobRunner) — seluruh job wajib sukses (ada satu kegagalan = skenario gagal)"
+  },
+  "engine": {
+    "engine_id": "uwae-engine",
+    "version": "uwae-0.3.0"
+  },
+  "scenarios": [
+    {
+      "scenario_id": "e11_sequential_small",
+      "wiring": "worker sequential minimal (tanpa cache, tanpa identifier)",
+      "jobs": 10,
+      "failures": 0,
+      "wall_time_s": 3.012,
+      "jobs_per_second": 3.32,
+      "latency_ms_p50": 203.71,
+      "latency_ms_p95": 743.02,
+      "peak_memory_bytes": 2353751,
+      "success": true
+    },
+    {
+      "scenario_id": "e11_sequential_medium",
+      "wiring": "worker sequential minimal (tanpa cache, tanpa identifier)",
+      "jobs": 20,
+      "failures": 0,
+      "wall_time_s": 4.601,
+      "jobs_per_second": 4.347,
+      "latency_ms_p50": 193.49,
+      "latency_ms_p95": 208.04,
+      "peak_memory_bytes": 305536,
+      "success": true
+    },
+    {
+      "scenario_id": "e11_concurrent_t2_small",
+      "wiring": "ConcurrentJobRunner 2 thread (worker+adapter per-thread)",
+      "threads": 2,
+      "jobs": 10,
+      "failures": 0,
+      "wall_time_s": 1.918,
+      "jobs_per_second": 5.214,
+      "latency_ms_p50": 283.1,
+      "latency_ms_p95": 593.8,
+      "success": true
+    },
+    {
+      "scenario_id": "e11_concurrent_t4_medium",
+      "wiring": "ConcurrentJobRunner 4 thread (worker+adapter per-thread)",
+      "threads": 4,
+      "jobs": 20,
+      "failures": 0,
+      "wall_time_s": 3.679,
+      "jobs_per_second": 5.437,
+      "latency_ms_p50": 457.93,
+      "latency_ms_p95": 1242.1,
+      "success": true
+    }
+  ],
+  "summary": {
+    "all_passed": true,
+    "interpretation": "Baseline SEQUENTIAL vs concurrent (ConcurrentJobRunner, worker + adapter per-thread) engine penuh terhadap fixture lokal — perbandingan E6 berbasis angka, bukan klaim; seluruh job wajib sukses."
+  }
+}

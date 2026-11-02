@@ -1,0 +1,2507 @@
+{
+  "benchmark_id": "e15-session-flow-differential-001",
+  "generated_at": "2026-10-27T03:58:52.868193+00:00",
+  "elapsed_s": 325.19,
+  "environment": {
+    "interpreter": {
+      "executable": "/root/uwae-comparison-venv/bin/python",
+      "version": "3.14.4",
+      "platform": "Linux-6.17.0-PRoot-Distro-aarch64-with-glibc2.43",
+      "machine": "aarch64",
+      "implementation": "CPython"
+    },
+    "package_versions": {
+      "botasaurus": "4.0.97",
+      "botasaurus_requests": "4.0.38",
+      "botasaurus_driver": "4.0.101",
+      "requests": "2.34.2",
+      "httpx": "0.28.1",
+      "curl_cffi": "0.17.0",
+      "joblib": "1.6.0",
+      "brotli": "1.2.0",
+      "certifi": "2026.7.22"
+    },
+    "identical_conditions": {
+      "targets": true,
+      "expected_outputs": true,
+      "device_conditions": true,
+      "run_counts": true,
+      "success_criteria": true
+    },
+    "notes": "Kedua arm berjalan sebagai subprocess dari interpreter yang sama dengan PYTHONPATH yang sama, melawan satu instance fixture server. Satu subprocess per run agar state sesi server bisa disetel ulang identik sebelum tiap run."
+  },
+  "arms": {
+    "uwae-engine": {
+      "recovery_policy": "engine_generic",
+      "description": "Jalur produksi UWAE: JobWorker + SessionRecoveryManager + HTTPSessionRecoveryProvider. Recovery dipicu kebijakan generik planner (RECOVER_SESSION) \u2014 tidak ada kode recovery per-skenario di arm ini."
+    },
+    "botasaurus-auto": {
+      "recovery_policy": "none",
+      "description": "Satu request lewat @request (API publik Botasaurus) tanpa kode recovery. Mengukur kapabilitas generik API publik, bukan versi yang sengaja dirusak."
+    },
+    "botasaurus-explicit": {
+      "recovery_policy": "written_in_arm_code",
+      "description": "Recovery ditulis DI DALAM arm: bila 401, arm memanggil endpoint login lalu mengulangi request. Mengukur apa yang mungkin dicapai pengguna Botasaurus dengan API publiknya \u2014 menjaga agar perbandingan ini bukan pembanding yang sengaja dibuat lemah."
+    },
+    "botasaurus-decorator-request": {
+      "recovery_policy": "written_in_arm_code",
+      "description": "Kode recovery IDENTIK dengan botasaurus-explicit, tapi memakai objek reqs yang diberikan dekorator (botasaurus_requests.request_class.Request) alih-alih Session() eksplisit. Membuktikan baseline diberi bentuk objek sesi terkuat yang Botasaurus tawarkan, dan mengisolasi perilaku cookie objek dekorator."
+    }
+  },
+  "scenarios": [
+    {
+      "scenario_id": "session_valid",
+      "description": "Kontrol: klien memegang sesi yang SAH di server. Resource terproteksi harus bisa diambil tanpa recovery sama sekali.",
+      "expects_recovery": false,
+      "ground_truth": {
+        "expect_status": 200,
+        "expect_body_sha256": "0165ee188672c28bcef37a81dda166f7e14388ed7a7b29821d8d639d660bd276",
+        "expect_body_bytes": 20,
+        "source": "semantika protokol fixture: /protected 200 hanya bila cookie sesi aktif"
+      },
+      "arms": {
+        "uwae-engine": {
+          "recovery_policy": "engine_generic",
+          "description": "Jalur produksi UWAE: JobWorker + SessionRecoveryManager + HTTPSessionRecoveryProvider. Recovery dipicu kebijakan generik planner (RECOVER_SESSION) \u2014 tidak ada kode recovery per-skenario di arm ini.",
+          "runs": [
+            {
+              "status_code": 200,
+              "body_sha256": "0165ee188672c28bcef37a81dda166f7e14388ed7a7b29821d8d639d660bd276",
+              "body_bytes": 20,
+              "content_ok": true,
+              "reached_protected": true,
+              "arm_reported_attempts": 1,
+              "recovery_outcome": null,
+              "recovery_generation": null,
+              "diagnosis_state": "access_granted",
+              "diagnosis_reason": "ok",
+              "terminal_status": "succeeded",
+              "elapsed_ms": 1171.7,
+              "error": null,
+              "server_observed": {
+                "total_requests": 1,
+                "login_requests": 0,
+                "protected_get_requests": 1,
+                "protected_head_requests": 0,
+                "first_protected_status": 200,
+                "final_protected_status": 200,
+                "cookies_seen_on_protected": [
+                  "uwae_session=valid-token"
+                ]
+              },
+              "run_index": 0,
+              "stdout_tail": "",
+              "stderr_tail": ""
+            },
+            {
+              "status_code": 200,
+              "body_sha256": "0165ee188672c28bcef37a81dda166f7e14388ed7a7b29821d8d639d660bd276",
+              "body_bytes": 20,
+              "content_ok": true,
+              "reached_protected": true,
+              "arm_reported_attempts": 1,
+              "recovery_outcome": null,
+              "recovery_generation": null,
+              "diagnosis_state": "access_granted",
+              "diagnosis_reason": "ok",
+              "terminal_status": "succeeded",
+              "elapsed_ms": 1037.0,
+              "error": null,
+              "server_observed": {
+                "total_requests": 1,
+                "login_requests": 0,
+                "protected_get_requests": 1,
+                "protected_head_requests": 0,
+                "first_protected_status": 200,
+                "final_protected_status": 200,
+                "cookies_seen_on_protected": [
+                  "uwae_session=valid-token"
+                ]
+              },
+              "run_index": 1,
+              "stdout_tail": "",
+              "stderr_tail": ""
+            },
+            {
+              "status_code": 200,
+              "body_sha256": "0165ee188672c28bcef37a81dda166f7e14388ed7a7b29821d8d639d660bd276",
+              "body_bytes": 20,
+              "content_ok": true,
+              "reached_protected": true,
+              "arm_reported_attempts": 1,
+              "recovery_outcome": null,
+              "recovery_generation": null,
+              "diagnosis_state": "access_granted",
+              "diagnosis_reason": "ok",
+              "terminal_status": "succeeded",
+              "elapsed_ms": 1060.02,
+              "error": null,
+              "server_observed": {
+                "total_requests": 1,
+                "login_requests": 0,
+                "protected_get_requests": 1,
+                "protected_head_requests": 0,
+                "first_protected_status": 200,
+                "final_protected_status": 200,
+                "cookies_seen_on_protected": [
+                  "uwae_session=valid-token"
+                ]
+              },
+              "run_index": 2,
+              "stdout_tail": "",
+              "stderr_tail": ""
+            },
+            {
+              "status_code": 200,
+              "body_sha256": "0165ee188672c28bcef37a81dda166f7e14388ed7a7b29821d8d639d660bd276",
+              "body_bytes": 20,
+              "content_ok": true,
+              "reached_protected": true,
+              "arm_reported_attempts": 1,
+              "recovery_outcome": null,
+              "recovery_generation": null,
+              "diagnosis_state": "access_granted",
+              "diagnosis_reason": "ok",
+              "terminal_status": "succeeded",
+              "elapsed_ms": 997.87,
+              "error": null,
+              "server_observed": {
+                "total_requests": 1,
+                "login_requests": 0,
+                "protected_get_requests": 1,
+                "protected_head_requests": 0,
+                "first_protected_status": 200,
+                "final_protected_status": 200,
+                "cookies_seen_on_protected": [
+                  "uwae_session=valid-token"
+                ]
+              },
+              "run_index": 3,
+              "stdout_tail": "",
+              "stderr_tail": ""
+            },
+            {
+              "status_code": 200,
+              "body_sha256": "0165ee188672c28bcef37a81dda166f7e14388ed7a7b29821d8d639d660bd276",
+              "body_bytes": 20,
+              "content_ok": true,
+              "reached_protected": true,
+              "arm_reported_attempts": 1,
+              "recovery_outcome": null,
+              "recovery_generation": null,
+              "diagnosis_state": "access_granted",
+              "diagnosis_reason": "ok",
+              "terminal_status": "succeeded",
+              "elapsed_ms": 1000.59,
+              "error": null,
+              "server_observed": {
+                "total_requests": 1,
+                "login_requests": 0,
+                "protected_get_requests": 1,
+                "protected_head_requests": 0,
+                "first_protected_status": 200,
+                "final_protected_status": 200,
+                "cookies_seen_on_protected": [
+                  "uwae_session=valid-token"
+                ]
+              },
+              "run_index": 4,
+              "stdout_tail": "",
+              "stderr_tail": ""
+            }
+          ],
+          "summary": {
+            "runs": 5,
+            "reached_protected_runs": 5,
+            "primary_success_rate": 1.0,
+            "runtime_failures": 0,
+            "server_observed_login_requests": [
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "server_observed_final_protected_status": [
+              200,
+              200,
+              200,
+              200,
+              200
+            ],
+            "server_observed_total_requests": [
+              1,
+              1,
+              1,
+              1,
+              1
+            ],
+            "server_observed_total_requests_median": 1,
+            "arm_reported_attempts_max": 1,
+            "recovery_outcomes": [],
+            "elapsed_ms_median": 1037.0,
+            "elapsed_ms_p95": 1171.7,
+            "elapsed_ms_runs": [
+              1171.7,
+              1037.0,
+              1060.02,
+              997.87,
+              1000.59
+            ]
+          }
+        },
+        "botasaurus-auto": {
+          "recovery_policy": "none",
+          "description": "Satu request lewat @request (API publik Botasaurus) tanpa kode recovery. Mengukur kapabilitas generik API publik, bukan versi yang sengaja dirusak.",
+          "runs": [
+            {
+              "status_code": 200,
+              "body_sha256": "0165ee188672c28bcef37a81dda166f7e14388ed7a7b29821d8d639d660bd276",
+              "body_bytes": 20,
+              "content_ok": true,
+              "reached_protected": true,
+              "arm_reported_attempts": 1,
+              "recovery_outcome": null,
+              "recovery_generation": null,
+              "diagnosis_state": null,
+              "diagnosis_reason": null,
+              "terminal_status": null,
+              "elapsed_ms": 92.44,
+              "error": null,
+              "server_observed": {
+                "total_requests": 1,
+                "login_requests": 0,
+                "protected_get_requests": 1,
+                "protected_head_requests": 0,
+                "first_protected_status": 200,
+                "final_protected_status": 200,
+                "cookies_seen_on_protected": [
+                  "uwae_session=valid-token"
+                ]
+              },
+              "run_index": 0,
+              "stdout_tail": "Running\n",
+              "stderr_tail": ""
+            },
+            {
+              "status_code": 200,
+              "body_sha256": "0165ee188672c28bcef37a81dda166f7e14388ed7a7b29821d8d639d660bd276",
+              "body_bytes": 20,
+              "content_ok": true,
+              "reached_protected": true,
+              "arm_reported_attempts": 1,
+              "recovery_outcome": null,
+              "recovery_generation": null,
+              "diagnosis_state": null,
+              "diagnosis_reason": null,
+              "terminal_status": null,
+              "elapsed_ms": 170.34,
+              "error": null,
+              "server_observed": {
+                "total_requests": 1,
+                "login_requests": 0,
+                "protected_get_requests": 1,
+                "protected_head_requests": 0,
+                "first_protected_status": 200,
+                "final_protected_status": 200,
+                "cookies_seen_on_protected": [
+                  "uwae_session=valid-token"
+                ]
+              },
+              "run_index": 1,
+              "stdout_tail": "Running\n",
+              "stderr_tail": ""
+            },
+            {
+              "status_code": 200,
+              "body_sha256": "0165ee188672c28bcef37a81dda166f7e14388ed7a7b29821d8d639d660bd276",
+              "body_bytes": 20,
+              "content_ok": true,
+              "reached_protected": true,
+              "arm_reported_attempts": 1,
+              "recovery_outcome": null,
+              "recovery_generation": null,
+              "diagnosis_state": null,
+              "diagnosis_reason": null,
+              "terminal_status": null,
+              "elapsed_ms": 163.63,
+              "error": null,
+              "server_observed": {
+                "total_requests": 1,
+                "login_requests": 0,
+                "protected_get_requests": 1,
+                "protected_head_requests": 0,
+                "first_protected_status": 200,
+                "final_protected_status": 200,
+                "cookies_seen_on_protected": [
+                  "uwae_session=valid-token"
+                ]
+              },
+              "run_index": 2,
+              "stdout_tail": "Running\n",
+              "stderr_tail": ""
+            },
+            {
+              "status_code": 200,
+              "body_sha256": "0165ee188672c28bcef37a81dda166f7e14388ed7a7b29821d8d639d660bd276",
+              "body_bytes": 20,
+              "content_ok": true,
+              "reached_protected": true,
+              "arm_reported_attempts": 1,
+              "recovery_outcome": null,
+              "recovery_generation": null,
+              "diagnosis_state": null,
+              "diagnosis_reason": null,
+              "terminal_status": null,
+              "elapsed_ms": 132.49,
+              "error": null,
+              "server_observed": {
+                "total_requests": 1,
+                "login_requests": 0,
+                "protected_get_requests": 1,
+                "protected_head_requests": 0,
+                "first_protected_status": 200,
+                "final_protected_status": 200,
+                "cookies_seen_on_protected": [
+                  "uwae_session=valid-token"
+                ]
+              },
+              "run_index": 3,
+              "stdout_tail": "Running\n",
+              "stderr_tail": ""
+            },
+            {
+              "status_code": 200,
+              "body_sha256": "0165ee188672c28bcef37a81dda166f7e14388ed7a7b29821d8d639d660bd276",
+              "body_bytes": 20,
+              "content_ok": true,
+              "reached_protected": true,
+              "arm_reported_attempts": 1,
+              "recovery_outcome": null,
+              "recovery_generation": null,
+              "diagnosis_state": null,
+              "diagnosis_reason": null,
+              "terminal_status": null,
+              "elapsed_ms": 274.86,
+              "error": null,
+              "server_observed": {
+                "total_requests": 1,
+                "login_requests": 0,
+                "protected_get_requests": 1,
+                "protected_head_requests": 0,
+                "first_protected_status": 200,
+                "final_protected_status": 200,
+                "cookies_seen_on_protected": [
+                  "uwae_session=valid-token"
+                ]
+              },
+              "run_index": 4,
+              "stdout_tail": "Running\n",
+              "stderr_tail": ""
+            }
+          ],
+          "summary": {
+            "runs": 5,
+            "reached_protected_runs": 5,
+            "primary_success_rate": 1.0,
+            "runtime_failures": 0,
+            "server_observed_login_requests": [
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "server_observed_final_protected_status": [
+              200,
+              200,
+              200,
+              200,
+              200
+            ],
+            "server_observed_total_requests": [
+              1,
+              1,
+              1,
+              1,
+              1
+            ],
+            "server_observed_total_requests_median": 1,
+            "arm_reported_attempts_max": 1,
+            "recovery_outcomes": [],
+            "elapsed_ms_median": 163.63,
+            "elapsed_ms_p95": 274.86,
+            "elapsed_ms_runs": [
+              92.44,
+              170.34,
+              163.63,
+              132.49,
+              274.86
+            ]
+          }
+        },
+        "botasaurus-explicit": {
+          "recovery_policy": "written_in_arm_code",
+          "description": "Recovery ditulis DI DALAM arm: bila 401, arm memanggil endpoint login lalu mengulangi request. Mengukur apa yang mungkin dicapai pengguna Botasaurus dengan API publiknya \u2014 menjaga agar perbandingan ini bukan pembanding yang sengaja dibuat lemah.",
+          "runs": [
+            {
+              "status_code": 200,
+              "body_sha256": "0165ee188672c28bcef37a81dda166f7e14388ed7a7b29821d8d639d660bd276",
+              "body_bytes": 20,
+              "content_ok": true,
+              "reached_protected": true,
+              "arm_reported_attempts": 1,
+              "recovery_outcome": null,
+              "recovery_generation": null,
+              "diagnosis_state": null,
+              "diagnosis_reason": null,
+              "terminal_status": null,
+              "elapsed_ms": 143.18,
+              "error": null,
+              "server_observed": {
+                "total_requests": 1,
+                "login_requests": 0,
+                "protected_get_requests": 1,
+                "protected_head_requests": 0,
+                "first_protected_status": 200,
+                "final_protected_status": 200,
+                "cookies_seen_on_protected": [
+                  "uwae_session=valid-token"
+                ]
+              },
+              "run_index": 0,
+              "stdout_tail": "Running\n",
+              "stderr_tail": ""
+            },
+            {
+              "status_code": 200,
+              "body_sha256": "0165ee188672c28bcef37a81dda166f7e14388ed7a7b29821d8d639d660bd276",
+              "body_bytes": 20,
+              "content_ok": true,
+              "reached_protected": true,
+              "arm_reported_attempts": 1,
+              "recovery_outcome": null,
+              "recovery_generation": null,
+              "diagnosis_state": null,
+              "diagnosis_reason": null,
+              "terminal_status": null,
+              "elapsed_ms": 119.45,
+              "error": null,
+              "server_observed": {
+                "total_requests": 1,
+                "login_requests": 0,
+                "protected_get_requests": 1,
+                "protected_head_requests": 0,
+                "first_protected_status": 200,
+                "final_protected_status": 200,
+                "cookies_seen_on_protected": [
+                  "uwae_session=valid-token"
+                ]
+              },
+              "run_index": 1,
+              "stdout_tail": "Running\n",
+              "stderr_tail": ""
+            },
+            {
+              "status_code": 200,
+              "body_sha256": "0165ee188672c28bcef37a81dda166f7e14388ed7a7b29821d8d639d660bd276",
+              "body_bytes": 20,
+              "content_ok": true,
+              "reached_protected": true,
+              "arm_reported_attempts": 1,
+              "recovery_outcome": null,
+              "recovery_generation": null,
+              "diagnosis_state": null,
+              "diagnosis_reason": null,
+              "terminal_status": null,
+              "elapsed_ms": 114.25,
+              "error": null,
+              "server_observed": {
+                "total_requests": 1,
+                "login_requests": 0,
+                "protected_get_requests": 1,
+                "protected_head_requests": 0,
+                "first_protected_status": 200,
+                "final_protected_status": 200,
+                "cookies_seen_on_protected": [
+                  "uwae_session=valid-token"
+                ]
+              },
+              "run_index": 2,
+              "stdout_tail": "Running\n",
+              "stderr_tail": ""
+            },
+            {
+              "status_code": 200,
+              "body_sha256": "0165ee188672c28bcef37a81dda166f7e14388ed7a7b29821d8d639d660bd276",
+              "body_bytes": 20,
+              "content_ok": true,
+              "reached_protected": true,
+              "arm_reported_attempts": 1,
+              "recovery_outcome": null,
+              "recovery_generation": null,
+              "diagnosis_state": null,
+              "diagnosis_reason": null,
+              "terminal_status": null,
+              "elapsed_ms": 116.97,
+              "error": null,
+              "server_observed": {
+                "total_requests": 1,
+                "login_requests": 0,
+                "protected_get_requests": 1,
+                "protected_head_requests": 0,
+                "first_protected_status": 200,
+                "final_protected_status": 200,
+                "cookies_seen_on_protected": [
+                  "uwae_session=valid-token"
+                ]
+              },
+              "run_index": 3,
+              "stdout_tail": "Running\n",
+              "stderr_tail": ""
+            },
+            {
+              "status_code": 200,
+              "body_sha256": "0165ee188672c28bcef37a81dda166f7e14388ed7a7b29821d8d639d660bd276",
+              "body_bytes": 20,
+              "content_ok": true,
+              "reached_protected": true,
+              "arm_reported_attempts": 1,
+              "recovery_outcome": null,
+              "recovery_generation": null,
+              "diagnosis_state": null,
+              "diagnosis_reason": null,
+              "terminal_status": null,
+              "elapsed_ms": 151.93,
+              "error": null,
+              "server_observed": {
+                "total_requests": 1,
+                "login_requests": 0,
+                "protected_get_requests": 1,
+                "protected_head_requests": 0,
+                "first_protected_status": 200,
+                "final_protected_status": 200,
+                "cookies_seen_on_protected": [
+                  "uwae_session=valid-token"
+                ]
+              },
+              "run_index": 4,
+              "stdout_tail": "Running\n",
+              "stderr_tail": ""
+            }
+          ],
+          "summary": {
+            "runs": 5,
+            "reached_protected_runs": 5,
+            "primary_success_rate": 1.0,
+            "runtime_failures": 0,
+            "server_observed_login_requests": [
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "server_observed_final_protected_status": [
+              200,
+              200,
+              200,
+              200,
+              200
+            ],
+            "server_observed_total_requests": [
+              1,
+              1,
+              1,
+              1,
+              1
+            ],
+            "server_observed_total_requests_median": 1,
+            "arm_reported_attempts_max": 1,
+            "recovery_outcomes": [],
+            "elapsed_ms_median": 119.45,
+            "elapsed_ms_p95": 151.93,
+            "elapsed_ms_runs": [
+              143.18,
+              119.45,
+              114.25,
+              116.97,
+              151.93
+            ]
+          }
+        },
+        "botasaurus-decorator-request": {
+          "recovery_policy": "written_in_arm_code",
+          "description": "Kode recovery IDENTIK dengan botasaurus-explicit, tapi memakai objek reqs yang diberikan dekorator (botasaurus_requests.request_class.Request) alih-alih Session() eksplisit. Membuktikan baseline diberi bentuk objek sesi terkuat yang Botasaurus tawarkan, dan mengisolasi perilaku cookie objek dekorator.",
+          "runs": [
+            {
+              "status_code": 200,
+              "body_sha256": "0165ee188672c28bcef37a81dda166f7e14388ed7a7b29821d8d639d660bd276",
+              "body_bytes": 20,
+              "content_ok": true,
+              "reached_protected": true,
+              "arm_reported_attempts": 1,
+              "recovery_outcome": null,
+              "recovery_generation": null,
+              "diagnosis_state": null,
+              "diagnosis_reason": null,
+              "terminal_status": null,
+              "elapsed_ms": 152.35,
+              "error": null,
+              "server_observed": {
+                "total_requests": 1,
+                "login_requests": 0,
+                "protected_get_requests": 1,
+                "protected_head_requests": 0,
+                "first_protected_status": 200,
+                "final_protected_status": 200,
+                "cookies_seen_on_protected": [
+                  "uwae_session=valid-token"
+                ]
+              },
+              "run_index": 0,
+              "stdout_tail": "Running\n",
+              "stderr_tail": ""
+            },
+            {
+              "status_code": 200,
+              "body_sha256": "0165ee188672c28bcef37a81dda166f7e14388ed7a7b29821d8d639d660bd276",
+              "body_bytes": 20,
+              "content_ok": true,
+              "reached_protected": true,
+              "arm_reported_attempts": 1,
+              "recovery_outcome": null,
+              "recovery_generation": null,
+              "diagnosis_state": null,
+              "diagnosis_reason": null,
+              "terminal_status": null,
+              "elapsed_ms": 140.17,
+              "error": null,
+              "server_observed": {
+                "total_requests": 1,
+                "login_requests": 0,
+                "protected_get_requests": 1,
+                "protected_head_requests": 0,
+                "first_protected_status": 200,
+                "final_protected_status": 200,
+                "cookies_seen_on_protected": [
+                  "uwae_session=valid-token"
+                ]
+              },
+              "run_index": 1,
+              "stdout_tail": "Running\n",
+              "stderr_tail": ""
+            },
+            {
+              "status_code": 200,
+              "body_sha256": "0165ee188672c28bcef37a81dda166f7e14388ed7a7b29821d8d639d660bd276",
+              "body_bytes": 20,
+              "content_ok": true,
+              "reached_protected": true,
+              "arm_reported_attempts": 1,
+              "recovery_outcome": null,
+              "recovery_generation": null,
+              "diagnosis_state": null,
+              "diagnosis_reason": null,
+              "terminal_status": null,
+              "elapsed_ms": 124.44,
+              "error": null,
+              "server_observed": {
+                "total_requests": 1,
+                "login_requests": 0,
+                "protected_get_requests": 1,
+                "protected_head_requests": 0,
+                "first_protected_status": 200,
+                "final_protected_status": 200,
+                "cookies_seen_on_protected": [
+                  "uwae_session=valid-token"
+                ]
+              },
+              "run_index": 2,
+              "stdout_tail": "Running\n",
+              "stderr_tail": ""
+            },
+            {
+              "status_code": 200,
+              "body_sha256": "0165ee188672c28bcef37a81dda166f7e14388ed7a7b29821d8d639d660bd276",
+              "body_bytes": 20,
+              "content_ok": true,
+              "reached_protected": true,
+              "arm_reported_attempts": 1,
+              "recovery_outcome": null,
+              "recovery_generation": null,
+              "diagnosis_state": null,
+              "diagnosis_reason": null,
+              "terminal_status": null,
+              "elapsed_ms": 143.06,
+              "error": null,
+              "server_observed": {
+                "total_requests": 1,
+                "login_requests": 0,
+                "protected_get_requests": 1,
+                "protected_head_requests": 0,
+                "first_protected_status": 200,
+                "final_protected_status": 200,
+                "cookies_seen_on_protected": [
+                  "uwae_session=valid-token"
+                ]
+              },
+              "run_index": 3,
+              "stdout_tail": "Running\n",
+              "stderr_tail": ""
+            },
+            {
+              "status_code": 200,
+              "body_sha256": "0165ee188672c28bcef37a81dda166f7e14388ed7a7b29821d8d639d660bd276",
+              "body_bytes": 20,
+              "content_ok": true,
+              "reached_protected": true,
+              "arm_reported_attempts": 1,
+              "recovery_outcome": null,
+              "recovery_generation": null,
+              "diagnosis_state": null,
+              "diagnosis_reason": null,
+              "terminal_status": null,
+              "elapsed_ms": 153.85,
+              "error": null,
+              "server_observed": {
+                "total_requests": 1,
+                "login_requests": 0,
+                "protected_get_requests": 1,
+                "protected_head_requests": 0,
+                "first_protected_status": 200,
+                "final_protected_status": 200,
+                "cookies_seen_on_protected": [
+                  "uwae_session=valid-token"
+                ]
+              },
+              "run_index": 4,
+              "stdout_tail": "Running\n",
+              "stderr_tail": ""
+            }
+          ],
+          "summary": {
+            "runs": 5,
+            "reached_protected_runs": 5,
+            "primary_success_rate": 1.0,
+            "runtime_failures": 0,
+            "server_observed_login_requests": [
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "server_observed_final_protected_status": [
+              200,
+              200,
+              200,
+              200,
+              200
+            ],
+            "server_observed_total_requests": [
+              1,
+              1,
+              1,
+              1,
+              1
+            ],
+            "server_observed_total_requests_median": 1,
+            "arm_reported_attempts_max": 1,
+            "recovery_outcomes": [],
+            "elapsed_ms_median": 143.06,
+            "elapsed_ms_p95": 153.85,
+            "elapsed_ms_runs": [
+              152.35,
+              140.17,
+              124.44,
+              143.06,
+              153.85
+            ]
+          }
+        }
+      }
+    },
+    {
+      "scenario_id": "session_required",
+      "description": "Klien tidak memegang sesi sama sekali; server exige cookie sesi. Resource terproteksi hanya bisa diambil bila engine mampu mengauthentikasi ulang secara otomatis.",
+      "expects_recovery": true,
+      "ground_truth": {
+        "expect_status": 200,
+        "expect_body_sha256": "0165ee188672c28bcef37a81dda166f7e14388ed7a7b29821d8d639d660bd276",
+        "expect_body_bytes": 20,
+        "source": "semantika protokol fixture: /protected 200 hanya bila cookie sesi aktif"
+      },
+      "arms": {
+        "uwae-engine": {
+          "recovery_policy": "engine_generic",
+          "description": "Jalur produksi UWAE: JobWorker + SessionRecoveryManager + HTTPSessionRecoveryProvider. Recovery dipicu kebijakan generik planner (RECOVER_SESSION) \u2014 tidak ada kode recovery per-skenario di arm ini.",
+          "runs": [
+            {
+              "status_code": 200,
+              "body_sha256": "0165ee188672c28bcef37a81dda166f7e14388ed7a7b29821d8d639d660bd276",
+              "body_bytes": 20,
+              "content_ok": true,
+              "reached_protected": true,
+              "arm_reported_attempts": 2,
+              "recovery_outcome": "recovered",
+              "recovery_generation": 1,
+              "diagnosis_state": "access_granted",
+              "diagnosis_reason": "ok",
+              "terminal_status": "succeeded",
+              "elapsed_ms": 1988.27,
+              "error": null,
+              "server_observed": {
+                "total_requests": 4,
+                "login_requests": 1,
+                "protected_get_requests": 3,
+                "protected_head_requests": 0,
+                "first_protected_status": 401,
+                "final_protected_status": 200,
+                "cookies_seen_on_protected": [
+                  "",
+                  "uwae_session=valid-token",
+                  "uwae_session=valid-token"
+                ]
+              },
+              "run_index": 0,
+              "stdout_tail": "",
+              "stderr_tail": ""
+            },
+            {
+              "status_code": 200,
+              "body_sha256": "0165ee188672c28bcef37a81dda166f7e14388ed7a7b29821d8d639d660bd276",
+              "body_bytes": 20,
+              "content_ok": true,
+              "reached_protected": true,
+              "arm_reported_attempts": 2,
+              "recovery_outcome": "recovered",
+              "recovery_generation": 1,
+              "diagnosis_state": "access_granted",
+              "diagnosis_reason": "ok",
+              "terminal_status": "succeeded",
+              "elapsed_ms": 1965.34,
+              "error": null,
+              "server_observed": {
+                "total_requests": 4,
+                "login_requests": 1,
+                "protected_get_requests": 3,
+                "protected_head_requests": 0,
+                "first_protected_status": 401,
+                "final_protected_status": 200,
+                "cookies_seen_on_protected": [
+                  "",
+                  "uwae_session=valid-token",
+                  "uwae_session=valid-token"
+                ]
+              },
+              "run_index": 1,
+              "stdout_tail": "",
+              "stderr_tail": ""
+            },
+            {
+              "status_code": 200,
+              "body_sha256": "0165ee188672c28bcef37a81dda166f7e14388ed7a7b29821d8d639d660bd276",
+              "body_bytes": 20,
+              "content_ok": true,
+              "reached_protected": true,
+              "arm_reported_attempts": 2,
+              "recovery_outcome": "recovered",
+              "recovery_generation": 1,
+              "diagnosis_state": "access_granted",
+              "diagnosis_reason": "ok",
+              "terminal_status": "succeeded",
+              "elapsed_ms": 1887.2,
+              "error": null,
+              "server_observed": {
+                "total_requests": 4,
+                "login_requests": 1,
+                "protected_get_requests": 3,
+                "protected_head_requests": 0,
+                "first_protected_status": 401,
+                "final_protected_status": 200,
+                "cookies_seen_on_protected": [
+                  "",
+                  "uwae_session=valid-token",
+                  "uwae_session=valid-token"
+                ]
+              },
+              "run_index": 2,
+              "stdout_tail": "",
+              "stderr_tail": ""
+            },
+            {
+              "status_code": 200,
+              "body_sha256": "0165ee188672c28bcef37a81dda166f7e14388ed7a7b29821d8d639d660bd276",
+              "body_bytes": 20,
+              "content_ok": true,
+              "reached_protected": true,
+              "arm_reported_attempts": 2,
+              "recovery_outcome": "recovered",
+              "recovery_generation": 1,
+              "diagnosis_state": "access_granted",
+              "diagnosis_reason": "ok",
+              "terminal_status": "succeeded",
+              "elapsed_ms": 2006.88,
+              "error": null,
+              "server_observed": {
+                "total_requests": 4,
+                "login_requests": 1,
+                "protected_get_requests": 3,
+                "protected_head_requests": 0,
+                "first_protected_status": 401,
+                "final_protected_status": 200,
+                "cookies_seen_on_protected": [
+                  "",
+                  "uwae_session=valid-token",
+                  "uwae_session=valid-token"
+                ]
+              },
+              "run_index": 3,
+              "stdout_tail": "",
+              "stderr_tail": ""
+            },
+            {
+              "status_code": 200,
+              "body_sha256": "0165ee188672c28bcef37a81dda166f7e14388ed7a7b29821d8d639d660bd276",
+              "body_bytes": 20,
+              "content_ok": true,
+              "reached_protected": true,
+              "arm_reported_attempts": 2,
+              "recovery_outcome": "recovered",
+              "recovery_generation": 1,
+              "diagnosis_state": "access_granted",
+              "diagnosis_reason": "ok",
+              "terminal_status": "succeeded",
+              "elapsed_ms": 2165.45,
+              "error": null,
+              "server_observed": {
+                "total_requests": 4,
+                "login_requests": 1,
+                "protected_get_requests": 3,
+                "protected_head_requests": 0,
+                "first_protected_status": 401,
+                "final_protected_status": 200,
+                "cookies_seen_on_protected": [
+                  "",
+                  "uwae_session=valid-token",
+                  "uwae_session=valid-token"
+                ]
+              },
+              "run_index": 4,
+              "stdout_tail": "",
+              "stderr_tail": ""
+            }
+          ],
+          "summary": {
+            "runs": 5,
+            "reached_protected_runs": 5,
+            "primary_success_rate": 1.0,
+            "runtime_failures": 0,
+            "server_observed_login_requests": [
+              1,
+              1,
+              1,
+              1,
+              1
+            ],
+            "server_observed_final_protected_status": [
+              200,
+              200,
+              200,
+              200,
+              200
+            ],
+            "server_observed_total_requests": [
+              4,
+              4,
+              4,
+              4,
+              4
+            ],
+            "server_observed_total_requests_median": 4,
+            "arm_reported_attempts_max": 2,
+            "recovery_outcomes": [
+              "recovered",
+              "recovered",
+              "recovered",
+              "recovered",
+              "recovered"
+            ],
+            "elapsed_ms_median": 1988.27,
+            "elapsed_ms_p95": 2165.45,
+            "elapsed_ms_runs": [
+              1988.27,
+              1965.34,
+              1887.2,
+              2006.88,
+              2165.45
+            ]
+          }
+        },
+        "botasaurus-auto": {
+          "recovery_policy": "none",
+          "description": "Satu request lewat @request (API publik Botasaurus) tanpa kode recovery. Mengukur kapabilitas generik API publik, bukan versi yang sengaja dirusak.",
+          "runs": [
+            {
+              "status_code": 401,
+              "body_sha256": "23e37a54829820e0331c4c53da32f1ec919f4879dfe8f326a15e235df9b40c8f",
+              "body_bytes": 30,
+              "content_ok": false,
+              "reached_protected": false,
+              "arm_reported_attempts": 1,
+              "recovery_outcome": null,
+              "recovery_generation": null,
+              "diagnosis_state": null,
+              "diagnosis_reason": null,
+              "terminal_status": null,
+              "elapsed_ms": 120.89,
+              "error": null,
+              "server_observed": {
+                "total_requests": 1,
+                "login_requests": 0,
+                "protected_get_requests": 1,
+                "protected_head_requests": 0,
+                "first_protected_status": 401,
+                "final_protected_status": 401,
+                "cookies_seen_on_protected": [
+                  ""
+                ]
+              },
+              "run_index": 0,
+              "stdout_tail": "Running\n",
+              "stderr_tail": ""
+            },
+            {
+              "status_code": 401,
+              "body_sha256": "23e37a54829820e0331c4c53da32f1ec919f4879dfe8f326a15e235df9b40c8f",
+              "body_bytes": 30,
+              "content_ok": false,
+              "reached_protected": false,
+              "arm_reported_attempts": 1,
+              "recovery_outcome": null,
+              "recovery_generation": null,
+              "diagnosis_state": null,
+              "diagnosis_reason": null,
+              "terminal_status": null,
+              "elapsed_ms": 111.62,
+              "error": null,
+              "server_observed": {
+                "total_requests": 1,
+                "login_requests": 0,
+                "protected_get_requests": 1,
+                "protected_head_requests": 0,
+                "first_protected_status": 401,
+                "final_protected_status": 401,
+                "cookies_seen_on_protected": [
+                  ""
+                ]
+              },
+              "run_index": 1,
+              "stdout_tail": "Running\n",
+              "stderr_tail": ""
+            },
+            {
+              "status_code": 401,
+              "body_sha256": "23e37a54829820e0331c4c53da32f1ec919f4879dfe8f326a15e235df9b40c8f",
+              "body_bytes": 30,
+              "content_ok": false,
+              "reached_protected": false,
+              "arm_reported_attempts": 1,
+              "recovery_outcome": null,
+              "recovery_generation": null,
+              "diagnosis_state": null,
+              "diagnosis_reason": null,
+              "terminal_status": null,
+              "elapsed_ms": 111.27,
+              "error": null,
+              "server_observed": {
+                "total_requests": 1,
+                "login_requests": 0,
+                "protected_get_requests": 1,
+                "protected_head_requests": 0,
+                "first_protected_status": 401,
+                "final_protected_status": 401,
+                "cookies_seen_on_protected": [
+                  ""
+                ]
+              },
+              "run_index": 2,
+              "stdout_tail": "Running\n",
+              "stderr_tail": ""
+            },
+            {
+              "status_code": 401,
+              "body_sha256": "23e37a54829820e0331c4c53da32f1ec919f4879dfe8f326a15e235df9b40c8f",
+              "body_bytes": 30,
+              "content_ok": false,
+              "reached_protected": false,
+              "arm_reported_attempts": 1,
+              "recovery_outcome": null,
+              "recovery_generation": null,
+              "diagnosis_state": null,
+              "diagnosis_reason": null,
+              "terminal_status": null,
+              "elapsed_ms": 190.89,
+              "error": null,
+              "server_observed": {
+                "total_requests": 1,
+                "login_requests": 0,
+                "protected_get_requests": 1,
+                "protected_head_requests": 0,
+                "first_protected_status": 401,
+                "final_protected_status": 401,
+                "cookies_seen_on_protected": [
+                  ""
+                ]
+              },
+              "run_index": 3,
+              "stdout_tail": "Running\n",
+              "stderr_tail": ""
+            },
+            {
+              "status_code": 401,
+              "body_sha256": "23e37a54829820e0331c4c53da32f1ec919f4879dfe8f326a15e235df9b40c8f",
+              "body_bytes": 30,
+              "content_ok": false,
+              "reached_protected": false,
+              "arm_reported_attempts": 1,
+              "recovery_outcome": null,
+              "recovery_generation": null,
+              "diagnosis_state": null,
+              "diagnosis_reason": null,
+              "terminal_status": null,
+              "elapsed_ms": 131.63,
+              "error": null,
+              "server_observed": {
+                "total_requests": 1,
+                "login_requests": 0,
+                "protected_get_requests": 1,
+                "protected_head_requests": 0,
+                "first_protected_status": 401,
+                "final_protected_status": 401,
+                "cookies_seen_on_protected": [
+                  ""
+                ]
+              },
+              "run_index": 4,
+              "stdout_tail": "Running\n",
+              "stderr_tail": ""
+            }
+          ],
+          "summary": {
+            "runs": 5,
+            "reached_protected_runs": 0,
+            "primary_success_rate": 0.0,
+            "runtime_failures": 0,
+            "server_observed_login_requests": [
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "server_observed_final_protected_status": [
+              401,
+              401,
+              401,
+              401,
+              401
+            ],
+            "server_observed_total_requests": [
+              1,
+              1,
+              1,
+              1,
+              1
+            ],
+            "server_observed_total_requests_median": 1,
+            "arm_reported_attempts_max": 1,
+            "recovery_outcomes": [],
+            "elapsed_ms_median": 120.89,
+            "elapsed_ms_p95": 190.89,
+            "elapsed_ms_runs": [
+              120.89,
+              111.62,
+              111.27,
+              190.89,
+              131.63
+            ]
+          }
+        },
+        "botasaurus-explicit": {
+          "recovery_policy": "written_in_arm_code",
+          "description": "Recovery ditulis DI DALAM arm: bila 401, arm memanggil endpoint login lalu mengulangi request. Mengukur apa yang mungkin dicapai pengguna Botasaurus dengan API publiknya \u2014 menjaga agar perbandingan ini bukan pembanding yang sengaja dibuat lemah.",
+          "runs": [
+            {
+              "status_code": 200,
+              "body_sha256": "0165ee188672c28bcef37a81dda166f7e14388ed7a7b29821d8d639d660bd276",
+              "body_bytes": 20,
+              "content_ok": true,
+              "reached_protected": true,
+              "arm_reported_attempts": 2,
+              "recovery_outcome": "recovered",
+              "recovery_generation": null,
+              "diagnosis_state": null,
+              "diagnosis_reason": null,
+              "terminal_status": null,
+              "elapsed_ms": 278.63,
+              "error": null,
+              "server_observed": {
+                "total_requests": 3,
+                "login_requests": 1,
+                "protected_get_requests": 2,
+                "protected_head_requests": 0,
+                "first_protected_status": 401,
+                "final_protected_status": 200,
+                "cookies_seen_on_protected": [
+                  "",
+                  "uwae_session=valid-token"
+                ]
+              },
+              "run_index": 0,
+              "stdout_tail": "Running\n",
+              "stderr_tail": ""
+            },
+            {
+              "status_code": 200,
+              "body_sha256": "0165ee188672c28bcef37a81dda166f7e14388ed7a7b29821d8d639d660bd276",
+              "body_bytes": 20,
+              "content_ok": true,
+              "reached_protected": true,
+              "arm_reported_attempts": 2,
+              "recovery_outcome": "recovered",
+              "recovery_generation": null,
+              "diagnosis_state": null,
+              "diagnosis_reason": null,
+              "terminal_status": null,
+              "elapsed_ms": 232.97,
+              "error": null,
+              "server_observed": {
+                "total_requests": 3,
+                "login_requests": 1,
+                "protected_get_requests": 2,
+                "protected_head_requests": 0,
+                "first_protected_status": 401,
+                "final_protected_status": 200,
+                "cookies_seen_on_protected": [
+                  "",
+                  "uwae_session=valid-token"
+                ]
+              },
+              "run_index": 1,
+              "stdout_tail": "Running\n",
+              "stderr_tail": ""
+            },
+            {
+              "status_code": 200,
+              "body_sha256": "0165ee188672c28bcef37a81dda166f7e14388ed7a7b29821d8d639d660bd276",
+              "body_bytes": 20,
+              "content_ok": true,
+              "reached_protected": true,
+              "arm_reported_attempts": 2,
+              "recovery_outcome": "recovered",
+              "recovery_generation": null,
+              "diagnosis_state": null,
+              "diagnosis_reason": null,
+              "terminal_status": null,
+              "elapsed_ms": 198.52,
+              "error": null,
+              "server_observed": {
+                "total_requests": 3,
+                "login_requests": 1,
+                "protected_get_requests": 2,
+                "protected_head_requests": 0,
+                "first_protected_status": 401,
+                "final_protected_status": 200,
+                "cookies_seen_on_protected": [
+                  "",
+                  "uwae_session=valid-token"
+                ]
+              },
+              "run_index": 2,
+              "stdout_tail": "Running\n",
+              "stderr_tail": ""
+            },
+            {
+              "status_code": 200,
+              "body_sha256": "0165ee188672c28bcef37a81dda166f7e14388ed7a7b29821d8d639d660bd276",
+              "body_bytes": 20,
+              "content_ok": true,
+              "reached_protected": true,
+              "arm_reported_attempts": 2,
+              "recovery_outcome": "recovered",
+              "recovery_generation": null,
+              "diagnosis_state": null,
+              "diagnosis_reason": null,
+              "terminal_status": null,
+              "elapsed_ms": 225.43,
+              "error": null,
+              "server_observed": {
+                "total_requests": 3,
+                "login_requests": 1,
+                "protected_get_requests": 2,
+                "protected_head_requests": 0,
+                "first_protected_status": 401,
+                "final_protected_status": 200,
+                "cookies_seen_on_protected": [
+                  "",
+                  "uwae_session=valid-token"
+                ]
+              },
+              "run_index": 3,
+              "stdout_tail": "Running\n",
+              "stderr_tail": ""
+            },
+            {
+              "status_code": 200,
+              "body_sha256": "0165ee188672c28bcef37a81dda166f7e14388ed7a7b29821d8d639d660bd276",
+              "body_bytes": 20,
+              "content_ok": true,
+              "reached_protected": true,
+              "arm_reported_attempts": 2,
+              "recovery_outcome": "recovered",
+              "recovery_generation": null,
+              "diagnosis_state": null,
+              "diagnosis_reason": null,
+              "terminal_status": null,
+              "elapsed_ms": 253.75,
+              "error": null,
+              "server_observed": {
+                "total_requests": 3,
+                "login_requests": 1,
+                "protected_get_requests": 2,
+                "protected_head_requests": 0,
+                "first_protected_status": 401,
+                "final_protected_status": 200,
+                "cookies_seen_on_protected": [
+                  "",
+                  "uwae_session=valid-token"
+                ]
+              },
+              "run_index": 4,
+              "stdout_tail": "Running\n",
+              "stderr_tail": ""
+            }
+          ],
+          "summary": {
+            "runs": 5,
+            "reached_protected_runs": 5,
+            "primary_success_rate": 1.0,
+            "runtime_failures": 0,
+            "server_observed_login_requests": [
+              1,
+              1,
+              1,
+              1,
+              1
+            ],
+            "server_observed_final_protected_status": [
+              200,
+              200,
+              200,
+              200,
+              200
+            ],
+            "server_observed_total_requests": [
+              3,
+              3,
+              3,
+              3,
+              3
+            ],
+            "server_observed_total_requests_median": 3,
+            "arm_reported_attempts_max": 2,
+            "recovery_outcomes": [
+              "recovered",
+              "recovered",
+              "recovered",
+              "recovered",
+              "recovered"
+            ],
+            "elapsed_ms_median": 232.97,
+            "elapsed_ms_p95": 278.63,
+            "elapsed_ms_runs": [
+              278.63,
+              232.97,
+              198.52,
+              225.43,
+              253.75
+            ]
+          }
+        },
+        "botasaurus-decorator-request": {
+          "recovery_policy": "written_in_arm_code",
+          "description": "Kode recovery IDENTIK dengan botasaurus-explicit, tapi memakai objek reqs yang diberikan dekorator (botasaurus_requests.request_class.Request) alih-alih Session() eksplisit. Membuktikan baseline diberi bentuk objek sesi terkuat yang Botasaurus tawarkan, dan mengisolasi perilaku cookie objek dekorator.",
+          "runs": [
+            {
+              "status_code": 401,
+              "body_sha256": "23e37a54829820e0331c4c53da32f1ec919f4879dfe8f326a15e235df9b40c8f",
+              "body_bytes": 30,
+              "content_ok": false,
+              "reached_protected": false,
+              "arm_reported_attempts": 2,
+              "recovery_outcome": "recovered",
+              "recovery_generation": null,
+              "diagnosis_state": null,
+              "diagnosis_reason": null,
+              "terminal_status": null,
+              "elapsed_ms": 217.96,
+              "error": null,
+              "server_observed": {
+                "total_requests": 3,
+                "login_requests": 1,
+                "protected_get_requests": 2,
+                "protected_head_requests": 0,
+                "first_protected_status": 401,
+                "final_protected_status": 401,
+                "cookies_seen_on_protected": [
+                  "",
+                  ""
+                ]
+              },
+              "run_index": 0,
+              "stdout_tail": "Running\n",
+              "stderr_tail": ""
+            },
+            {
+              "status_code": 401,
+              "body_sha256": "23e37a54829820e0331c4c53da32f1ec919f4879dfe8f326a15e235df9b40c8f",
+              "body_bytes": 30,
+              "content_ok": false,
+              "reached_protected": false,
+              "arm_reported_attempts": 2,
+              "recovery_outcome": "recovered",
+              "recovery_generation": null,
+              "diagnosis_state": null,
+              "diagnosis_reason": null,
+              "terminal_status": null,
+              "elapsed_ms": 212.45,
+              "error": null,
+              "server_observed": {
+                "total_requests": 3,
+                "login_requests": 1,
+                "protected_get_requests": 2,
+                "protected_head_requests": 0,
+                "first_protected_status": 401,
+                "final_protected_status": 401,
+                "cookies_seen_on_protected": [
+                  "",
+                  ""
+                ]
+              },
+              "run_index": 1,
+              "stdout_tail": "Running\n",
+              "stderr_tail": ""
+            },
+            {
+              "status_code": 401,
+              "body_sha256": "23e37a54829820e0331c4c53da32f1ec919f4879dfe8f326a15e235df9b40c8f",
+              "body_bytes": 30,
+              "content_ok": false,
+              "reached_protected": false,
+              "arm_reported_attempts": 2,
+              "recovery_outcome": "recovered",
+              "recovery_generation": null,
+              "diagnosis_state": null,
+              "diagnosis_reason": null,
+              "terminal_status": null,
+              "elapsed_ms": 246.31,
+              "error": null,
+              "server_observed": {
+                "total_requests": 3,
+                "login_requests": 1,
+                "protected_get_requests": 2,
+                "protected_head_requests": 0,
+                "first_protected_status": 401,
+                "final_protected_status": 401,
+                "cookies_seen_on_protected": [
+                  "",
+                  ""
+                ]
+              },
+              "run_index": 2,
+              "stdout_tail": "Running\n",
+              "stderr_tail": ""
+            },
+            {
+              "status_code": 401,
+              "body_sha256": "23e37a54829820e0331c4c53da32f1ec919f4879dfe8f326a15e235df9b40c8f",
+              "body_bytes": 30,
+              "content_ok": false,
+              "reached_protected": false,
+              "arm_reported_attempts": 2,
+              "recovery_outcome": "recovered",
+              "recovery_generation": null,
+              "diagnosis_state": null,
+              "diagnosis_reason": null,
+              "terminal_status": null,
+              "elapsed_ms": 232.02,
+              "error": null,
+              "server_observed": {
+                "total_requests": 3,
+                "login_requests": 1,
+                "protected_get_requests": 2,
+                "protected_head_requests": 0,
+                "first_protected_status": 401,
+                "final_protected_status": 401,
+                "cookies_seen_on_protected": [
+                  "",
+                  ""
+                ]
+              },
+              "run_index": 3,
+              "stdout_tail": "Running\n",
+              "stderr_tail": ""
+            },
+            {
+              "status_code": 401,
+              "body_sha256": "23e37a54829820e0331c4c53da32f1ec919f4879dfe8f326a15e235df9b40c8f",
+              "body_bytes": 30,
+              "content_ok": false,
+              "reached_protected": false,
+              "arm_reported_attempts": 2,
+              "recovery_outcome": "recovered",
+              "recovery_generation": null,
+              "diagnosis_state": null,
+              "diagnosis_reason": null,
+              "terminal_status": null,
+              "elapsed_ms": 184.79,
+              "error": null,
+              "server_observed": {
+                "total_requests": 3,
+                "login_requests": 1,
+                "protected_get_requests": 2,
+                "protected_head_requests": 0,
+                "first_protected_status": 401,
+                "final_protected_status": 401,
+                "cookies_seen_on_protected": [
+                  "",
+                  ""
+                ]
+              },
+              "run_index": 4,
+              "stdout_tail": "Running\n",
+              "stderr_tail": ""
+            }
+          ],
+          "summary": {
+            "runs": 5,
+            "reached_protected_runs": 0,
+            "primary_success_rate": 0.0,
+            "runtime_failures": 0,
+            "server_observed_login_requests": [
+              1,
+              1,
+              1,
+              1,
+              1
+            ],
+            "server_observed_final_protected_status": [
+              401,
+              401,
+              401,
+              401,
+              401
+            ],
+            "server_observed_total_requests": [
+              3,
+              3,
+              3,
+              3,
+              3
+            ],
+            "server_observed_total_requests_median": 3,
+            "arm_reported_attempts_max": 2,
+            "recovery_outcomes": [
+              "recovered",
+              "recovered",
+              "recovered",
+              "recovered",
+              "recovered"
+            ],
+            "elapsed_ms_median": 217.96,
+            "elapsed_ms_p95": 246.31,
+            "elapsed_ms_runs": [
+              217.96,
+              212.45,
+              246.31,
+              232.02,
+              184.79
+            ]
+          }
+        }
+      }
+    },
+    {
+      "scenario_id": "session_expired",
+      "description": "Klien memegang cookie yang MASIH SAH secara sintaksis tetapi sudah DICABUT di sisi server (rotasi token). Persis situasi 'sesi kedaluwarsa tanpa klien tahu' \u2014 cookie tidak bisa dibedakan dari cookie valid oleh klien.",
+      "expects_recovery": true,
+      "ground_truth": {
+        "expect_status": 200,
+        "expect_body_sha256": "0165ee188672c28bcef37a81dda166f7e14388ed7a7b29821d8d639d660bd276",
+        "expect_body_bytes": 20,
+        "source": "semantika protokol fixture: /protected 200 hanya bila cookie sesi aktif"
+      },
+      "arms": {
+        "uwae-engine": {
+          "recovery_policy": "engine_generic",
+          "description": "Jalur produksi UWAE: JobWorker + SessionRecoveryManager + HTTPSessionRecoveryProvider. Recovery dipicu kebijakan generik planner (RECOVER_SESSION) \u2014 tidak ada kode recovery per-skenario di arm ini.",
+          "runs": [
+            {
+              "status_code": 200,
+              "body_sha256": "0165ee188672c28bcef37a81dda166f7e14388ed7a7b29821d8d639d660bd276",
+              "body_bytes": 20,
+              "content_ok": true,
+              "reached_protected": true,
+              "arm_reported_attempts": 2,
+              "recovery_outcome": "recovered",
+              "recovery_generation": 2,
+              "diagnosis_state": "access_granted",
+              "diagnosis_reason": "ok",
+              "terminal_status": "succeeded",
+              "elapsed_ms": 1900.5,
+              "error": null,
+              "server_observed": {
+                "total_requests": 5,
+                "login_requests": 1,
+                "protected_get_requests": 4,
+                "protected_head_requests": 0,
+                "first_protected_status": 401,
+                "final_protected_status": 200,
+                "cookies_seen_on_protected": [
+                  "uwae_session=valid-token",
+                  "uwae_session=valid-token",
+                  "uwae_session=valid-token-v2",
+                  "uwae_session=valid-token-v2"
+                ]
+              },
+              "run_index": 0,
+              "stdout_tail": "",
+              "stderr_tail": ""
+            },
+            {
+              "status_code": 200,
+              "body_sha256": "0165ee188672c28bcef37a81dda166f7e14388ed7a7b29821d8d639d660bd276",
+              "body_bytes": 20,
+              "content_ok": true,
+              "reached_protected": true,
+              "arm_reported_attempts": 2,
+              "recovery_outcome": "recovered",
+              "recovery_generation": 2,
+              "diagnosis_state": "access_granted",
+              "diagnosis_reason": "ok",
+              "terminal_status": "succeeded",
+              "elapsed_ms": 1747.34,
+              "error": null,
+              "server_observed": {
+                "total_requests": 5,
+                "login_requests": 1,
+                "protected_get_requests": 4,
+                "protected_head_requests": 0,
+                "first_protected_status": 401,
+                "final_protected_status": 200,
+                "cookies_seen_on_protected": [
+                  "uwae_session=valid-token",
+                  "uwae_session=valid-token",
+                  "uwae_session=valid-token-v2",
+                  "uwae_session=valid-token-v2"
+                ]
+              },
+              "run_index": 1,
+              "stdout_tail": "",
+              "stderr_tail": ""
+            },
+            {
+              "status_code": 200,
+              "body_sha256": "0165ee188672c28bcef37a81dda166f7e14388ed7a7b29821d8d639d660bd276",
+              "body_bytes": 20,
+              "content_ok": true,
+              "reached_protected": true,
+              "arm_reported_attempts": 2,
+              "recovery_outcome": "recovered",
+              "recovery_generation": 2,
+              "diagnosis_state": "access_granted",
+              "diagnosis_reason": "ok",
+              "terminal_status": "succeeded",
+              "elapsed_ms": 1615.07,
+              "error": null,
+              "server_observed": {
+                "total_requests": 5,
+                "login_requests": 1,
+                "protected_get_requests": 4,
+                "protected_head_requests": 0,
+                "first_protected_status": 401,
+                "final_protected_status": 200,
+                "cookies_seen_on_protected": [
+                  "uwae_session=valid-token",
+                  "uwae_session=valid-token",
+                  "uwae_session=valid-token-v2",
+                  "uwae_session=valid-token-v2"
+                ]
+              },
+              "run_index": 2,
+              "stdout_tail": "",
+              "stderr_tail": ""
+            },
+            {
+              "status_code": 200,
+              "body_sha256": "0165ee188672c28bcef37a81dda166f7e14388ed7a7b29821d8d639d660bd276",
+              "body_bytes": 20,
+              "content_ok": true,
+              "reached_protected": true,
+              "arm_reported_attempts": 2,
+              "recovery_outcome": "recovered",
+              "recovery_generation": 2,
+              "diagnosis_state": "access_granted",
+              "diagnosis_reason": "ok",
+              "terminal_status": "succeeded",
+              "elapsed_ms": 1588.89,
+              "error": null,
+              "server_observed": {
+                "total_requests": 5,
+                "login_requests": 1,
+                "protected_get_requests": 4,
+                "protected_head_requests": 0,
+                "first_protected_status": 401,
+                "final_protected_status": 200,
+                "cookies_seen_on_protected": [
+                  "uwae_session=valid-token",
+                  "uwae_session=valid-token",
+                  "uwae_session=valid-token-v2",
+                  "uwae_session=valid-token-v2"
+                ]
+              },
+              "run_index": 3,
+              "stdout_tail": "",
+              "stderr_tail": ""
+            },
+            {
+              "status_code": 200,
+              "body_sha256": "0165ee188672c28bcef37a81dda166f7e14388ed7a7b29821d8d639d660bd276",
+              "body_bytes": 20,
+              "content_ok": true,
+              "reached_protected": true,
+              "arm_reported_attempts": 2,
+              "recovery_outcome": "recovered",
+              "recovery_generation": 2,
+              "diagnosis_state": "access_granted",
+              "diagnosis_reason": "ok",
+              "terminal_status": "succeeded",
+              "elapsed_ms": 1961.71,
+              "error": null,
+              "server_observed": {
+                "total_requests": 5,
+                "login_requests": 1,
+                "protected_get_requests": 4,
+                "protected_head_requests": 0,
+                "first_protected_status": 401,
+                "final_protected_status": 200,
+                "cookies_seen_on_protected": [
+                  "uwae_session=valid-token",
+                  "uwae_session=valid-token",
+                  "uwae_session=valid-token-v2",
+                  "uwae_session=valid-token-v2"
+                ]
+              },
+              "run_index": 4,
+              "stdout_tail": "",
+              "stderr_tail": ""
+            }
+          ],
+          "summary": {
+            "runs": 5,
+            "reached_protected_runs": 5,
+            "primary_success_rate": 1.0,
+            "runtime_failures": 0,
+            "server_observed_login_requests": [
+              1,
+              1,
+              1,
+              1,
+              1
+            ],
+            "server_observed_final_protected_status": [
+              200,
+              200,
+              200,
+              200,
+              200
+            ],
+            "server_observed_total_requests": [
+              5,
+              5,
+              5,
+              5,
+              5
+            ],
+            "server_observed_total_requests_median": 5,
+            "arm_reported_attempts_max": 2,
+            "recovery_outcomes": [
+              "recovered",
+              "recovered",
+              "recovered",
+              "recovered",
+              "recovered"
+            ],
+            "elapsed_ms_median": 1747.34,
+            "elapsed_ms_p95": 1961.71,
+            "elapsed_ms_runs": [
+              1900.5,
+              1747.34,
+              1615.07,
+              1588.89,
+              1961.71
+            ]
+          }
+        },
+        "botasaurus-auto": {
+          "recovery_policy": "none",
+          "description": "Satu request lewat @request (API publik Botasaurus) tanpa kode recovery. Mengukur kapabilitas generik API publik, bukan versi yang sengaja dirusak.",
+          "runs": [
+            {
+              "status_code": 401,
+              "body_sha256": "23e37a54829820e0331c4c53da32f1ec919f4879dfe8f326a15e235df9b40c8f",
+              "body_bytes": 30,
+              "content_ok": false,
+              "reached_protected": false,
+              "arm_reported_attempts": 1,
+              "recovery_outcome": null,
+              "recovery_generation": null,
+              "diagnosis_state": null,
+              "diagnosis_reason": null,
+              "terminal_status": null,
+              "elapsed_ms": 144.79,
+              "error": null,
+              "server_observed": {
+                "total_requests": 1,
+                "login_requests": 0,
+                "protected_get_requests": 1,
+                "protected_head_requests": 0,
+                "first_protected_status": 401,
+                "final_protected_status": 401,
+                "cookies_seen_on_protected": [
+                  "uwae_session=valid-token"
+                ]
+              },
+              "run_index": 0,
+              "stdout_tail": "Running\n",
+              "stderr_tail": ""
+            },
+            {
+              "status_code": 401,
+              "body_sha256": "23e37a54829820e0331c4c53da32f1ec919f4879dfe8f326a15e235df9b40c8f",
+              "body_bytes": 30,
+              "content_ok": false,
+              "reached_protected": false,
+              "arm_reported_attempts": 1,
+              "recovery_outcome": null,
+              "recovery_generation": null,
+              "diagnosis_state": null,
+              "diagnosis_reason": null,
+              "terminal_status": null,
+              "elapsed_ms": 170.6,
+              "error": null,
+              "server_observed": {
+                "total_requests": 1,
+                "login_requests": 0,
+                "protected_get_requests": 1,
+                "protected_head_requests": 0,
+                "first_protected_status": 401,
+                "final_protected_status": 401,
+                "cookies_seen_on_protected": [
+                  "uwae_session=valid-token"
+                ]
+              },
+              "run_index": 1,
+              "stdout_tail": "Running\n",
+              "stderr_tail": ""
+            },
+            {
+              "status_code": 401,
+              "body_sha256": "23e37a54829820e0331c4c53da32f1ec919f4879dfe8f326a15e235df9b40c8f",
+              "body_bytes": 30,
+              "content_ok": false,
+              "reached_protected": false,
+              "arm_reported_attempts": 1,
+              "recovery_outcome": null,
+              "recovery_generation": null,
+              "diagnosis_state": null,
+              "diagnosis_reason": null,
+              "terminal_status": null,
+              "elapsed_ms": 109.0,
+              "error": null,
+              "server_observed": {
+                "total_requests": 1,
+                "login_requests": 0,
+                "protected_get_requests": 1,
+                "protected_head_requests": 0,
+                "first_protected_status": 401,
+                "final_protected_status": 401,
+                "cookies_seen_on_protected": [
+                  "uwae_session=valid-token"
+                ]
+              },
+              "run_index": 2,
+              "stdout_tail": "Running\n",
+              "stderr_tail": ""
+            },
+            {
+              "status_code": 401,
+              "body_sha256": "23e37a54829820e0331c4c53da32f1ec919f4879dfe8f326a15e235df9b40c8f",
+              "body_bytes": 30,
+              "content_ok": false,
+              "reached_protected": false,
+              "arm_reported_attempts": 1,
+              "recovery_outcome": null,
+              "recovery_generation": null,
+              "diagnosis_state": null,
+              "diagnosis_reason": null,
+              "terminal_status": null,
+              "elapsed_ms": 135.58,
+              "error": null,
+              "server_observed": {
+                "total_requests": 1,
+                "login_requests": 0,
+                "protected_get_requests": 1,
+                "protected_head_requests": 0,
+                "first_protected_status": 401,
+                "final_protected_status": 401,
+                "cookies_seen_on_protected": [
+                  "uwae_session=valid-token"
+                ]
+              },
+              "run_index": 3,
+              "stdout_tail": "Running\n",
+              "stderr_tail": ""
+            },
+            {
+              "status_code": 401,
+              "body_sha256": "23e37a54829820e0331c4c53da32f1ec919f4879dfe8f326a15e235df9b40c8f",
+              "body_bytes": 30,
+              "content_ok": false,
+              "reached_protected": false,
+              "arm_reported_attempts": 1,
+              "recovery_outcome": null,
+              "recovery_generation": null,
+              "diagnosis_state": null,
+              "diagnosis_reason": null,
+              "terminal_status": null,
+              "elapsed_ms": 82.58,
+              "error": null,
+              "server_observed": {
+                "total_requests": 1,
+                "login_requests": 0,
+                "protected_get_requests": 1,
+                "protected_head_requests": 0,
+                "first_protected_status": 401,
+                "final_protected_status": 401,
+                "cookies_seen_on_protected": [
+                  "uwae_session=valid-token"
+                ]
+              },
+              "run_index": 4,
+              "stdout_tail": "Running\n",
+              "stderr_tail": ""
+            }
+          ],
+          "summary": {
+            "runs": 5,
+            "reached_protected_runs": 0,
+            "primary_success_rate": 0.0,
+            "runtime_failures": 0,
+            "server_observed_login_requests": [
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "server_observed_final_protected_status": [
+              401,
+              401,
+              401,
+              401,
+              401
+            ],
+            "server_observed_total_requests": [
+              1,
+              1,
+              1,
+              1,
+              1
+            ],
+            "server_observed_total_requests_median": 1,
+            "arm_reported_attempts_max": 1,
+            "recovery_outcomes": [],
+            "elapsed_ms_median": 135.58,
+            "elapsed_ms_p95": 170.6,
+            "elapsed_ms_runs": [
+              144.79,
+              170.6,
+              109.0,
+              135.58,
+              82.58
+            ]
+          }
+        },
+        "botasaurus-explicit": {
+          "recovery_policy": "written_in_arm_code",
+          "description": "Recovery ditulis DI DALAM arm: bila 401, arm memanggil endpoint login lalu mengulangi request. Mengukur apa yang mungkin dicapai pengguna Botasaurus dengan API publiknya \u2014 menjaga agar perbandingan ini bukan pembanding yang sengaja dibuat lemah.",
+          "runs": [
+            {
+              "status_code": 200,
+              "body_sha256": "0165ee188672c28bcef37a81dda166f7e14388ed7a7b29821d8d639d660bd276",
+              "body_bytes": 20,
+              "content_ok": true,
+              "reached_protected": true,
+              "arm_reported_attempts": 2,
+              "recovery_outcome": "recovered",
+              "recovery_generation": null,
+              "diagnosis_state": null,
+              "diagnosis_reason": null,
+              "terminal_status": null,
+              "elapsed_ms": 132.32,
+              "error": null,
+              "server_observed": {
+                "total_requests": 3,
+                "login_requests": 1,
+                "protected_get_requests": 2,
+                "protected_head_requests": 0,
+                "first_protected_status": 401,
+                "final_protected_status": 200,
+                "cookies_seen_on_protected": [
+                  "uwae_session=valid-token",
+                  "uwae_session=valid-token-v2"
+                ]
+              },
+              "run_index": 0,
+              "stdout_tail": "Running\n",
+              "stderr_tail": ""
+            },
+            {
+              "status_code": 200,
+              "body_sha256": "0165ee188672c28bcef37a81dda166f7e14388ed7a7b29821d8d639d660bd276",
+              "body_bytes": 20,
+              "content_ok": true,
+              "reached_protected": true,
+              "arm_reported_attempts": 2,
+              "recovery_outcome": "recovered",
+              "recovery_generation": null,
+              "diagnosis_state": null,
+              "diagnosis_reason": null,
+              "terminal_status": null,
+              "elapsed_ms": 180.82,
+              "error": null,
+              "server_observed": {
+                "total_requests": 3,
+                "login_requests": 1,
+                "protected_get_requests": 2,
+                "protected_head_requests": 0,
+                "first_protected_status": 401,
+                "final_protected_status": 200,
+                "cookies_seen_on_protected": [
+                  "uwae_session=valid-token",
+                  "uwae_session=valid-token-v2"
+                ]
+              },
+              "run_index": 1,
+              "stdout_tail": "Running\n",
+              "stderr_tail": ""
+            },
+            {
+              "status_code": 200,
+              "body_sha256": "0165ee188672c28bcef37a81dda166f7e14388ed7a7b29821d8d639d660bd276",
+              "body_bytes": 20,
+              "content_ok": true,
+              "reached_protected": true,
+              "arm_reported_attempts": 2,
+              "recovery_outcome": "recovered",
+              "recovery_generation": null,
+              "diagnosis_state": null,
+              "diagnosis_reason": null,
+              "terminal_status": null,
+              "elapsed_ms": 134.64,
+              "error": null,
+              "server_observed": {
+                "total_requests": 3,
+                "login_requests": 1,
+                "protected_get_requests": 2,
+                "protected_head_requests": 0,
+                "first_protected_status": 401,
+                "final_protected_status": 200,
+                "cookies_seen_on_protected": [
+                  "uwae_session=valid-token",
+                  "uwae_session=valid-token-v2"
+                ]
+              },
+              "run_index": 2,
+              "stdout_tail": "Running\n",
+              "stderr_tail": ""
+            },
+            {
+              "status_code": 200,
+              "body_sha256": "0165ee188672c28bcef37a81dda166f7e14388ed7a7b29821d8d639d660bd276",
+              "body_bytes": 20,
+              "content_ok": true,
+              "reached_protected": true,
+              "arm_reported_attempts": 2,
+              "recovery_outcome": "recovered",
+              "recovery_generation": null,
+              "diagnosis_state": null,
+              "diagnosis_reason": null,
+              "terminal_status": null,
+              "elapsed_ms": 171.46,
+              "error": null,
+              "server_observed": {
+                "total_requests": 3,
+                "login_requests": 1,
+                "protected_get_requests": 2,
+                "protected_head_requests": 0,
+                "first_protected_status": 401,
+                "final_protected_status": 200,
+                "cookies_seen_on_protected": [
+                  "uwae_session=valid-token",
+                  "uwae_session=valid-token-v2"
+                ]
+              },
+              "run_index": 3,
+              "stdout_tail": "Running\n",
+              "stderr_tail": ""
+            },
+            {
+              "status_code": 200,
+              "body_sha256": "0165ee188672c28bcef37a81dda166f7e14388ed7a7b29821d8d639d660bd276",
+              "body_bytes": 20,
+              "content_ok": true,
+              "reached_protected": true,
+              "arm_reported_attempts": 2,
+              "recovery_outcome": "recovered",
+              "recovery_generation": null,
+              "diagnosis_state": null,
+              "diagnosis_reason": null,
+              "terminal_status": null,
+              "elapsed_ms": 147.61,
+              "error": null,
+              "server_observed": {
+                "total_requests": 3,
+                "login_requests": 1,
+                "protected_get_requests": 2,
+                "protected_head_requests": 0,
+                "first_protected_status": 401,
+                "final_protected_status": 200,
+                "cookies_seen_on_protected": [
+                  "uwae_session=valid-token",
+                  "uwae_session=valid-token-v2"
+                ]
+              },
+              "run_index": 4,
+              "stdout_tail": "Running\n",
+              "stderr_tail": ""
+            }
+          ],
+          "summary": {
+            "runs": 5,
+            "reached_protected_runs": 5,
+            "primary_success_rate": 1.0,
+            "runtime_failures": 0,
+            "server_observed_login_requests": [
+              1,
+              1,
+              1,
+              1,
+              1
+            ],
+            "server_observed_final_protected_status": [
+              200,
+              200,
+              200,
+              200,
+              200
+            ],
+            "server_observed_total_requests": [
+              3,
+              3,
+              3,
+              3,
+              3
+            ],
+            "server_observed_total_requests_median": 3,
+            "arm_reported_attempts_max": 2,
+            "recovery_outcomes": [
+              "recovered",
+              "recovered",
+              "recovered",
+              "recovered",
+              "recovered"
+            ],
+            "elapsed_ms_median": 147.61,
+            "elapsed_ms_p95": 180.82,
+            "elapsed_ms_runs": [
+              132.32,
+              180.82,
+              134.64,
+              171.46,
+              147.61
+            ]
+          }
+        },
+        "botasaurus-decorator-request": {
+          "recovery_policy": "written_in_arm_code",
+          "description": "Kode recovery IDENTIK dengan botasaurus-explicit, tapi memakai objek reqs yang diberikan dekorator (botasaurus_requests.request_class.Request) alih-alih Session() eksplisit. Membuktikan baseline diberi bentuk objek sesi terkuat yang Botasaurus tawarkan, dan mengisolasi perilaku cookie objek dekorator.",
+          "runs": [
+            {
+              "status_code": 401,
+              "body_sha256": "23e37a54829820e0331c4c53da32f1ec919f4879dfe8f326a15e235df9b40c8f",
+              "body_bytes": 30,
+              "content_ok": false,
+              "reached_protected": false,
+              "arm_reported_attempts": 2,
+              "recovery_outcome": "recovered",
+              "recovery_generation": null,
+              "diagnosis_state": null,
+              "diagnosis_reason": null,
+              "terminal_status": null,
+              "elapsed_ms": 173.92,
+              "error": null,
+              "server_observed": {
+                "total_requests": 3,
+                "login_requests": 1,
+                "protected_get_requests": 2,
+                "protected_head_requests": 0,
+                "first_protected_status": 401,
+                "final_protected_status": 401,
+                "cookies_seen_on_protected": [
+                  "uwae_session=valid-token",
+                  ""
+                ]
+              },
+              "run_index": 0,
+              "stdout_tail": "Running\n",
+              "stderr_tail": ""
+            },
+            {
+              "status_code": 401,
+              "body_sha256": "23e37a54829820e0331c4c53da32f1ec919f4879dfe8f326a15e235df9b40c8f",
+              "body_bytes": 30,
+              "content_ok": false,
+              "reached_protected": false,
+              "arm_reported_attempts": 2,
+              "recovery_outcome": "recovered",
+              "recovery_generation": null,
+              "diagnosis_state": null,
+              "diagnosis_reason": null,
+              "terminal_status": null,
+              "elapsed_ms": 167.71,
+              "error": null,
+              "server_observed": {
+                "total_requests": 3,
+                "login_requests": 1,
+                "protected_get_requests": 2,
+                "protected_head_requests": 0,
+                "first_protected_status": 401,
+                "final_protected_status": 401,
+                "cookies_seen_on_protected": [
+                  "uwae_session=valid-token",
+                  ""
+                ]
+              },
+              "run_index": 1,
+              "stdout_tail": "Running\n",
+              "stderr_tail": ""
+            },
+            {
+              "status_code": 401,
+              "body_sha256": "23e37a54829820e0331c4c53da32f1ec919f4879dfe8f326a15e235df9b40c8f",
+              "body_bytes": 30,
+              "content_ok": false,
+              "reached_protected": false,
+              "arm_reported_attempts": 2,
+              "recovery_outcome": "recovered",
+              "recovery_generation": null,
+              "diagnosis_state": null,
+              "diagnosis_reason": null,
+              "terminal_status": null,
+              "elapsed_ms": 120.42,
+              "error": null,
+              "server_observed": {
+                "total_requests": 3,
+                "login_requests": 1,
+                "protected_get_requests": 2,
+                "protected_head_requests": 0,
+                "first_protected_status": 401,
+                "final_protected_status": 401,
+                "cookies_seen_on_protected": [
+                  "uwae_session=valid-token",
+                  ""
+                ]
+              },
+              "run_index": 2,
+              "stdout_tail": "Running\n",
+              "stderr_tail": ""
+            },
+            {
+              "status_code": 401,
+              "body_sha256": "23e37a54829820e0331c4c53da32f1ec919f4879dfe8f326a15e235df9b40c8f",
+              "body_bytes": 30,
+              "content_ok": false,
+              "reached_protected": false,
+              "arm_reported_attempts": 2,
+              "recovery_outcome": "recovered",
+              "recovery_generation": null,
+              "diagnosis_state": null,
+              "diagnosis_reason": null,
+              "terminal_status": null,
+              "elapsed_ms": 138.43,
+              "error": null,
+              "server_observed": {
+                "total_requests": 3,
+                "login_requests": 1,
+                "protected_get_requests": 2,
+                "protected_head_requests": 0,
+                "first_protected_status": 401,
+                "final_protected_status": 401,
+                "cookies_seen_on_protected": [
+                  "uwae_session=valid-token",
+                  ""
+                ]
+              },
+              "run_index": 3,
+              "stdout_tail": "Running\n",
+              "stderr_tail": ""
+            },
+            {
+              "status_code": 401,
+              "body_sha256": "23e37a54829820e0331c4c53da32f1ec919f4879dfe8f326a15e235df9b40c8f",
+              "body_bytes": 30,
+              "content_ok": false,
+              "reached_protected": false,
+              "arm_reported_attempts": 2,
+              "recovery_outcome": "recovered",
+              "recovery_generation": null,
+              "diagnosis_state": null,
+              "diagnosis_reason": null,
+              "terminal_status": null,
+              "elapsed_ms": 198.26,
+              "error": null,
+              "server_observed": {
+                "total_requests": 3,
+                "login_requests": 1,
+                "protected_get_requests": 2,
+                "protected_head_requests": 0,
+                "first_protected_status": 401,
+                "final_protected_status": 401,
+                "cookies_seen_on_protected": [
+                  "uwae_session=valid-token",
+                  ""
+                ]
+              },
+              "run_index": 4,
+              "stdout_tail": "Running\n",
+              "stderr_tail": ""
+            }
+          ],
+          "summary": {
+            "runs": 5,
+            "reached_protected_runs": 0,
+            "primary_success_rate": 0.0,
+            "runtime_failures": 0,
+            "server_observed_login_requests": [
+              1,
+              1,
+              1,
+              1,
+              1
+            ],
+            "server_observed_final_protected_status": [
+              401,
+              401,
+              401,
+              401,
+              401
+            ],
+            "server_observed_total_requests": [
+              3,
+              3,
+              3,
+              3,
+              3
+            ],
+            "server_observed_total_requests_median": 3,
+            "arm_reported_attempts_max": 2,
+            "recovery_outcomes": [
+              "recovered",
+              "recovered",
+              "recovered",
+              "recovered",
+              "recovered"
+            ],
+            "elapsed_ms_median": 167.71,
+            "elapsed_ms_p95": 198.26,
+            "elapsed_ms_runs": [
+              173.92,
+              167.71,
+              120.42,
+              138.43,
+              198.26
+            ]
+          }
+        }
+      }
+    }
+  ],
+  "summary": {
+    "primary_success_runs": {
+      "uwae-engine": 15,
+      "botasaurus-auto": 5,
+      "botasaurus-explicit": 15,
+      "botasaurus-decorator-request": 5
+    },
+    "of_total_runs": 15,
+    "automatic_recovery_axis": {
+      "uwae-engine": {
+        "recovery_policy": "engine_generic",
+        "reached_protected_runs": 10,
+        "of_runs": 10,
+        "rate": 1.0
+      },
+      "botasaurus-auto": {
+        "recovery_policy": "none",
+        "reached_protected_runs": 0,
+        "of_runs": 10,
+        "rate": 0.0
+      },
+      "botasaurus-explicit": {
+        "recovery_policy": "written_in_arm_code",
+        "reached_protected_runs": 10,
+        "of_runs": 10,
+        "rate": 1.0
+      },
+      "botasaurus-decorator-request": {
+        "recovery_policy": "written_in_arm_code",
+        "reached_protected_runs": 0,
+        "of_runs": 10,
+        "rate": 0.0
+      }
+    },
+    "latency": {
+      "uwae-engine": {
+        "median_ms": 1747.34,
+        "p95_ms": 2165.45
+      },
+      "botasaurus-auto": {
+        "median_ms": 132.49,
+        "p95_ms": 274.86
+      },
+      "botasaurus-explicit": {
+        "median_ms": 151.93,
+        "p95_ms": 278.63
+      },
+      "botasaurus-decorator-request": {
+        "median_ms": 167.71,
+        "p95_ms": 246.31
+      }
+    },
+    "interpretation": "E15 mengukur alur sesi lintas-implementasi pada kondisi device identik. Sumbu recovery OTOMATIS (tanpa kode per-skenario): UWAE mencapai resource terproteksi lewat kebijakan generik planner, sedangkan lengan Botasaurus yang tanpa kode recovery tidak. Sumbu alur EKSPLISIT: lengan botasaurus-explicit juga mencapai resource terproteksi bila recovery ditulis di dalam kode arm \u2014 jadi selisihnya adalah LETAK kebijakan (engine generik vs per-task), BUKAN kemampuan. Lengan botasaurus-explicit sengaja diikutsertakan agar perbandingan ini bukan pembanding yang sengaja dibuat lemah. Lengan botasaurus-decorator-request menjalankan kode recovery IDENTIK pada objek reqs bawaan dekorator, sehingga selisihnya terhadap botasaurus-explicit mengukur perilaku cookie objek dekorator Botasaurus \u2014 bukan selisih kapabilitas dan bukan cara melemahkan baseline. BUKAN klaim mengungguli Botasaurus \u2014 ini baseline yang dapat direproduksi."
+  }
+}

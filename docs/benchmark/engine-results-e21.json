@@ -1,0 +1,491 @@
+{
+  "schema_version": 1,
+  "benchmark_id": "e21-http-post-ext-differential-001",
+  "supersedes": [],
+  "timestamp": "2026-10-31T00:42:22.511637+00:00",
+  "timing": {
+    "measured_arm_execution_s_total": 13.09,
+    "measured_arm_execution_runs": 120,
+    "measured_arm_execution_note": "Jumlah waktu eksekusi lengan yang terukur, dijumlahkan dari elapsed_ms tiap run. Ini durasi kerja yang sebenarnya, dan bukan durasi satu pemanggilan harness.",
+    "measurement_window": {
+      "first_run_recorded_at": "2026-10-31T00:42:02.116538+00:00",
+      "last_run_recorded_at": "2026-10-31T00:42:22.146430+00:00",
+      "wall_clock_span_s": 20.03,
+      "note": "Rentang rekam run pertama sampai run terakhir di perangkat. Lebih besar dari durasi kerja terukur karena mencakup jeda antar-run dan jeda restart perangkat."
+    },
+    "execution_sessions": [
+      {
+        "session": 1,
+        "runs": 120,
+        "started_at": "2026-10-31T00:42:02.116538+00:00",
+        "ended_at": "2026-10-31T00:42:22.146430+00:00",
+        "wall_clock_span_s": 20.0,
+        "gap_before_s": 0.0,
+        "fixture_base_urls": [
+          "http://127.0.0.1:41039"
+        ]
+      }
+    ],
+    "interruption_gap_threshold_s": 60.0,
+    "harness_invocation": {
+      "wall_clock_s": 24.69,
+      "runs_executed_this_invocation": 120,
+      "runs_reused_from_checkpoint": 0,
+      "note": "Durasi pemanggilan harness yang menulis dokumen ini. Kalau sebagian besar run diambil dari checkpoint, angka ini TIDAK mencakup durasi eksekusi run tersebut -- makanya durasi kerja terukur dipublikasikan terpisah."
+    }
+  },
+  "checkpoint": {
+    "checkpoint_path": "/root/.qwen/tmp/e21_checkpoint.jsonl",
+    "harness_fingerprint": "e3c4c3cad0c3bcbcb29ef2388827b4492bab4c550f587d97497311827ed2c15f",
+    "runs_in_checkpoint": 120,
+    "runs_reused": 0,
+    "records_ignored": 0,
+    "runs_executed_this_invocation": 120
+  },
+  "environment": {
+    "interpreter": {
+      "executable": "/root/uwae-comparison-venv/bin/python",
+      "version": "3.14.4",
+      "platform": "Linux-6.17.0-PRoot-Distro-aarch64-with-glibc2.43",
+      "machine": "aarch64",
+      "implementation": "CPython"
+    },
+    "pythonpath": "/root/botasaurus-venv/lib/python3.14/site-packages:/root/universal-web-acquisition/src",
+    "package_versions": {
+      "botasaurus": "4.0.97",
+      "botasaurus_requests": "4.0.38",
+      "botasaurus_driver": "4.0.101",
+      "requests": "2.34.2",
+      "httpx": "0.28.1",
+      "curl_cffi": "0.17.0",
+      "joblib": "1.6.0",
+      "brotli": "1.2.0",
+      "certifi": "2026.7.22"
+    },
+    "fixture": "deterministic localhost POST-protocol fixture (fixture_post.py), port bebas per invocation",
+    "method": "30 run per (arm, skenario); kedua arm sebagai subprocess dari SATU interpreter dengan SATU PYTHONPATH melawan SATU instance fixture POST",
+    "identical_conditions": {
+      "targets": true,
+      "expected_outputs": true,
+      "device_conditions": true,
+      "run_counts": true,
+      "success_criteria": true
+    },
+    "memory_note": "peak_memory_bytes = peak alokasi Python (tracemalloc); buffer C tidak dihitung",
+    "percentile_note": "p95 nearest-rank pada n=30 memakai statistik urutan ke-29 dari 30 run (bukan maksimum) — ambang minimal 30 pengulangan TEXT.md §6.3 sudah terpenuhi, tetapi persentil hanya bermakna kalau dibaca bersama median dan seluruh waktu mentah di elapsed_ms_runs"
+  },
+  "engines": [
+    {
+      "engine_id": "uwae-engine",
+      "engine_name": "UWAE engine (JobWorker + ACP)",
+      "engine_version": "uwae-0.3.0",
+      "is_baseline": false,
+      "description": "JobWorker + transport registry (curl_cffi primary); job POST dengan body mentah + header eksplisit"
+    },
+    {
+      "engine_id": "botasaurus-request",
+      "engine_name": "Botasaurus @request (public API)",
+      "engine_version": "botasaurus 4.0.97 / botasaurus_requests 4.0.38",
+      "is_baseline": true,
+      "description": "session.post(url, data=bytes, headers=...) — body mentah dikirim apa adanya"
+    }
+  ],
+  "scenarios": [
+    {
+      "scenario_id": "p05_post_multipart",
+      "path": "/post/multipart",
+      "primary_criterion": "acquisition",
+      "ground_truth": {
+        "expect_status": 200,
+        "expect_body_sha256": "0e76f6e39507577498348b9bf1d2ec1d2ab16278c5b5e322537d6ea6a2ca9b92",
+        "expect_body_bytes": 18,
+        "expect_content_type": "multipart/form-data",
+        "expect_headers": {
+          "X-Uwae-Protocol": "p05-post-multipart",
+          "Content-Type": "multipart/form-data; boundary=----uwae-post-fixture-boundary-7d1a"
+        },
+        "expect_request_body_sha256": "1b02e36a1ed1f2aaf89817197851fbf32218c451a43957bb105fb088169f288d",
+        "expect_request_body_bytes": 321,
+        "redirect_chain": null
+      },
+      "results": {
+        "uwae-engine": {
+          "runs": 30,
+          "primary_successes": 30,
+          "primary_success_rate": 1.0,
+          "elapsed_ms_median": 158.95,
+          "elapsed_ms_p95": 183.82,
+          "elapsed_ms_min": 128.52,
+          "elapsed_ms_max": 1470.46,
+          "elapsed_ms_runs": [
+            1470.46,
+            159.12,
+            143.41,
+            181.47,
+            173.28,
+            132.55,
+            128.52,
+            182.2,
+            154.08,
+            148.25,
+            129.62,
+            165.11,
+            132.02,
+            158.79,
+            167.78,
+            128.87,
+            156.31,
+            164.88,
+            146.04,
+            138.15,
+            183.64,
+            165.28,
+            181.72,
+            143.35,
+            159.59,
+            166.17,
+            150.9,
+            144.91,
+            160.83,
+            183.82
+          ],
+          "peak_memory_bytes": null,
+          "attempts_total": 30,
+          "attempts_max": 1,
+          "acquisition_verified_runs": 30,
+          "status_match_runs": 30,
+          "body_match_runs": 30,
+          "raw_signals": [
+            "access_granted"
+          ],
+          "errors": []
+        },
+        "botasaurus-request": {
+          "runs": 30,
+          "primary_successes": 30,
+          "primary_success_rate": 1.0,
+          "elapsed_ms_median": 23.92,
+          "elapsed_ms_p95": 71.64,
+          "elapsed_ms_min": 12.4,
+          "elapsed_ms_max": 104.95,
+          "elapsed_ms_runs": [
+            104.95,
+            26.36,
+            71.64,
+            21.06,
+            28.65,
+            28.67,
+            23.62,
+            30.01,
+            20.66,
+            29.49,
+            31.0,
+            18.11,
+            18.26,
+            12.4,
+            34.85,
+            17.06,
+            16.9,
+            38.24,
+            25.48,
+            28.7,
+            14.78,
+            18.2,
+            45.67,
+            18.3,
+            31.87,
+            24.22,
+            16.04,
+            15.25,
+            14.01,
+            14.79
+          ],
+          "peak_memory_bytes": 887349,
+          "attempts_total": 30,
+          "attempts_max": 1,
+          "acquisition_verified_runs": 30,
+          "status_match_runs": 30,
+          "body_match_runs": 30,
+          "raw_signals": [
+            "status 200"
+          ],
+          "errors": []
+        }
+      }
+    },
+    {
+      "scenario_id": "p06_post_redirect307",
+      "path": "/post/redirect307",
+      "primary_criterion": "acquisition",
+      "ground_truth": {
+        "expect_status": 200,
+        "expect_body_sha256": "5cdae71a6d71db52808d8b2afe918db22e0415a60ad07aab4694daaff9922145",
+        "expect_body_bytes": 24,
+        "expect_content_type": "application/x-www-form-urlencoded",
+        "expect_headers": {
+          "X-Uwae-Protocol": "p06-post-redirect307",
+          "Content-Type": "application/x-www-form-urlencoded"
+        },
+        "expect_request_body_sha256": "a741d2a48a855945d019b37e910ddb79214e84f10a9f99f08ed94ab4df917de3",
+        "expect_request_body_bytes": 19,
+        "redirect_chain": [
+          {
+            "path": "/post/redirect307",
+            "status": 307
+          },
+          {
+            "path": "/post/redirect-target",
+            "status": 200
+          }
+        ]
+      },
+      "results": {
+        "uwae-engine": {
+          "runs": 30,
+          "primary_successes": 30,
+          "primary_success_rate": 1.0,
+          "elapsed_ms_median": 158.89,
+          "elapsed_ms_p95": 228.33,
+          "elapsed_ms_min": 126.21,
+          "elapsed_ms_max": 300.36,
+          "elapsed_ms_runs": [
+            153.06,
+            165.34,
+            162.49,
+            146.8,
+            126.21,
+            182.22,
+            147.67,
+            157.45,
+            152.36,
+            154.97,
+            141.32,
+            137.39,
+            148.5,
+            205.23,
+            228.33,
+            189.9,
+            160.34,
+            200.99,
+            205.97,
+            300.36,
+            163.01,
+            146.27,
+            136.62,
+            170.93,
+            216.97,
+            150.66,
+            141.46,
+            193.68,
+            206.17,
+            126.86
+          ],
+          "peak_memory_bytes": null,
+          "attempts_total": 30,
+          "attempts_max": 1,
+          "acquisition_verified_runs": 30,
+          "status_match_runs": 30,
+          "body_match_runs": 30,
+          "raw_signals": [
+            "access_granted"
+          ],
+          "errors": []
+        },
+        "botasaurus-request": {
+          "runs": 30,
+          "primary_successes": 30,
+          "primary_success_rate": 1.0,
+          "elapsed_ms_median": 34.84,
+          "elapsed_ms_p95": 63.37,
+          "elapsed_ms_min": 18.72,
+          "elapsed_ms_max": 67.56,
+          "elapsed_ms_runs": [
+            47.09,
+            35.03,
+            37.74,
+            37.36,
+            22.21,
+            26.96,
+            30.45,
+            63.37,
+            52.67,
+            25.53,
+            45.4,
+            31.53,
+            67.56,
+            21.52,
+            31.1,
+            21.94,
+            49.63,
+            25.66,
+            62.19,
+            22.05,
+            54.99,
+            25.78,
+            50.31,
+            54.91,
+            26.69,
+            35.65,
+            18.72,
+            34.66,
+            24.83,
+            46.13
+          ],
+          "peak_memory_bytes": 1294155,
+          "attempts_total": 30,
+          "attempts_max": 1,
+          "acquisition_verified_runs": 30,
+          "status_match_runs": 30,
+          "body_match_runs": 30,
+          "raw_signals": [
+            "status 200"
+          ],
+          "errors": []
+        }
+      }
+    }
+  ],
+  "server_side_evidence": {
+    "uwae-engine": {
+      "observations": 90,
+      "methods_observed": {
+        "POST": 90
+      },
+      "protocol_verdicts": {
+        "ok": 60,
+        "redirect_issued": 30
+      },
+      "distinct_user_agents": [
+        "UniversalWebAcquisitionEngine/0.2.0"
+      ],
+      "runs_executed": 60,
+      "runs_with_observation": 30,
+      "runs_without_observation": 0,
+      "runs_with_multiple_observations": 30,
+      "attribution": "Observasi server dipetakan ke run lewat jendela waktu [run_mulai, run_selesai]."
+    },
+    "botasaurus-request": {
+      "observations": 90,
+      "methods_observed": {
+        "POST": 90
+      },
+      "protocol_verdicts": {
+        "ok": 60,
+        "redirect_issued": 30
+      },
+      "distinct_user_agents": [
+        "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_2; rv:151.0.1) Gecko/20100101 Firefox/151.0.1",
+        "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_3; rv:149.0.2) Gecko/20100101 Firefox/149.0.2",
+        "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_4; rv:150.0.1) Gecko/20100101 Firefox/150.0.1",
+        "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_4; rv:151.0.4) Gecko/20100101 Firefox/151.0.4",
+        "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_5; rv:156.0.1) Gecko/20100101 Firefox/156.0.1",
+        "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_6; rv:151.0.1) Gecko/20100101 Firefox/151.0.1",
+        "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_1; rv:150.0.1) Gecko/20100101 Firefox/150.0.1",
+        "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_3; rv:153.0.1) Gecko/20100101 Firefox/153.0.1",
+        "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_3; rv:156.0.1) Gecko/20100101 Firefox/156.0.1",
+        "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_4; rv:150.0.2) Gecko/20100101 Firefox/150.0.2",
+        "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_6; rv:148.0) Gecko/20100101 Firefox/148.0",
+        "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_12_1; rv:147.0.3) Gecko/20100101 Firefox/147.0.3",
+        "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_12_1; rv:153.0) Gecko/20100101 Firefox/153.0",
+        "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_12_4; rv:150.0.1) Gecko/20100101 Firefox/150.0.1",
+        "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_12_6; rv:155.0.1) Gecko/20100101 Firefox/155.0.1",
+        "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_13_2; rv:153.0.1) Gecko/20100101 Firefox/153.0.1",
+        "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_13_3; rv:153.0.4) Gecko/20100101 Firefox/153.0.4",
+        "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_1; rv:148.0.2) Gecko/20100101 Firefox/148.0.2",
+        "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_2; rv:153.0.3) Gecko/20100101 Firefox/153.0.3",
+        "Mozilla/5.0 (Windows NT 10.0; WOW64; rv:154.0) Gecko/20100101 Firefox/154.0",
+        "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:147.0.1) Gecko/20100101 Firefox/147.0.1",
+        "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:148.0.2) Gecko/20100101 Firefox/148.0.2",
+        "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:151.0.1) Gecko/20100101 Firefox/151.0.1",
+        "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:151.0.4) Gecko/20100101 Firefox/151.0.4",
+        "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:153.0.1) Gecko/20100101 Firefox/153.0.1",
+        "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:153.0.4) Gecko/20100101 Firefox/153.0.4",
+        "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:154.0) Gecko/20100101 Firefox/154.0",
+        "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:157.0) Gecko/20100101 Firefox/157.0",
+        "Mozilla/5.0 (Windows NT 6.0; Win64; x64; rv:147.0.4) Gecko/20100101 Firefox/147.0.4",
+        "Mozilla/5.0 (Windows NT 6.0; rv:156.0.1) Gecko/20100101 Firefox/156.0.1",
+        "Mozilla/5.0 (Windows NT 6.2; WOW64; rv:155.0) Gecko/20100101 Firefox/155.0",
+        "Mozilla/5.0 (Windows NT 6.2; Win64; x64; rv:150.0.2) Gecko/20100101 Firefox/150.0.2",
+        "Mozilla/5.0 (Windows NT 6.3; rv:149.0.2) Gecko/20100101 Firefox/149.0.2",
+        "Mozilla/5.0 (X11; Linux i686 on x86_64; rv:147.0) Gecko/20100101 Firefox/147.0",
+        "Mozilla/5.0 (X11; Linux i686 on x86_64; rv:149.0) Gecko/20100101 Firefox/149.0",
+        "Mozilla/5.0 (X11; Linux i686 on x86_64; rv:150.0.1) Gecko/20100101 Firefox/150.0.1",
+        "Mozilla/5.0 (X11; Linux i686 on x86_64; rv:151.0.1) Gecko/20100101 Firefox/151.0.1",
+        "Mozilla/5.0 (X11; Linux i686 on x86_64; rv:152.0.2) Gecko/20100101 Firefox/152.0.2",
+        "Mozilla/5.0 (X11; Linux i686 on x86_64; rv:153.0) Gecko/20100101 Firefox/153.0",
+        "Mozilla/5.0 (X11; Linux i686 on x86_64; rv:153.0.4) Gecko/20100101 Firefox/153.0.4",
+        "Mozilla/5.0 (X11; Linux i686; rv:147.0.2) Gecko/20100101 Firefox/147.0.2",
+        "Mozilla/5.0 (X11; Linux i686; rv:147.0.4) Gecko/20100101 Firefox/147.0.4",
+        "Mozilla/5.0 (X11; Linux i686; rv:148.0.2) Gecko/20100101 Firefox/148.0.2",
+        "Mozilla/5.0 (X11; Linux i686; rv:151.0.1) Gecko/20100101 Firefox/151.0.1",
+        "Mozilla/5.0 (X11; Linux i686; rv:152.0.4) Gecko/20100101 Firefox/152.0.4",
+        "Mozilla/5.0 (X11; Linux i686; rv:153.0) Gecko/20100101 Firefox/153.0",
+        "Mozilla/5.0 (X11; Linux i686; rv:154.0) Gecko/20100101 Firefox/154.0",
+        "Mozilla/5.0 (X11; Linux i686; rv:156.0.1) Gecko/20100101 Firefox/156.0.1",
+        "Mozilla/5.0 (X11; Linux x86_64; rv:147.0.1) Gecko/20100101 Firefox/147.0.1",
+        "Mozilla/5.0 (X11; Linux x86_64; rv:147.0.3) Gecko/20100101 Firefox/147.0.3",
+        "Mozilla/5.0 (X11; Linux x86_64; rv:150.0) Gecko/20100101 Firefox/150.0",
+        "Mozilla/5.0 (X11; Linux x86_64; rv:151.0.4) Gecko/20100101 Firefox/151.0.4",
+        "Mozilla/5.0 (X11; Linux x86_64; rv:152.0.4) Gecko/20100101 Firefox/152.0.4",
+        "Mozilla/5.0 (X11; Linux x86_64; rv:153.0.3) Gecko/20100101 Firefox/153.0.3",
+        "Mozilla/5.0 (X11; Linux x86_64; rv:154.0) Gecko/20100101 Firefox/154.0",
+        "Mozilla/5.0 (X11; Linux x86_64; rv:154.0.1) Gecko/20100101 Firefox/154.0.1",
+        "Mozilla/5.0 (X11; Linux x86_64; rv:156.0) Gecko/20100101 Firefox/156.0"
+      ],
+      "runs_executed": 60,
+      "runs_with_observation": 30,
+      "runs_without_observation": 0,
+      "runs_with_multiple_observations": 30,
+      "attribution": "Observasi server dipetakan ke run lewat jendela waktu [run_mulai, run_selesai]."
+    },
+    "redirect_hops": {
+      "by_path": {
+        "/post/redirect307": {
+          "observations": 60,
+          "status_307": 60,
+          "status_200": 0,
+          "verdict_ok": 0
+        },
+        "/post/redirect-target": {
+          "observations": 60,
+          "status_307": 0,
+          "status_200": 60,
+          "verdict_ok": 60
+        }
+      },
+      "note": "Redirect 307 yang benar menghasilkan tepat dua observasi per run: POST /post/redirect307 (status 307, verdict redirect_issued) lalu POST /post/redirect-target (status 200, verdict ok). Kalau klien mengubah method menjadi GET setelah 307, target akan membalas 405."
+    },
+    "note": "Bukti dari log server, bukan klaim arm."
+  },
+  "declared_gaps": [
+    {
+      "scenario_id": "post_multipart_form_data",
+      "reason": "E20 hanya mengukur urlencoded/JSON/empty/octet-stream. E21 mengukur multipart/form-data byte-for-byte terhadap konstanta MULTIPART_BODY (boundary ikut diuji)."
+    },
+    {
+      "scenario_id": "post_redirect_307_preserves_method",
+      "reason": "E20 tidak punya route redirect. E21 mengukur apakah method dan body POST dipertahankan setelah redirect 307 (ground truth = respons akhir 200; observasi server membuktikan dua hop)."
+    }
+  ],
+  "unsupported_scenarios": [
+    {
+      "scenario_id": "post_browser_arm",
+      "reason": "POST pada arm browser tidak diukur di slot E21 (arm HTTP saja). Ditangani slot E22.",
+      "supported_by": [
+        "E22"
+      ]
+    }
+  ],
+  "summary": {
+    "interpretation": "Pengukuran baseline untuk ekstensi protokol POST (multipart byte-exact, redirect 307 preserve method) — BUKAN klaim mengungguli. Slot ini ada karena E20 mendeklarasikan kedua skenario ini sebagai celah terbuka.",
+    "primary_success_runs": {
+      "uwae-engine": 60,
+      "botasaurus-request": 60,
+      "total_runs_per_arm": 60
+    },
+    "runtime_failures": {
+      "uwae-engine": null,
+      "botasaurus-request": null
+    }
+  }
+}

@@ -1,0 +1,69 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Benchmark Result Schema",
+  "type": "object",
+  "properties": {
+    "schema_version": {"type": "integer"},
+    "benchmark_id": {"type": "string"},
+    "timestamp": {"type": "string", "format": "date-time"},
+    "environment": {"type": "object"},
+    "engines": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "engine_id": {"type": "string"},
+          "engine_name": {"type": "string"},
+          "engine_version": {"type": "string"},
+          "source_commit": {"type": "string"},
+          "is_baseline": {"type": "boolean"}
+        }
+      }
+    },
+    "scenario": {
+      "type": "object",
+      "properties": {
+        "scenario_id": {"type": "string"},
+        "scenario_name": {"type": "string"},
+        "category": {"type": "string"},
+        "description": {"type": "string"},
+        "ground_truth": {"type": "string"}
+      }
+    },
+    "results": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "engine_id": {"type": "string"},
+          "run_id": {"type": "string"},
+          "success": {"type": "boolean"},
+          "performance": {
+            "type": "object",
+            "properties": {
+              "elapsed_ms": {"type": "number"},
+              "peak_memory_bytes": {"type": "integer"},
+              "cpu_utilization_percent": {"type": "number"}
+            }
+          },
+          "correctness": {
+            "type": "object",
+            "properties": {
+              "verified_acquisition": {"type": "boolean"},
+              "output_fidelity_score": {"type": "number", "minimum": 0, "maximum": 1}
+            }
+          }
+        }
+      }
+    },
+    "summary": {
+      "type": "object",
+      "properties": {
+        "best_performing_engine": {"type": "string"},
+        "performance_improvement": {"type": "object"},
+        "correctness_improvement": {"type": "object"}
+      }
+    }
+  },
+  "required": ["schema_version", "benchmark_id", "timestamp", "environment", "engines", "scenario", "results", "summary"]
+}

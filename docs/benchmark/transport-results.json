@@ -1,0 +1,592 @@
+{
+  "schema_version": 1,
+  "benchmark_id": "e5-transport-differential-001",
+  "timestamp": "2026-10-20T07:10:48.672483+00:00",
+  "environment": {
+    "python": "3.14.6 (Termux, bionic)",
+    "architecture": "aarch64",
+    "platform": "PRoot-Distro on Termux Android, no root",
+    "fixture": "deterministic localhost fixture server (fixture_server.py)",
+    "method": "5 timed runs (median) + 1 tracemalloc run; fresh connection per run",
+    "schema_note": "extends result-schema.json: scenarios[] replaces single scenario object"
+  },
+  "engines": [
+    {
+      "engine_id": "httpx",
+      "engine_name": "httpx",
+      "engine_version": "0.28.1",
+      "is_baseline": false
+    },
+    {
+      "engine_id": "requests",
+      "engine_name": "requests",
+      "engine_version": "2.33.0",
+      "is_baseline": false
+    },
+    {
+      "engine_id": "curl_cffi",
+      "engine_name": "curl_cffi",
+      "engine_version": "0.16.3",
+      "is_baseline": false
+    },
+    {
+      "engine_id": "requests-botasaurus-venv",
+      "engine_name": "requests (botasaurus-venv baseline)",
+      "engine_version": "2.34.2",
+      "source_commit": "6c9260de12d71b9dc0c3b3a019d2698a9af38433",
+      "is_baseline": true
+    }
+  ],
+  "scenarios": [
+    {
+      "scenario_id": "b01_small_get",
+      "category": "B01",
+      "description": "Small HTML GET (<1KB), byte-for-byte ground truth",
+      "ground_truth": "status 200 + byte-for-byte body",
+      "results": [
+        {
+          "engine_id": "httpx",
+          "scenario_id": "b01_small_get",
+          "runs_ms": [
+            3140.65,
+            42.69,
+            30.35,
+            33.3,
+            37.85
+          ],
+          "elapsed_ms_median": 37.85,
+          "peak_memory_bytes": 156417,
+          "status_code": 200,
+          "success": true,
+          "verified_acquisition": true,
+          "output_fidelity_score": 1.0,
+          "error": null,
+          "body_bytes": 177
+        },
+        {
+          "engine_id": "requests",
+          "scenario_id": "b01_small_get",
+          "runs_ms": [
+            774.23,
+            21.14,
+            44.84,
+            31.19,
+            36.13
+          ],
+          "elapsed_ms_median": 36.13,
+          "peak_memory_bytes": 287307,
+          "status_code": 200,
+          "success": true,
+          "verified_acquisition": true,
+          "output_fidelity_score": 1.0,
+          "error": null,
+          "body_bytes": 177
+        },
+        {
+          "engine_id": "curl_cffi",
+          "scenario_id": "b01_small_get",
+          "runs_ms": [
+            794.6,
+            14.93,
+            18.82,
+            52.43,
+            23.19
+          ],
+          "elapsed_ms_median": 23.19,
+          "peak_memory_bytes": 145549,
+          "status_code": 200,
+          "success": true,
+          "verified_acquisition": true,
+          "output_fidelity_score": 1.0,
+          "error": null,
+          "body_bytes": 177
+        },
+        {
+          "engine_id": "requests-botasaurus-venv",
+          "scenario_id": "b01_small_get",
+          "runs_ms": [
+            25.91,
+            16.09,
+            33.79,
+            18.75,
+            15.36
+          ],
+          "elapsed_ms_median": 18.75,
+          "peak_memory_bytes": 152684,
+          "status_code": 200,
+          "success": true,
+          "verified_acquisition": true,
+          "output_fidelity_score": 1.0,
+          "error": null,
+          "body_bytes": 177
+        }
+      ]
+    },
+    {
+      "scenario_id": "b01_large_get",
+      "category": "B01",
+      "description": "Large GET (~1.05MB), byte-for-byte ground truth",
+      "ground_truth": "status 200 + byte-for-byte body",
+      "results": [
+        {
+          "engine_id": "httpx",
+          "scenario_id": "b01_large_get",
+          "runs_ms": [
+            59.04,
+            63.09,
+            65.72,
+            55.61,
+            54.76
+          ],
+          "elapsed_ms_median": 59.04,
+          "peak_memory_bytes": 2187593,
+          "status_code": 200,
+          "success": true,
+          "verified_acquisition": true,
+          "output_fidelity_score": 1.0,
+          "error": null,
+          "body_bytes": 1085000
+        },
+        {
+          "engine_id": "requests",
+          "scenario_id": "b01_large_get",
+          "runs_ms": [
+            62.63,
+            47.63,
+            39.65,
+            52.87,
+            54.61
+          ],
+          "elapsed_ms_median": 52.87,
+          "peak_memory_bytes": 2201304,
+          "status_code": 200,
+          "success": true,
+          "verified_acquisition": true,
+          "output_fidelity_score": 1.0,
+          "error": null,
+          "body_bytes": 1085000
+        },
+        {
+          "engine_id": "curl_cffi",
+          "scenario_id": "b01_large_get",
+          "runs_ms": [
+            28.53,
+            24.03,
+            21.42,
+            27.85,
+            31.31
+          ],
+          "elapsed_ms_median": 27.85,
+          "peak_memory_bytes": 1232326,
+          "status_code": 200,
+          "success": true,
+          "verified_acquisition": true,
+          "output_fidelity_score": 1.0,
+          "error": null,
+          "body_bytes": 1085000
+        },
+        {
+          "engine_id": "requests-botasaurus-venv",
+          "scenario_id": "b01_large_get",
+          "runs_ms": [
+            19.37,
+            22.36,
+            24.1,
+            24.53,
+            31.84
+          ],
+          "elapsed_ms_median": 24.1,
+          "peak_memory_bytes": 2200730,
+          "status_code": 200,
+          "success": true,
+          "verified_acquisition": true,
+          "output_fidelity_score": 1.0,
+          "error": null,
+          "body_bytes": 1085000
+        }
+      ]
+    },
+    {
+      "scenario_id": "b04_redirect",
+      "category": "B04",
+      "description": "3-hop redirect chain (301->302->307), final content",
+      "ground_truth": "status 200 + byte-for-byte body",
+      "results": [
+        {
+          "engine_id": "httpx",
+          "scenario_id": "b04_redirect",
+          "runs_ms": [
+            94.28,
+            99.16,
+            147.26,
+            114.86,
+            176.47
+          ],
+          "elapsed_ms_median": 114.86,
+          "peak_memory_bytes": 237421,
+          "status_code": 200,
+          "success": true,
+          "verified_acquisition": true,
+          "output_fidelity_score": 1.0,
+          "error": null,
+          "body_bytes": 17
+        },
+        {
+          "engine_id": "requests",
+          "scenario_id": "b04_redirect",
+          "runs_ms": [
+            164.0,
+            136.81,
+            106.23,
+            93.98,
+            91.19
+          ],
+          "elapsed_ms_median": 106.23,
+          "peak_memory_bytes": 312110,
+          "status_code": 200,
+          "success": true,
+          "verified_acquisition": true,
+          "output_fidelity_score": 1.0,
+          "error": null,
+          "body_bytes": 17
+        },
+        {
+          "engine_id": "curl_cffi",
+          "scenario_id": "b04_redirect",
+          "runs_ms": [
+            39.51,
+            52.78,
+            58.92,
+            47.6,
+            47.33
+          ],
+          "elapsed_ms_median": 47.6,
+          "peak_memory_bytes": 146099,
+          "status_code": 200,
+          "success": true,
+          "verified_acquisition": true,
+          "output_fidelity_score": 1.0,
+          "error": null,
+          "body_bytes": 17
+        },
+        {
+          "engine_id": "requests-botasaurus-venv",
+          "scenario_id": "b04_redirect",
+          "runs_ms": [
+            72.84,
+            94.44,
+            55.81,
+            53.98,
+            53.37
+          ],
+          "elapsed_ms_median": 55.81,
+          "peak_memory_bytes": 172062,
+          "status_code": 200,
+          "success": true,
+          "verified_acquisition": true,
+          "output_fidelity_score": 1.0,
+          "error": null,
+          "body_bytes": 17
+        }
+      ]
+    },
+    {
+      "scenario_id": "b06_gzip",
+      "category": "B06",
+      "description": "Content-Encoding: gzip, auto-decode",
+      "ground_truth": "status 200 + byte-for-byte body",
+      "results": [
+        {
+          "engine_id": "httpx",
+          "scenario_id": "b06_gzip",
+          "runs_ms": [
+            44.3,
+            45.97,
+            40.39,
+            35.32,
+            39.76
+          ],
+          "elapsed_ms_median": 40.39,
+          "peak_memory_bytes": 513106,
+          "status_code": 200,
+          "success": true,
+          "verified_acquisition": true,
+          "output_fidelity_score": 1.0,
+          "error": null,
+          "body_bytes": 177
+        },
+        {
+          "engine_id": "requests",
+          "scenario_id": "b06_gzip",
+          "runs_ms": [
+            32.77,
+            33.43,
+            24.28,
+            30.08,
+            18.5
+          ],
+          "elapsed_ms_median": 30.08,
+          "peak_memory_bytes": 582274,
+          "status_code": 200,
+          "success": true,
+          "verified_acquisition": true,
+          "output_fidelity_score": 1.0,
+          "error": null,
+          "body_bytes": 177
+        },
+        {
+          "engine_id": "curl_cffi",
+          "scenario_id": "b06_gzip",
+          "runs_ms": [
+            15.55,
+            13.37,
+            14.9,
+            16.21,
+            10.75
+          ],
+          "elapsed_ms_median": 14.9,
+          "peak_memory_bytes": 441793,
+          "status_code": 200,
+          "success": true,
+          "verified_acquisition": true,
+          "output_fidelity_score": 1.0,
+          "error": null,
+          "body_bytes": 177
+        },
+        {
+          "engine_id": "requests-botasaurus-venv",
+          "scenario_id": "b06_gzip",
+          "runs_ms": [
+            13.07,
+            11.96,
+            13.97,
+            10.89,
+            15.68
+          ],
+          "elapsed_ms_median": 13.07,
+          "peak_memory_bytes": 158101,
+          "status_code": 200,
+          "success": true,
+          "verified_acquisition": true,
+          "output_fidelity_score": 1.0,
+          "error": null,
+          "body_bytes": 177
+        }
+      ]
+    },
+    {
+      "scenario_id": "b06_brotli",
+      "category": "B06",
+      "description": "Content-Encoding: br, auto-decode",
+      "ground_truth": "status 200 + byte-for-byte body",
+      "results": [
+        {
+          "engine_id": "httpx",
+          "scenario_id": "b06_brotli",
+          "runs_ms": [
+            46.99,
+            60.59,
+            44.62,
+            38.09,
+            43.55
+          ],
+          "elapsed_ms_median": 44.62,
+          "peak_memory_bytes": 216318,
+          "status_code": 200,
+          "success": true,
+          "verified_acquisition": true,
+          "output_fidelity_score": 1.0,
+          "error": null,
+          "body_bytes": 177
+        },
+        {
+          "engine_id": "requests",
+          "scenario_id": "b06_brotli",
+          "runs_ms": [
+            21.78,
+            19.96,
+            21.74,
+            35.47,
+            20.37
+          ],
+          "elapsed_ms_median": 21.74,
+          "peak_memory_bytes": 287448,
+          "status_code": 200,
+          "success": true,
+          "verified_acquisition": true,
+          "output_fidelity_score": 1.0,
+          "error": null,
+          "body_bytes": 177
+        },
+        {
+          "engine_id": "curl_cffi",
+          "scenario_id": "b06_brotli",
+          "runs_ms": [
+            17.43,
+            13.8,
+            19.93,
+            14.43,
+            11.96
+          ],
+          "elapsed_ms_median": 14.43,
+          "peak_memory_bytes": 144901,
+          "status_code": 200,
+          "success": true,
+          "verified_acquisition": true,
+          "output_fidelity_score": 1.0,
+          "error": null,
+          "body_bytes": 177
+        },
+        {
+          "engine_id": "requests-botasaurus-venv",
+          "scenario_id": "b06_brotli",
+          "runs_ms": [
+            56.27,
+            25.98,
+            19.23,
+            17.5,
+            16.29
+          ],
+          "elapsed_ms_median": 19.23,
+          "peak_memory_bytes": 150788,
+          "status_code": 200,
+          "success": true,
+          "verified_acquisition": true,
+          "output_fidelity_score": 1.0,
+          "error": null,
+          "body_bytes": 177
+        }
+      ]
+    },
+    {
+      "scenario_id": "e02_not_found",
+      "category": "E02",
+      "description": "HTTP 404 handled: correct status, no crash",
+      "ground_truth": "status 404 + byte-for-byte body",
+      "results": [
+        {
+          "engine_id": "httpx",
+          "scenario_id": "e02_not_found",
+          "runs_ms": [
+            38.57,
+            48.59,
+            41.94,
+            42.04,
+            31.9
+          ],
+          "elapsed_ms_median": 41.94,
+          "peak_memory_bytes": 213574,
+          "status_code": 404,
+          "success": true,
+          "verified_acquisition": true,
+          "output_fidelity_score": 1.0,
+          "error": null,
+          "body_bytes": 21
+        },
+        {
+          "engine_id": "requests",
+          "scenario_id": "e02_not_found",
+          "runs_ms": [
+            29.06,
+            15.24,
+            15.75,
+            20.13,
+            14.73
+          ],
+          "elapsed_ms_median": 15.75,
+          "peak_memory_bytes": 154287,
+          "status_code": 404,
+          "success": true,
+          "verified_acquisition": true,
+          "output_fidelity_score": 1.0,
+          "error": null,
+          "body_bytes": 21
+        },
+        {
+          "engine_id": "curl_cffi",
+          "scenario_id": "e02_not_found",
+          "runs_ms": [
+            22.97,
+            20.48,
+            27.44,
+            10.77,
+            15.34
+          ],
+          "elapsed_ms_median": 20.48,
+          "peak_memory_bytes": 144753,
+          "status_code": 404,
+          "success": true,
+          "verified_acquisition": true,
+          "output_fidelity_score": 1.0,
+          "error": null,
+          "body_bytes": 21
+        },
+        {
+          "engine_id": "requests-botasaurus-venv",
+          "scenario_id": "e02_not_found",
+          "runs_ms": [
+            13.94,
+            13.26,
+            19.59,
+            13.05,
+            37.06
+          ],
+          "elapsed_ms_median": 13.94,
+          "peak_memory_bytes": 150197,
+          "status_code": 404,
+          "success": true,
+          "verified_acquisition": true,
+          "output_fidelity_score": 1.0,
+          "error": null,
+          "body_bytes": 21
+        }
+      ]
+    }
+  ],
+  "summary": {
+    "per_scenario": [
+      {
+        "scenario_id": "b01_small_get",
+        "best_engine": "requests-botasaurus-venv",
+        "best_elapsed_ms_median": 18.75,
+        "baseline_elapsed_ms_median": 18.75,
+        "baseline_vs_best_ratio": 1.0
+      },
+      {
+        "scenario_id": "b01_large_get",
+        "best_engine": "requests-botasaurus-venv",
+        "best_elapsed_ms_median": 24.1,
+        "baseline_elapsed_ms_median": 24.1,
+        "baseline_vs_best_ratio": 1.0
+      },
+      {
+        "scenario_id": "b04_redirect",
+        "best_engine": "curl_cffi",
+        "best_elapsed_ms_median": 47.6,
+        "baseline_elapsed_ms_median": 55.81,
+        "baseline_vs_best_ratio": 1.17
+      },
+      {
+        "scenario_id": "b06_gzip",
+        "best_engine": "requests-botasaurus-venv",
+        "best_elapsed_ms_median": 13.07,
+        "baseline_elapsed_ms_median": 13.07,
+        "baseline_vs_best_ratio": 1.0
+      },
+      {
+        "scenario_id": "b06_brotli",
+        "best_engine": "curl_cffi",
+        "best_elapsed_ms_median": 14.43,
+        "baseline_elapsed_ms_median": 19.23,
+        "baseline_vs_best_ratio": 1.33
+      },
+      {
+        "scenario_id": "e02_not_found",
+        "best_engine": "requests-botasaurus-venv",
+        "best_elapsed_ms_median": 13.94,
+        "baseline_elapsed_ms_median": 13.94,
+        "baseline_vs_best_ratio": 1.0
+      }
+    ]
+  }
+}

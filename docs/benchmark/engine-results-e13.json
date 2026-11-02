@@ -1,0 +1,413 @@
+{
+  "schema_version": 1,
+  "benchmark_id": "e5-failure-isolation-001",
+  "timestamp": "2026-10-26T13:14:50.455681+00:00",
+  "environment": {
+    "python": "3.14.6 (Termux, bionic)",
+    "architecture": "aarch64",
+    "platform": "PRoot-Distro on Termux Android, no root",
+    "fixture": "deterministic localhost fixture server (fixture_server.py)",
+    "runner": "ConcurrentJobRunner (uwae crawl --concurrency N)",
+    "n_threads": 4,
+    "healthy_jobs_per_batch": 11,
+    "client_timeout_seconds": 2.0,
+    "retry_policy": "max_retries=1, base_backoff=0.05s"
+  },
+  "ground_truth": {
+    "healthy_only": {
+      "faulted_status": null,
+      "faulted_error_contains": null,
+      "faulted_assessment_reason_code": null,
+      "healthy_status": "succeeded"
+    },
+    "timeout_fault": {
+      "faulted_status": "failed",
+      "faulted_error_contains": null,
+      "faulted_assessment_reason_code": "timeout",
+      "healthy_status": "succeeded"
+    },
+    "permanent_error_fault": {
+      "faulted_status": "failed",
+      "faulted_error_contains": null,
+      "faulted_assessment_reason_code": "http_4xx",
+      "healthy_status": "succeeded"
+    },
+    "unexpected_exception_fault": {
+      "faulted_status": "failed",
+      "faulted_error_contains": "internal_error",
+      "faulted_assessment_reason_code": null,
+      "healthy_status": "succeeded"
+    }
+  },
+  "runs": [
+    {
+      "scenario": "healthy_only",
+      "total_jobs": 11,
+      "healthy_jobs": 11,
+      "returned_results": 11,
+      "batch_raised": null,
+      "batch_elapsed_ms": 2582.6,
+      "n_threads": 4,
+      "client_timeout_seconds": 2.0,
+      "healthy_all_succeeded": true,
+      "faulted_status": null,
+      "faulted_error": null,
+      "faulted_assessment_reason_codes": [],
+      "results_complete": true,
+      "matches_ground_truth": true,
+      "per_job": [
+        {
+          "job_id": "e5-healthy_only-ok-00",
+          "role": "healthy",
+          "status": "succeeded",
+          "error": null
+        },
+        {
+          "job_id": "e5-healthy_only-ok-01",
+          "role": "healthy",
+          "status": "succeeded",
+          "error": null
+        },
+        {
+          "job_id": "e5-healthy_only-ok-02",
+          "role": "healthy",
+          "status": "succeeded",
+          "error": null
+        },
+        {
+          "job_id": "e5-healthy_only-ok-03",
+          "role": "healthy",
+          "status": "succeeded",
+          "error": null
+        },
+        {
+          "job_id": "e5-healthy_only-ok-04",
+          "role": "healthy",
+          "status": "succeeded",
+          "error": null
+        },
+        {
+          "job_id": "e5-healthy_only-ok-05",
+          "role": "healthy",
+          "status": "succeeded",
+          "error": null
+        },
+        {
+          "job_id": "e5-healthy_only-ok-06",
+          "role": "healthy",
+          "status": "succeeded",
+          "error": null
+        },
+        {
+          "job_id": "e5-healthy_only-ok-07",
+          "role": "healthy",
+          "status": "succeeded",
+          "error": null
+        },
+        {
+          "job_id": "e5-healthy_only-ok-08",
+          "role": "healthy",
+          "status": "succeeded",
+          "error": null
+        },
+        {
+          "job_id": "e5-healthy_only-ok-09",
+          "role": "healthy",
+          "status": "succeeded",
+          "error": null
+        },
+        {
+          "job_id": "e5-healthy_only-ok-10",
+          "role": "healthy",
+          "status": "succeeded",
+          "error": null
+        }
+      ]
+    },
+    {
+      "scenario": "timeout_fault",
+      "total_jobs": 12,
+      "healthy_jobs": 11,
+      "returned_results": 12,
+      "batch_raised": null,
+      "batch_elapsed_ms": 8947.59,
+      "n_threads": 4,
+      "client_timeout_seconds": 2.0,
+      "healthy_all_succeeded": true,
+      "faulted_status": "failed",
+      "faulted_error": "budget_exhausted: Timeout: Failed to perform, curl: (28) Operation timed out after 2003 milliseconds with 0 bytes received. See https://curl.se/libcurl/c/libcurl-errors.html first for more details. (attempt 3)",
+      "faulted_assessment_reason_codes": [
+        "timeout",
+        "timeout",
+        "timeout"
+      ],
+      "results_complete": true,
+      "matches_ground_truth": true,
+      "per_job": [
+        {
+          "job_id": "e5-timeout_fault-ok-00",
+          "role": "healthy",
+          "status": "succeeded",
+          "error": null
+        },
+        {
+          "job_id": "e5-timeout_fault-ok-01",
+          "role": "healthy",
+          "status": "succeeded",
+          "error": null
+        },
+        {
+          "job_id": "e5-timeout_fault-ok-02",
+          "role": "healthy",
+          "status": "succeeded",
+          "error": null
+        },
+        {
+          "job_id": "e5-timeout_fault-ok-03",
+          "role": "healthy",
+          "status": "succeeded",
+          "error": null
+        },
+        {
+          "job_id": "e5-timeout_fault-ok-04",
+          "role": "healthy",
+          "status": "succeeded",
+          "error": null
+        },
+        {
+          "job_id": "e5-timeout_fault-ok-05",
+          "role": "healthy",
+          "status": "succeeded",
+          "error": null
+        },
+        {
+          "job_id": "e5-timeout_fault-ok-06",
+          "role": "healthy",
+          "status": "succeeded",
+          "error": null
+        },
+        {
+          "job_id": "e5-timeout_fault-ok-07",
+          "role": "healthy",
+          "status": "succeeded",
+          "error": null
+        },
+        {
+          "job_id": "e5-timeout_fault-ok-08",
+          "role": "healthy",
+          "status": "succeeded",
+          "error": null
+        },
+        {
+          "job_id": "e5-timeout_fault-ok-09",
+          "role": "healthy",
+          "status": "succeeded",
+          "error": null
+        },
+        {
+          "job_id": "e5-timeout_fault-ok-10",
+          "role": "healthy",
+          "status": "succeeded",
+          "error": null
+        },
+        {
+          "job_id": "e5-timeout_fault-fault",
+          "role": "faulted",
+          "status": "failed",
+          "error": "budget_exhausted: Timeout: Failed to perform, curl: (28) Operation timed out after 2003 milliseconds with 0 bytes received. See https://curl.se/libcurl/c/libcurl-errors.html first for more details. (attempt 3)"
+        }
+      ]
+    },
+    {
+      "scenario": "permanent_error_fault",
+      "total_jobs": 12,
+      "healthy_jobs": 11,
+      "returned_results": 12,
+      "batch_raised": null,
+      "batch_elapsed_ms": 2909.75,
+      "n_threads": 4,
+      "client_timeout_seconds": 2.0,
+      "healthy_all_succeeded": true,
+      "faulted_status": "failed",
+      "faulted_error": "http_4xx: HTTP 404 untuk http://127.0.0.1:8781/missing (attempt 3)",
+      "faulted_assessment_reason_codes": [
+        "http_4xx",
+        "http_4xx",
+        "http_4xx"
+      ],
+      "results_complete": true,
+      "matches_ground_truth": true,
+      "per_job": [
+        {
+          "job_id": "e5-permanent_error_fault-ok-00",
+          "role": "healthy",
+          "status": "succeeded",
+          "error": null
+        },
+        {
+          "job_id": "e5-permanent_error_fault-ok-01",
+          "role": "healthy",
+          "status": "succeeded",
+          "error": null
+        },
+        {
+          "job_id": "e5-permanent_error_fault-ok-02",
+          "role": "healthy",
+          "status": "succeeded",
+          "error": null
+        },
+        {
+          "job_id": "e5-permanent_error_fault-ok-03",
+          "role": "healthy",
+          "status": "succeeded",
+          "error": null
+        },
+        {
+          "job_id": "e5-permanent_error_fault-ok-04",
+          "role": "healthy",
+          "status": "succeeded",
+          "error": null
+        },
+        {
+          "job_id": "e5-permanent_error_fault-ok-05",
+          "role": "healthy",
+          "status": "succeeded",
+          "error": null
+        },
+        {
+          "job_id": "e5-permanent_error_fault-ok-06",
+          "role": "healthy",
+          "status": "succeeded",
+          "error": null
+        },
+        {
+          "job_id": "e5-permanent_error_fault-ok-07",
+          "role": "healthy",
+          "status": "succeeded",
+          "error": null
+        },
+        {
+          "job_id": "e5-permanent_error_fault-ok-08",
+          "role": "healthy",
+          "status": "succeeded",
+          "error": null
+        },
+        {
+          "job_id": "e5-permanent_error_fault-ok-09",
+          "role": "healthy",
+          "status": "succeeded",
+          "error": null
+        },
+        {
+          "job_id": "e5-permanent_error_fault-ok-10",
+          "role": "healthy",
+          "status": "succeeded",
+          "error": null
+        },
+        {
+          "job_id": "e5-permanent_error_fault-fault",
+          "role": "faulted",
+          "status": "failed",
+          "error": "http_4xx: HTTP 404 untuk http://127.0.0.1:8781/missing (attempt 3)"
+        }
+      ]
+    },
+    {
+      "scenario": "unexpected_exception_fault",
+      "total_jobs": 12,
+      "healthy_jobs": 11,
+      "returned_results": 12,
+      "batch_raised": null,
+      "batch_elapsed_ms": 2381.53,
+      "n_threads": 4,
+      "client_timeout_seconds": 2.0,
+      "healthy_all_succeeded": true,
+      "faulted_status": "failed",
+      "faulted_error": "internal_error: RuntimeError: injected non-transport failure (simulasi DB error)",
+      "faulted_assessment_reason_codes": [],
+      "results_complete": true,
+      "matches_ground_truth": true,
+      "per_job": [
+        {
+          "job_id": "e5-unexpected_exception_fault-ok-00",
+          "role": "healthy",
+          "status": "succeeded",
+          "error": null
+        },
+        {
+          "job_id": "e5-unexpected_exception_fault-ok-01",
+          "role": "healthy",
+          "status": "succeeded",
+          "error": null
+        },
+        {
+          "job_id": "e5-unexpected_exception_fault-ok-02",
+          "role": "healthy",
+          "status": "succeeded",
+          "error": null
+        },
+        {
+          "job_id": "e5-unexpected_exception_fault-ok-03",
+          "role": "healthy",
+          "status": "succeeded",
+          "error": null
+        },
+        {
+          "job_id": "e5-unexpected_exception_fault-ok-04",
+          "role": "healthy",
+          "status": "succeeded",
+          "error": null
+        },
+        {
+          "job_id": "e5-unexpected_exception_fault-ok-05",
+          "role": "healthy",
+          "status": "succeeded",
+          "error": null
+        },
+        {
+          "job_id": "e5-unexpected_exception_fault-ok-06",
+          "role": "healthy",
+          "status": "succeeded",
+          "error": null
+        },
+        {
+          "job_id": "e5-unexpected_exception_fault-ok-07",
+          "role": "healthy",
+          "status": "succeeded",
+          "error": null
+        },
+        {
+          "job_id": "e5-unexpected_exception_fault-ok-08",
+          "role": "healthy",
+          "status": "succeeded",
+          "error": null
+        },
+        {
+          "job_id": "e5-unexpected_exception_fault-ok-09",
+          "role": "healthy",
+          "status": "succeeded",
+          "error": null
+        },
+        {
+          "job_id": "e5-unexpected_exception_fault-ok-10",
+          "role": "healthy",
+          "status": "succeeded",
+          "error": null
+        },
+        {
+          "job_id": "e5-unexpected_exception_fault-fault",
+          "role": "faulted",
+          "status": "failed",
+          "error": "internal_error: RuntimeError: injected non-transport failure (simulasi DB error)"
+        }
+      ]
+    }
+  ],
+  "summary": {
+    "scenarios": 4,
+    "all_match_ground_truth": true,
+    "batch_failures": [],
+    "incomplete_batches": []
+  },
+  "interpretation": "E5 mengukur failure isolation pada batch `uwae crawl --concurrency N`: satu URL timeout / error permanen / kegagalan tak terduga TIDAK boleh menghentikan job lain, dan job bermasalah tidak boleh dilaporkan sukses. Baseline internal UWAE — bukan klaim lintas-implementasi terhadap Botasaurus."
+}

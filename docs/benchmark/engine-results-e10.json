@@ -1,0 +1,91 @@
+{
+  "schema_version": 1,
+  "benchmark_id": "e10-capability-001",
+  "timestamp": "2026-10-24T09:50:06.731798+00:00",
+  "environment": {
+    "python": "3.14.6 (Termux, bionic)",
+    "architecture": "aarch64",
+    "platform": "PRoot-Distro on Termux Android, no root",
+    "fixture": "deterministic localhost fixture server (fixture_server.py)",
+    "note": "kapabilitas pasca-roadmap diuji di level engine penuh — kebenaran diukur dari EVIDENCE (event audit), bukan klaim kode"
+  },
+  "engine": {
+    "engine_id": "uwae-engine",
+    "version": "uwae-0.3.0"
+  },
+  "capabilities_under_test": [
+    "E2 file identification (file-first, signature)",
+    "cache respons (hit tercatat jujur sebagai sinyal cache.hit)",
+    "discovery graph (link extractor + provenance discovered_via)",
+    "E3 reprocessing + plugin eksternal (integrity sumber wajib)"
+  ],
+  "scenarios": [
+    {
+      "scenario_id": "e10_identification_no_ext",
+      "elapsed_ms": 585.36,
+      "peak_memory_bytes": 159763,
+      "success": true,
+      "checks": {
+        "job_succeeded": true,
+        "identification_event_present": true,
+        "format_from_signature": true,
+        "mime_hint_recorded": true,
+        "mime_conflict_flagged": true
+      }
+    },
+    {
+      "scenario_id": "e10_identification_wrong_mime",
+      "elapsed_ms": 478.34,
+      "peak_memory_bytes": 159587,
+      "success": true,
+      "checks": {
+        "job_succeeded": true,
+        "identification_event_present": true,
+        "format_from_signature": true,
+        "mime_hint_recorded": true,
+        "mime_conflict_flagged": true
+      }
+    },
+    {
+      "scenario_id": "e10_cache_hit",
+      "elapsed_ms": 1009.09,
+      "peak_memory_bytes": 163618,
+      "success": true,
+      "checks": {
+        "both_succeeded": true,
+        "first_fetch_not_from_cache": true,
+        "second_fetch_from_cache": true,
+        "integrity_preserved_through_cache": true
+      }
+    },
+    {
+      "scenario_id": "e10_follow_links_provenance",
+      "elapsed_ms": 1312.37,
+      "peak_memory_bytes": 165689,
+      "success": true,
+      "checks": {
+        "parent_succeeded": true,
+        "child_discovered": true,
+        "child_executed": true,
+        "provenance_recorded": true
+      }
+    },
+    {
+      "scenario_id": "e10_reprocess_plugin",
+      "elapsed_ms": 544.21,
+      "peak_memory_bytes": 159421,
+      "success": true,
+      "checks": {
+        "job_succeeded": true,
+        "builtin_extractor_ran": true,
+        "external_plugin_ran": true,
+        "external_fields": true,
+        "source_integrity_lineage": true
+      }
+    }
+  ],
+  "summary": {
+    "all_passed": true,
+    "interpretation": "Bukti kapabilitas, BUKAN klaim mengungguli Botasaurus (mandat INSTRUCTION.md): setiap kapabilitas pasca-roadmap terbukti bekerja melalui engine penuh dengan evidence lineage — identifikasi format dari signature (bukan ekstensi), cache hit tercatat jujur dengan integritas terjaga, discovery graph membawa provenance induk→anak, dan reprocessing menjalankan plugin eksternal dengan lineage sha256 sumber."
+  }
+}

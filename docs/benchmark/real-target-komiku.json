@@ -1,0 +1,318 @@
+{
+  "schema_version": 1,
+  "benchmark_id": "real-target-komiku-001",
+  "timestamp": "2026-10-21T17:05:16.067282+00:00",
+  "target": "https://01.komiku.asia/",
+  "robots_compliance": {
+    "disallow_prefixes": [
+      "/admin",
+      "/auth",
+      "/library",
+      "/settings",
+      "/tickets"
+    ],
+    "note": "hanya path yang di-Allow yang diuji; volume minimal (<= 6 permintaan)"
+  },
+  "environment": {
+    "python": "3.14.6 (Termux, bionic)",
+    "architecture": "aarch64",
+    "transport": "curl_cffi (chrome impersonation, UA engine)",
+    "engine": "uwae-0.2.0 (JobWorker + ACP cycle + planner)",
+    "retry_policy": "max_retries=1, base_backoff=0.5s"
+  },
+  "scenarios": [
+    {
+      "scenario_id": "robots_txt",
+      "url": "https://01.komiku.asia/robots.txt",
+      "job_status": "succeeded",
+      "error": null,
+      "observed_state": "access_granted",
+      "observed_reason": "ok",
+      "artifact": {
+        "size_bytes": 159,
+        "sha256": "5b1b925358df27bd7373d3f0e7173bd7415da814593dff796dfc52a7dec36644",
+        "content_type": "text/plain",
+        "final_url": "https://01.komiku.asia/robots.txt"
+      },
+      "attempts": [
+        {
+          "attempt_id": "rt-robots_txt-60257376-att-0",
+          "transport": "curl_cffi",
+          "status": "succeeded",
+          "artifact_id": "fedde4b3-da87-4b44-a92b-e4cc7e0536cc",
+          "error": null,
+          "started_at": "2026-10-22T01:05:11.049576",
+          "finished_at": "2026-10-22T01:05:11.879166"
+        }
+      ],
+      "lineage": [
+        {
+          "kind": "assessment",
+          "attempt_id": "rt-robots_txt-60257376-att-0",
+          "transport": "curl_cffi",
+          "state": "access_granted",
+          "reason_code": "ok",
+          "confidence": 0.95,
+          "signals": [
+            "http.status=200",
+            "body.marker.target=found"
+          ]
+        },
+        {
+          "kind": "decision",
+          "attempt_id": "rt-robots_txt-60257376-att-0",
+          "action": "accept",
+          "reason_code": "ok",
+          "wait_seconds": null,
+          "target_transport": null,
+          "rationale": "konten valid — simpan hasil; browser tidak diperlukan"
+        }
+      ]
+    },
+    {
+      "scenario_id": "homepage",
+      "url": "https://01.komiku.asia/",
+      "job_status": "succeeded",
+      "error": null,
+      "observed_state": "access_granted",
+      "observed_reason": "ok",
+      "artifact": {
+        "size_bytes": 291224,
+        "sha256": "d8f47e03a44e0dba15ef0dc822a15cfbf5f061d679601703bc23c328f820110f",
+        "content_type": "text/html; charset=utf-8",
+        "final_url": "https://01.komiku.asia/"
+      },
+      "attempts": [
+        {
+          "attempt_id": "rt-homepage-d9c46f1a-att-0",
+          "transport": "curl_cffi",
+          "status": "succeeded",
+          "artifact_id": "ee3d853e-3e78-40a8-9c01-1c2a5326c0e3",
+          "error": null,
+          "started_at": "2026-10-22T01:05:12.105355",
+          "finished_at": "2026-10-22T01:05:12.724270"
+        }
+      ],
+      "lineage": [
+        {
+          "kind": "assessment",
+          "attempt_id": "rt-homepage-d9c46f1a-att-0",
+          "transport": "curl_cffi",
+          "state": "access_granted",
+          "reason_code": "ok",
+          "confidence": 0.95,
+          "signals": [
+            "http.status=200",
+            "body.marker.target=found"
+          ]
+        },
+        {
+          "kind": "decision",
+          "attempt_id": "rt-homepage-d9c46f1a-att-0",
+          "action": "accept",
+          "reason_code": "ok",
+          "wait_seconds": null,
+          "target_transport": null,
+          "rationale": "konten valid — simpan hasil; browser tidak diperlukan"
+        }
+      ]
+    },
+    {
+      "scenario_id": "sitemap_xml",
+      "url": "https://01.komiku.asia/sitemap.xml",
+      "job_status": "succeeded",
+      "error": null,
+      "observed_state": "access_granted",
+      "observed_reason": "ok",
+      "artifact": {
+        "size_bytes": 801,
+        "sha256": "e144393a649bcc0c3f3cc02cc6e7e88fe96b35738a8466f88bbb3f868bee3572",
+        "content_type": "application/xml; charset=utf-8",
+        "final_url": "https://01.komiku.asia/sitemap.xml"
+      },
+      "attempts": [
+        {
+          "attempt_id": "rt-sitemap_xml-37b787aa-att-0",
+          "transport": "curl_cffi",
+          "status": "succeeded",
+          "artifact_id": "0b3f5859-651a-4c8b-9bcb-68eb0713413f",
+          "error": null,
+          "started_at": "2026-10-22T01:05:12.956618",
+          "finished_at": "2026-10-22T01:05:13.389312"
+        }
+      ],
+      "lineage": [
+        {
+          "kind": "assessment",
+          "attempt_id": "rt-sitemap_xml-37b787aa-att-0",
+          "transport": "curl_cffi",
+          "state": "access_granted",
+          "reason_code": "ok",
+          "confidence": 0.95,
+          "signals": [
+            "http.status=200",
+            "body.marker.target=found"
+          ]
+        },
+        {
+          "kind": "decision",
+          "attempt_id": "rt-sitemap_xml-37b787aa-att-0",
+          "action": "accept",
+          "reason_code": "ok",
+          "wait_seconds": null,
+          "target_transport": null,
+          "rationale": "konten valid — simpan hasil; browser tidak diperlukan"
+        }
+      ]
+    },
+    {
+      "scenario_id": "sitemap_child",
+      "url": "https://01.komiku.asia/sitemap-static.xml",
+      "job_status": "succeeded",
+      "error": null,
+      "observed_state": "access_granted",
+      "observed_reason": "ok",
+      "artifact": {
+        "size_bytes": 1591,
+        "sha256": "ac16b17ded803b3372d69bacb94a1d5ab148f8e77471d86be8004e924b85b48c",
+        "content_type": "application/xml; charset=utf-8",
+        "final_url": "https://01.komiku.asia/sitemap-static.xml"
+      },
+      "attempts": [
+        {
+          "attempt_id": "rt-sitemap_child-311d57dd-att-0",
+          "transport": "curl_cffi",
+          "status": "succeeded",
+          "artifact_id": "a8a1ef83-0081-4643-b345-92c6d5641fc8",
+          "error": null,
+          "started_at": "2026-10-22T01:05:13.645636",
+          "finished_at": "2026-10-22T01:05:14.112394"
+        }
+      ],
+      "lineage": [
+        {
+          "kind": "assessment",
+          "attempt_id": "rt-sitemap_child-311d57dd-att-0",
+          "transport": "curl_cffi",
+          "state": "access_granted",
+          "reason_code": "ok",
+          "confidence": 0.95,
+          "signals": [
+            "http.status=200",
+            "body.marker.target=found"
+          ]
+        },
+        {
+          "kind": "decision",
+          "attempt_id": "rt-sitemap_child-311d57dd-att-0",
+          "action": "accept",
+          "reason_code": "ok",
+          "wait_seconds": null,
+          "target_transport": null,
+          "rationale": "konten valid — simpan hasil; browser tidak diperlukan"
+        }
+      ]
+    },
+    {
+      "scenario_id": "sitemap_content_1",
+      "url": "https://01.komiku.asia/",
+      "job_status": "succeeded",
+      "error": null,
+      "observed_state": "access_granted",
+      "observed_reason": "ok",
+      "artifact": {
+        "size_bytes": 290888,
+        "sha256": "9177a673836b516ab0e576800cf1cb754de61cf392a47ed226bd9c4558c19d5a",
+        "content_type": "text/html; charset=utf-8",
+        "final_url": "https://01.komiku.asia/"
+      },
+      "attempts": [
+        {
+          "attempt_id": "rt-sitemap_content_1-19b88e63-att-0",
+          "transport": "curl_cffi",
+          "status": "succeeded",
+          "artifact_id": "bfc67755-a207-4831-809a-a696b8602f26",
+          "error": null,
+          "started_at": "2026-10-22T01:05:14.350977",
+          "finished_at": "2026-10-22T01:05:14.931611"
+        }
+      ],
+      "lineage": [
+        {
+          "kind": "assessment",
+          "attempt_id": "rt-sitemap_content_1-19b88e63-att-0",
+          "transport": "curl_cffi",
+          "state": "access_granted",
+          "reason_code": "ok",
+          "confidence": 0.95,
+          "signals": [
+            "http.status=200",
+            "body.marker.target=found"
+          ]
+        },
+        {
+          "kind": "decision",
+          "attempt_id": "rt-sitemap_content_1-19b88e63-att-0",
+          "action": "accept",
+          "reason_code": "ok",
+          "wait_seconds": null,
+          "target_transport": null,
+          "rationale": "konten valid — simpan hasil; browser tidak diperlukan"
+        }
+      ]
+    },
+    {
+      "scenario_id": "sitemap_content_2",
+      "url": "https://01.komiku.asia/browse",
+      "job_status": "succeeded",
+      "error": null,
+      "observed_state": "access_granted",
+      "observed_reason": "ok",
+      "artifact": {
+        "size_bytes": 298536,
+        "sha256": "77f4340d39ba1ab72bcc1e4e34ccd548b7235031c9da2d9b525067f49faf85df",
+        "content_type": "text/html; charset=utf-8",
+        "final_url": "https://01.komiku.asia/browse"
+      },
+      "attempts": [
+        {
+          "attempt_id": "rt-sitemap_content_2-024b6a92-att-0",
+          "transport": "curl_cffi",
+          "status": "succeeded",
+          "artifact_id": "780ed0a3-4210-40da-be89-8f55c2771196",
+          "error": null,
+          "started_at": "2026-10-22T01:05:15.151128",
+          "finished_at": "2026-10-22T01:05:15.900700"
+        }
+      ],
+      "lineage": [
+        {
+          "kind": "assessment",
+          "attempt_id": "rt-sitemap_content_2-024b6a92-att-0",
+          "transport": "curl_cffi",
+          "state": "access_granted",
+          "reason_code": "ok",
+          "confidence": 0.95,
+          "signals": [
+            "http.status=200",
+            "body.marker.target=found"
+          ]
+        },
+        {
+          "kind": "decision",
+          "attempt_id": "rt-sitemap_content_2-024b6a92-att-0",
+          "action": "accept",
+          "reason_code": "ok",
+          "wait_seconds": null,
+          "target_transport": null,
+          "rationale": "konten valid — simpan hasil; browser tidak diperlukan"
+        }
+      ]
+    }
+  ],
+  "summary": {
+    "interpretation": "Pengukuran evidence-based terhadap target nyata atas otorisasi user — BUKAN klaim unggul (mandat INSTRUCTION.md). Diagnosis per attempt tercatat penuh (observasi → assessment → keputusan).",
+    "scenarios_run": 6,
+    "all_diagnosed": true
+  }
+}

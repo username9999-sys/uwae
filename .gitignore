@@ -1,0 +1,24 @@
+# Runtime artifacts — jangan di-commit
+jobs.db
+*.db
+*.part
+universal_web_acquisition.log
+storage/
+artifacts/
+
+# Python
+__pycache__/
+*.pyc
+.pytest_cache/
+
+# Tool state lokal
+.omc/
+
+# Clone referensi audit (pinned commit tercatat di audit/baseline-kommit.txt)
+audit/sumber-asli/
+
+# Rust build artifacts
+target/
+
+# Local tool state
+.omc/

@@ -1,0 +1,371 @@
+{
+  "schema_version": 1,
+  "benchmark_id": "e9-engine-differential-002",
+  "timestamp": "2026-10-24T00:00:30.148005+00:00",
+  "environment": {
+    "python": "3.14.6 (Termux, bionic)",
+    "architecture": "aarch64",
+    "platform": "PRoot-Distro on Termux Android, no root",
+    "fixture": "deterministic localhost fixture server (fixture_server.py)",
+    "uwae_retry_policy": "max_retries=2, base_backoff=0.05s (fixture lokal)",
+    "uwae_e9_note": "engine penuh uwae-0.3.0: ACP cycle (observasi→classifier→planner) + ResumableDownloader (HEAD probe Accept-Ranges per skenario HTTP — konten kecil → fallback unduh penuh; +1 request terukur jujur) + evidence lineage per attempt"
+  },
+  "engines": [
+    {
+      "engine_id": "uwae-engine",
+      "version": "uwae-0.3.0",
+      "description": "JobWorker + transport registry (curl_cffi primary) + bounded retry + reason codes + planner"
+    },
+    {
+      "engine_id": "botasaurus-requests-baseline",
+      "version": "4.0.38",
+      "source_commit": "6c9260de12d71b9dc0c3b3a019d2698a9af38433",
+      "description": "botasaurus_requests.get — lapisan HTTP di bawah @request Botasaurus",
+      "environment_compatibility": "TIDAK BERFUNGSI di PRoot aarch64 Termux: KeyError('headers') pada semua request — binary hrequests-cgo-2.1-linux-arm64.so ada di venv, tapi client Go-nya gagal mengeksekusi; lapisan requests polos dari venv yang sama berfungsi normal (lihat E5) KOREKSI (ADR-019, 2026-10-27): klaim 'TIDAK BERFUNGSI di PRoot aarch64 Termux' terbukti SALAH. Penyebabnya bug pemanggilan pada skrip baseline proyek ini (botasaurus_requests.get tanpa header -> KeyError('headers') di reqs.py:fix_headers), bukan ketidakcocokan platform; binary native hrequests-cgo-2.1-linux-arm64.so berjalan normal. Jalur publik Botasaurus (Request.get / @request) berfungsi dan sudah diukur ulang di docs/benchmark/engine-results-e14.json."
+    }
+  ],
+  "scenarios": {
+    "acquisition": {
+      "uwae": [
+        {
+          "engine_id": "uwae-engine",
+          "scenario_id": "b01_small_get",
+          "elapsed_ms": 674.42,
+          "peak_memory_bytes": 2440815,
+          "success_engine": true,
+          "correctness": true,
+          "diagnosis": "ok (reason code OK)",
+          "decision": "planner-terintegrasi (ACCEPT/RETRY/SWITCH/ABORT per state + anggaran berbatas)",
+          "body_bytes": 177,
+          "signals": [
+            "http.status=200",
+            "body.marker.target=found"
+          ]
+        },
+        {
+          "engine_id": "uwae-engine",
+          "scenario_id": "b04_redirect",
+          "elapsed_ms": 244.41,
+          "peak_memory_bytes": 164435,
+          "success_engine": true,
+          "correctness": true,
+          "diagnosis": "ok (reason code OK)",
+          "decision": "planner-terintegrasi (ACCEPT/RETRY/SWITCH/ABORT per state + anggaran berbatas)",
+          "body_bytes": 17,
+          "signals": [
+            "http.status=200",
+            "body.marker.target=found"
+          ]
+        },
+        {
+          "engine_id": "uwae-engine",
+          "scenario_id": "b06_brotli",
+          "elapsed_ms": 216.59,
+          "peak_memory_bytes": 162090,
+          "success_engine": true,
+          "correctness": true,
+          "diagnosis": "ok (reason code OK)",
+          "decision": "planner-terintegrasi (ACCEPT/RETRY/SWITCH/ABORT per state + anggaran berbatas)",
+          "body_bytes": 177,
+          "signals": [
+            "http.status=200",
+            "body.marker.target=found"
+          ]
+        },
+        {
+          "engine_id": "uwae-engine",
+          "scenario_id": "b07_js_render",
+          "elapsed_ms": 173.61,
+          "peak_memory_bytes": 161781,
+          "success_engine": true,
+          "correctness": true,
+          "diagnosis": "javascript_required (expected javascript_required)",
+          "decision": "planner-terintegrasi (RECOVER/WAIT_RETRY/NEEDS_USER/ABORT per state + anggaran berbatas)",
+          "body_bytes": 0,
+          "signals": [
+            "http.status=200",
+            "js.required=true",
+            "body.marker.target=missing"
+          ]
+        },
+        {
+          "engine_id": "uwae-engine",
+          "scenario_id": "e02_not_found",
+          "elapsed_ms": 608.82,
+          "peak_memory_bytes": 165267,
+          "success_engine": true,
+          "correctness": true,
+          "diagnosis": "content_invalid (expected content_invalid)",
+          "decision": "planner-terintegrasi (RECOVER/WAIT_RETRY/NEEDS_USER/ABORT per state + anggaran berbatas)",
+          "body_bytes": 0,
+          "signals": [
+            "http.status=404",
+            "body.marker.target=missing"
+          ]
+        },
+        {
+          "engine_id": "uwae-engine",
+          "scenario_id": "a04_login",
+          "elapsed_ms": 630.47,
+          "peak_memory_bytes": 167500,
+          "success_engine": true,
+          "correctness": true,
+          "diagnosis": "auth_required (expected auth_required)",
+          "decision": "planner-terintegrasi (RECOVER/WAIT_RETRY/NEEDS_USER/ABORT per state + anggaran berbatas)",
+          "body_bytes": 0,
+          "signals": [
+            "http.status=200",
+            "body.marker.login-form=present",
+            "body.marker.target=missing"
+          ]
+        },
+        {
+          "engine_id": "uwae-engine",
+          "scenario_id": "a06_rate_limited",
+          "elapsed_ms": 3634.71,
+          "peak_memory_bytes": 164712,
+          "success_engine": true,
+          "correctness": true,
+          "diagnosis": "rate_limited (expected rate_limited)",
+          "decision": "planner-terintegrasi (RECOVER/WAIT_RETRY/NEEDS_USER/ABORT per state + anggaran berbatas)",
+          "body_bytes": 0,
+          "signals": [
+            "http.status=429",
+            "http.header.retry-after=1",
+            "body.marker.target=missing"
+          ]
+        },
+        {
+          "engine_id": "uwae-engine",
+          "scenario_id": "a07_challenge",
+          "elapsed_ms": 170.1,
+          "peak_memory_bytes": 159964,
+          "success_engine": true,
+          "correctness": true,
+          "diagnosis": "challenge_present (expected challenge_present)",
+          "decision": "planner-terintegrasi (RECOVER/WAIT_RETRY/NEEDS_USER/ABORT per state + anggaran berbatas)",
+          "body_bytes": 0,
+          "signals": [
+            "http.status=403",
+            "body.marker.challenge=just a moment",
+            "body.marker.target=missing"
+          ]
+        },
+        {
+          "engine_id": "uwae-engine",
+          "scenario_id": "a07_denied",
+          "elapsed_ms": 198.63,
+          "peak_memory_bytes": 159722,
+          "success_engine": true,
+          "correctness": true,
+          "diagnosis": "access_denied (expected access_denied)",
+          "decision": "planner-terintegrasi (RECOVER/WAIT_RETRY/NEEDS_USER/ABORT per state + anggaran berbatas)",
+          "body_bytes": 0,
+          "signals": [
+            "http.status=403",
+            "body.marker.target=missing"
+          ]
+        },
+        {
+          "engine_id": "uwae-engine",
+          "scenario_id": "a11_invalid_html",
+          "elapsed_ms": 635.13,
+          "peak_memory_bytes": 282918,
+          "success_engine": true,
+          "correctness": true,
+          "diagnosis": "content_invalid (expected content_invalid)",
+          "decision": "planner-terintegrasi (RECOVER/WAIT_RETRY/NEEDS_USER/ABORT per state + anggaran berbatas)",
+          "body_bytes": 0,
+          "signals": [
+            "http.status=200",
+            "body.marker.target=missing"
+          ]
+        }
+      ],
+      "baseline": [
+        {
+          "engine_id": "botasaurus-requests-baseline",
+          "scenario_id": "b01_small_get",
+          "runs_ms": [],
+          "elapsed_ms_median": null,
+          "peak_memory_bytes": null,
+          "success_http": false,
+          "correctness": false,
+          "attempts": 1,
+          "diagnosis": "KeyError: 'headers'",
+          "decision": "none",
+          "body_bytes": 0
+        },
+        {
+          "engine_id": "botasaurus-requests-baseline",
+          "scenario_id": "b04_redirect",
+          "runs_ms": [],
+          "elapsed_ms_median": null,
+          "peak_memory_bytes": null,
+          "success_http": false,
+          "correctness": false,
+          "attempts": 1,
+          "diagnosis": "KeyError: 'headers'",
+          "decision": "none",
+          "body_bytes": 0
+        },
+        {
+          "engine_id": "botasaurus-requests-baseline",
+          "scenario_id": "b06_brotli",
+          "runs_ms": [],
+          "elapsed_ms_median": null,
+          "peak_memory_bytes": null,
+          "success_http": false,
+          "correctness": false,
+          "attempts": 1,
+          "diagnosis": "KeyError: 'headers'",
+          "decision": "none",
+          "body_bytes": 0
+        },
+        {
+          "engine_id": "botasaurus-requests-baseline",
+          "scenario_id": "b07_js_render",
+          "runs_ms": [],
+          "elapsed_ms_median": null,
+          "peak_memory_bytes": null,
+          "success_http": false,
+          "correctness": false,
+          "attempts": 1,
+          "diagnosis": "KeyError: 'headers'",
+          "decision": "none",
+          "body_bytes": 0
+        },
+        {
+          "engine_id": "botasaurus-requests-baseline",
+          "scenario_id": "e02_not_found",
+          "runs_ms": [],
+          "elapsed_ms_median": null,
+          "peak_memory_bytes": null,
+          "success_http": false,
+          "correctness": false,
+          "attempts": 1,
+          "diagnosis": "KeyError: 'headers'",
+          "decision": "none",
+          "body_bytes": 0
+        },
+        {
+          "engine_id": "botasaurus-requests-baseline",
+          "scenario_id": "a04_login",
+          "runs_ms": [],
+          "elapsed_ms_median": null,
+          "peak_memory_bytes": null,
+          "success_http": false,
+          "correctness": false,
+          "attempts": 1,
+          "diagnosis": "KeyError: 'headers'",
+          "decision": "none",
+          "body_bytes": 0
+        },
+        {
+          "engine_id": "botasaurus-requests-baseline",
+          "scenario_id": "a06_rate_limited",
+          "runs_ms": [],
+          "elapsed_ms_median": null,
+          "peak_memory_bytes": null,
+          "success_http": false,
+          "correctness": false,
+          "attempts": 1,
+          "diagnosis": "KeyError: 'headers'",
+          "decision": "none",
+          "body_bytes": 0
+        },
+        {
+          "engine_id": "botasaurus-requests-baseline",
+          "scenario_id": "a07_challenge",
+          "runs_ms": [],
+          "elapsed_ms_median": null,
+          "peak_memory_bytes": null,
+          "success_http": false,
+          "correctness": false,
+          "attempts": 1,
+          "diagnosis": "KeyError: 'headers'",
+          "decision": "none",
+          "body_bytes": 0
+        },
+        {
+          "engine_id": "botasaurus-requests-baseline",
+          "scenario_id": "a07_denied",
+          "runs_ms": [],
+          "elapsed_ms_median": null,
+          "peak_memory_bytes": null,
+          "success_http": false,
+          "correctness": false,
+          "attempts": 1,
+          "diagnosis": "KeyError: 'headers'",
+          "decision": "none",
+          "body_bytes": 0
+        },
+        {
+          "engine_id": "botasaurus-requests-baseline",
+          "scenario_id": "a11_invalid_html",
+          "runs_ms": [],
+          "elapsed_ms_median": null,
+          "peak_memory_bytes": null,
+          "success_http": false,
+          "correctness": false,
+          "attempts": 1,
+          "diagnosis": "KeyError: 'headers'",
+          "decision": "none",
+          "body_bytes": 0
+        }
+      ]
+    },
+    "dns_failure_diagnosis": {
+      "uwae": {
+        "engine_id": "uwae-engine",
+        "scenario_id": "dns_failure_diagnosis",
+        "elapsed_ms": 7564.37,
+        "success_engine": false,
+        "diagnosis": "budget_exhausted: ConnectionError: HTTPSConnectionPool(host='nonexistent-uwae-e8-test.invalid', port=443): Max retries exceeded with url: / (Caused by NameResolutionError(\"<urllib3.connection.HTTPSConnection object at 0x6f532170e0>: Failed to resolve 'nonexistent-uwae-e8-test.invalid' (Name or service not known: nonexistent-uwae-e8-test.invalid using 1 resolver(s))\")) (attempt 6)",
+        "decision": "retry berbatas lalu ABORT (BUDGET_EXHAUSTED) — tidak pernah loop tanpa akhir"
+      },
+      "baseline": {
+        "engine_id": "botasaurus-requests-baseline",
+        "scenario_id": "dns_failure_diagnosis",
+        "elapsed_s": 0.0,
+        "success_http": false,
+        "diagnosis": "KeyError: 'headers'",
+        "decision": "none"
+      }
+    }
+  },
+  "summary": {
+    "interpretation": "Pengukuran baseline, BUKAN klaim mengungguli Botasaurus (mandat INSTRUCTION.md). Temuan utama: engine HTTP Botasaurus (botasaurus_requests/hrequests-cgo) TIDAK BERFUNGSI di environment ini (PRoot aarch64 Termux) — semua request gagal dengan KeyError('headers') yang kriptik dan tidak terklasifikasi, meski binary native-nya ada; lapisan requests polos dari venv yang sama berfungsi normal (lihat E5). Diferensial terukur: UWAE menyelesaikan semua skenario akuisisi dengan reason code terstruktur dan diagnosis DNS terklasifikasi (dns_failure → anggaran berbatas → ABORT); baseline tidak dapat dieksekusi di environment ini. KOREKSI (ADR-019, 2026-10-27): temuan bahwa engine HTTP Botasaurus 'TIDAK BERFUNGSI di environment ini' terbukti SALAH — penyebabnya bug pemanggilan pada skrip baseline proyek ini, bukan ketidakcocokan platform. Benchmark lintas-implementasi dengan kondisi device identik (target, expected output, run count, success criteria) ada di docs/benchmark/engine-results-e14.json (E14).",
+    "uwae_all_correct": true,
+    "baseline_all_correct": false,
+    "baseline_executable_in_this_environment": false,
+    "note_b07": "b07_js_render kini gerbang JS sungguhan: fetch HTTP yang benar didiagnosis javascript_required (CAPABILITY_MISSING tanpa browser); render browser terbukti terpisah di TestBrowserRealCDP",
+    "diagnosis_accuracy_e9": {
+      "note": "skenario diagnosis §6.1: observed state (event assessment terakhir) vs ground truth",
+      "expected": {
+        "b07_js_render": "javascript_required",
+        "e02_not_found": "content_invalid",
+        "a04_login": "auth_required",
+        "a06_rate_limited": "rate_limited",
+        "a07_challenge": "challenge_present",
+        "a07_denied": "access_denied",
+        "a11_invalid_html": "content_invalid"
+      },
+      "all_diagnosed_correctly": true
+    }
+  },
+  "correction": {
+    "date": "2026-10-27",
+    "adr": "ADR-019",
+    "superseded_by": "docs/benchmark/engine-results-e14.json",
+    "benchmark_id": "e14-cross-implementation-differential-001",
+    "falsified_claim": "Engine HTTP Botasaurus 'TIDAK BERFUNGSI di PRoot aarch64 Termux' (KeyError('headers') pada semua request).",
+    "root_cause": "Bug pemanggilan pada skrip baseline milik proyek ini: botasaurus_requests.get(url) tanpa header -> reqs.py:fix_headers membaca kwargs['headers'] tanpa .get() sehingga KeyError. Bukan ketidakcocokan platform. Jalur publik Botasaurus (Request.get / dekorator @request) berjalan normal di environment ini dan sudah diukur ulang di E14 dengan kondisi device identik.",
+    "invalidated_fields": [
+      "engines[].environment_compatibility",
+      "summary.baseline_executable_in_this_environment",
+      "summary.interpretation"
+    ],
+    "data_note": "Data pengukuran mentah pada berkas ini TIDAK diubah — hanya interpretasinya yang dikoreksi. Interpretasi lama tetap terlihat sebagai catatan historis."
+  }
+}

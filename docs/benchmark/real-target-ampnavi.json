@@ -1,0 +1,235 @@
+{
+  "schema_version": 1,
+  "benchmark_id": "real-target-ampnavi-003",
+  "timestamp": "2026-10-23T12:16:56.449452+00:00",
+  "target": "https://ms.ampnavi188.com/",
+  "robots_compliance": {
+    "disallow_prefixes": [],
+    "robots_soft_404": true,
+    "note": "robots.txt mengembalikan HTML (soft-404) — tidak ada direktif robots; engine melanjutkan dengan fallback sitemap konvensi; volume minimal"
+  },
+  "environment": {
+    "python": "3.14.6 (Termux, bionic)",
+    "architecture": "aarch64",
+    "transport": "curl_cffi (chrome impersonation, UA engine)",
+    "engine": "uwae-0.3.0 (JobWorker + ACP cycle + planner + resume)",
+    "retry_policy": "max_retries=1, base_backoff=0.5s"
+  },
+  "scenarios": [
+    {
+      "scenario_id": "robots_txt",
+      "url": "https://ms.ampnavi188.com/robots.txt",
+      "job_status": "succeeded",
+      "error": null,
+      "observed_state": "access_granted",
+      "observed_reason": "ok",
+      "artifact": {
+        "size_bytes": 215804,
+        "sha256": "7ba131e426bcaaa34f718db27f639bb943d3d2d5b0c5e98a6b061dc702885363",
+        "content_type": "text/html",
+        "final_url": "http://ms.ampnavi188.com/"
+      },
+      "attempts": [
+        {
+          "attempt_id": "rt-robots_txt-64c99663-att-0",
+          "transport": "curl_cffi",
+          "status": "succeeded",
+          "artifact_id": "c23a2a51-e3c4-4288-bfca-8a71281bd342",
+          "error": null,
+          "started_at": "2026-10-23T20:16:28.313956",
+          "finished_at": "2026-10-23T20:16:34.420859"
+        }
+      ],
+      "lineage": [
+        {
+          "kind": "assessment",
+          "attempt_id": "rt-robots_txt-64c99663-att-0",
+          "transport": "curl_cffi",
+          "state": "access_granted",
+          "reason_code": "ok",
+          "confidence": 0.95,
+          "signals": [
+            "http.status=200",
+            "body.marker.target=found"
+          ]
+        },
+        {
+          "kind": "decision",
+          "attempt_id": "rt-robots_txt-64c99663-att-0",
+          "action": "accept",
+          "reason_code": "ok",
+          "wait_seconds": null,
+          "target_transport": null,
+          "rationale": "konten valid — simpan hasil; browser tidak diperlukan"
+        }
+      ]
+    },
+    {
+      "scenario_id": "homepage",
+      "url": "https://ms.ampnavi188.com/",
+      "job_status": "succeeded",
+      "error": null,
+      "observed_state": "access_granted",
+      "observed_reason": "ok",
+      "artifact": {
+        "size_bytes": 215804,
+        "sha256": "7ba131e426bcaaa34f718db27f639bb943d3d2d5b0c5e98a6b061dc702885363",
+        "content_type": "text/html",
+        "final_url": "https://ms.ampnavi188.com/"
+      },
+      "attempts": [
+        {
+          "attempt_id": "rt-homepage-7759f231-att-0",
+          "transport": "curl_cffi",
+          "status": "succeeded",
+          "artifact_id": "8eb2fdf4-bad4-483a-a666-e21c2404a183",
+          "error": null,
+          "started_at": "2026-10-23T20:16:34.805502",
+          "finished_at": "2026-10-23T20:16:38.548473"
+        }
+      ],
+      "lineage": [
+        {
+          "kind": "assessment",
+          "attempt_id": "rt-homepage-7759f231-att-0",
+          "transport": "curl_cffi",
+          "state": "access_granted",
+          "reason_code": "ok",
+          "confidence": 0.95,
+          "signals": [
+            "http.status=200",
+            "body.marker.target=found"
+          ]
+        },
+        {
+          "kind": "decision",
+          "attempt_id": "rt-homepage-7759f231-att-0",
+          "action": "accept",
+          "reason_code": "ok",
+          "wait_seconds": null,
+          "target_transport": null,
+          "rationale": "konten valid — simpan hasil; browser tidak diperlukan"
+        },
+        {
+          "kind": "soft404_suspected",
+          "sha256": "7ba131e426bcaaa34f718db27f639bb943d3d2d5b0c5e98a6b061dc702885363",
+          "url": "https://ms.ampnavi188.com/",
+          "first_seen_url": "https://ms.ampnavi188.com/robots.txt"
+        }
+      ]
+    },
+    {
+      "scenario_id": "sitemap_xml",
+      "url": "https://ms.ampnavi188.com/sitemap.xml",
+      "job_status": "succeeded",
+      "error": null,
+      "observed_state": "access_granted",
+      "observed_reason": "ok",
+      "artifact": {
+        "size_bytes": 215804,
+        "sha256": "7ba131e426bcaaa34f718db27f639bb943d3d2d5b0c5e98a6b061dc702885363",
+        "content_type": "text/html",
+        "final_url": "http://ms.ampnavi188.com/"
+      },
+      "attempts": [
+        {
+          "attempt_id": "rt-sitemap_xml-5ea28589-att-0",
+          "transport": "curl_cffi",
+          "status": "succeeded",
+          "artifact_id": "cdeed476-40eb-4fea-a39a-850c02028c6c",
+          "error": null,
+          "started_at": "2026-10-23T20:16:38.935230",
+          "finished_at": "2026-10-23T20:16:48.054610"
+        }
+      ],
+      "lineage": [
+        {
+          "kind": "assessment",
+          "attempt_id": "rt-sitemap_xml-5ea28589-att-0",
+          "transport": "curl_cffi",
+          "state": "access_granted",
+          "reason_code": "ok",
+          "confidence": 0.95,
+          "signals": [
+            "http.status=200",
+            "body.marker.target=found"
+          ]
+        },
+        {
+          "kind": "decision",
+          "attempt_id": "rt-sitemap_xml-5ea28589-att-0",
+          "action": "accept",
+          "reason_code": "ok",
+          "wait_seconds": null,
+          "target_transport": null,
+          "rationale": "konten valid — simpan hasil; browser tidak diperlukan"
+        },
+        {
+          "kind": "soft404_suspected",
+          "sha256": "7ba131e426bcaaa34f718db27f639bb943d3d2d5b0c5e98a6b061dc702885363",
+          "url": "https://ms.ampnavi188.com/sitemap.xml",
+          "first_seen_url": "https://ms.ampnavi188.com/robots.txt"
+        }
+      ]
+    },
+    {
+      "scenario_id": "soft404_probe",
+      "url": "https://ms.ampnavi188.com/nonexistent-uwae-probe",
+      "job_status": "succeeded",
+      "error": null,
+      "observed_state": "access_granted",
+      "observed_reason": "ok",
+      "artifact": {
+        "size_bytes": 215804,
+        "sha256": "7ba131e426bcaaa34f718db27f639bb943d3d2d5b0c5e98a6b061dc702885363",
+        "content_type": "text/html",
+        "final_url": "http://ms.ampnavi188.com/"
+      },
+      "attempts": [
+        {
+          "attempt_id": "rt-soft404_probe-b4c49a78-att-0",
+          "transport": "curl_cffi",
+          "status": "succeeded",
+          "artifact_id": "250c0783-4bac-421b-a29a-ce0514e75e85",
+          "error": null,
+          "started_at": "2026-10-23T20:16:48.519133",
+          "finished_at": "2026-10-23T20:16:56.201165"
+        }
+      ],
+      "lineage": [
+        {
+          "kind": "assessment",
+          "attempt_id": "rt-soft404_probe-b4c49a78-att-0",
+          "transport": "curl_cffi",
+          "state": "access_granted",
+          "reason_code": "ok",
+          "confidence": 0.95,
+          "signals": [
+            "http.status=200",
+            "body.marker.target=found"
+          ]
+        },
+        {
+          "kind": "decision",
+          "attempt_id": "rt-soft404_probe-b4c49a78-att-0",
+          "action": "accept",
+          "reason_code": "ok",
+          "wait_seconds": null,
+          "target_transport": null,
+          "rationale": "konten valid — simpan hasil; browser tidak diperlukan"
+        },
+        {
+          "kind": "soft404_suspected",
+          "sha256": "7ba131e426bcaaa34f718db27f639bb943d3d2d5b0c5e98a6b061dc702885363",
+          "url": "https://ms.ampnavi188.com/nonexistent-uwae-probe",
+          "first_seen_url": "https://ms.ampnavi188.com/robots.txt"
+        }
+      ]
+    }
+  ],
+  "summary": {
+    "interpretation": "Pengukuran evidence-based terhadap target nyata atas otorisasi user — BUKAN klaim unggul (mandat INSTRUCTION.md). Diagnosis per attempt tercatat penuh (observasi → assessment → keputusan).",
+    "scenarios_run": 4,
+    "all_diagnosed": true
+  }
+}
