@@ -1,6 +1,6 @@
 ---
 name: uwae
-description: Fetch any web page and return it as clean, token-efficient markdown for the agent. Use whenever the user asks to read a URL, scrape a page, summarize a website, check what a link contains, or feed web content into analysis. Trigger phrases: "fetch this url", "what does this page say", "scrape", "get the content of", "read this link", "website to markdown".
+description: "Fetch any web page and return it as clean, token-efficient markdown for the agent. Use whenever the user asks to read a URL, scrape a page, summarize a website, check what a link contains, or feed web content into analysis. Trigger phrases: fetch this url, what does this page say, scrape, get the content of, read this link, website to markdown."
 license: MIT
 compatibility: Works in Claude Code, Codex, OpenCode, Antigravity, MiniMax Code. No API key needed. Rust binary is the fast path; the bundled stdlib MCP server is the zero-dependency fallback.
 metadata:
